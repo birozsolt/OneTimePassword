@@ -1,6 +1,6 @@
 //
-//  OneTimePasswordUITests.swift
-//  OneTimePasswordUITests
+//  OneTimePasswordDemoUITests.swift
+//  OneTimePasswordDemoUITests
 //
 //  Created by Biro Zsolt on 06/02/2020.
 //  Copyright © 2020 Biro Zsolt. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class OneTimePasswordUITests: XCTestCase {
+class OneTimePasswordDemoUITests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

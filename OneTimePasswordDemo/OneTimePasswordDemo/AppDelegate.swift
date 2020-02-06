@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  OneTimePassword
+//  OneTimePasswordDemo
 //
 //  Created by Biro Zsolt on 06/02/2020.
 //  Copyright © 2020 Biro Zsolt. All rights reserved.
