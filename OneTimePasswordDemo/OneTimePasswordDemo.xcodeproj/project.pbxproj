@@ -15,6 +15,8 @@
 		3E813DCB23EC96A10022D836 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E813DC923EC96A10022D836 /* LaunchScreen.storyboard */; };
 		3E813DD623EC96A20022D836 /* OneTimePasswordDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E813DD523EC96A20022D836 /* OneTimePasswordDemoTests.swift */; };
 		3E813DE123EC96A20022D836 /* OneTimePasswordDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E813DE023EC96A20022D836 /* OneTimePasswordDemoUITests.swift */; };
+		3E813DF023EC9B150022D836 /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E813DEF23EC9B150022D836 /* PureLayout.framework */; };
+		3E813DF123EC9B150022D836 /* PureLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E813DEF23EC9B150022D836 /* PureLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3E813DF223EC9B150022D836 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3E813DF123EC9B150022D836 /* PureLayout.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3E813DBB23EC96A00022D836 /* OneTimePasswordDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneTimePasswordDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E813DBE23EC96A00022D836 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +65,7 @@
 		3E813DDC23EC96A20022D836 /* OneTimePasswordDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneTimePasswordDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E813DE023EC96A20022D836 /* OneTimePasswordDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimePasswordDemoUITests.swift; sourceTree = "<group>"; };
 		3E813DE223EC96A20022D836 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E813DEF23EC9B150022D836 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E813DF023EC9B150022D836 /* PureLayout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +101,7 @@
 				3E813DD423EC96A20022D836 /* OneTimePasswordDemoTests */,
 				3E813DDF23EC96A20022D836 /* OneTimePasswordDemoUITests */,
 				3E813DBC23EC96A00022D836 /* Products */,
+				3E813DEE23EC9B150022D836 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +147,14 @@
 			path = OneTimePasswordDemoUITests;
 			sourceTree = "<group>";
 		};
+		3E813DEE23EC9B150022D836 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3E813DEF23EC9B150022D836 /* PureLayout.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +165,8 @@
 				3E813DB723EC96A00022D836 /* Sources */,
 				3E813DB823EC96A00022D836 /* Frameworks */,
 				3E813DB923EC96A00022D836 /* Resources */,
+				3E813DF223EC9B150022D836 /* Embed Frameworks */,
+				3E813DF323EC9B570022D836 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -254,6 +283,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3E813DF323EC9B570022D836 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/PureLayout.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3E813DB723EC96A00022D836 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -366,14 +416,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -421,13 +471,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -438,6 +488,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9L2TPWUVEQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = OneTimePasswordDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -445,7 +499,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zsolt.biro.OneTimePasswordDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -456,6 +510,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9L2TPWUVEQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = OneTimePasswordDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -463,7 +521,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zsolt.biro.OneTimePasswordDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
