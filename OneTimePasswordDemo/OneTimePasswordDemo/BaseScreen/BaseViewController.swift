@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  BaseViewController.swift
 //  OneTimePasswordDemo
 //
 //  Created by Biro Zsolt on 06/02/2020.
@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class BaseViewController: UIViewController {
+    lazy var baseView = BaseView()
+    
+    override func loadView() {
+        view = baseView
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
+    
 }
-
