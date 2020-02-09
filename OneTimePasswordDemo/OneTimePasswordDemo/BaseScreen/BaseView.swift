@@ -47,12 +47,12 @@ class BaseView: UIView {
     }
     
     func setupLayout() {
-        verticalSeparator.autoAlignAxis(toSuperviewAxis: .vertical)
+        verticalSeparator.autoAlignAxis(toSuperviewMarginAxis: .vertical)
         verticalSeparator.autoPinEdge(toSuperviewSafeArea: .top)
         verticalSeparator.autoPinEdge(toSuperviewSafeArea: .bottom)
         verticalSeparator.autoSetDimension(.width, toSize: 1)
         
-        horizontalSeparator.autoAlignAxis(toSuperviewAxis: .horizontal)
+        horizontalSeparator.autoAlignAxis(toSuperviewMarginAxis: .horizontal)
         horizontalSeparator.autoPinEdge(toSuperviewSafeArea: .left)
         horizontalSeparator.autoPinEdge(toSuperviewSafeArea: .right)
         horizontalSeparator.autoSetDimension(.height, toSize: 1)

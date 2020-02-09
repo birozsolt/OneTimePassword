@@ -9,11 +9,11 @@
 import PureLayout
 
 class CanvasView: UIView {
-    lazy var lineWidth: CGFloat = 5
-    lazy var lineColor = UIColor.black
-    lazy var path = UIBezierPath()
-    lazy var startingPoint = CGPoint.zero
-    lazy var touchPoint = CGPoint.zero
+    private lazy var lineWidth: CGFloat = 5
+    private lazy var lineColor = UIColor.black
+    private lazy var path = UIBezierPath()
+    private lazy var startingPoint = CGPoint.zero
+    private lazy var touchPoint = CGPoint.zero
     
     override func layoutSubviews() {
         backgroundColor = .white
@@ -28,13 +28,17 @@ class CanvasView: UIView {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
-        touchPoint = touch.location(in: self)
-        
-        path.move(to: startingPoint)
-        path.addLine(to: touchPoint)
-        startingPoint = touchPoint
-        
-        drawShapeLayer()
+        let location = touch.location(in: self)
+        let maxX = self.frame.size.width
+        let maxY = self.frame.size.height
+        if location.x < maxX && location.x > 0 && location.y < maxY && location.y > 0 {
+            touchPoint = location
+            path.move(to: startingPoint)
+            path.addLine(to: touchPoint)
+            startingPoint = touchPoint
+            
+            drawShapeLayer()
+        }
     }
     
     private func drawShapeLayer() {
