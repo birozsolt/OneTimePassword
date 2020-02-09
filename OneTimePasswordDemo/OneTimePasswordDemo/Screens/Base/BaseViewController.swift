@@ -9,7 +9,7 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-    lazy var baseView = BaseView()
+    private lazy var baseView = BaseView()
     
     override func loadView() {
         view = baseView

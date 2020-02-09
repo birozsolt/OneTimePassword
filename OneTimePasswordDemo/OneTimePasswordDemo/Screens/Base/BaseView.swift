@@ -17,18 +17,15 @@ class BaseView: UIView {
     
     lazy var verticalSeparator: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .darkGray
         return view
     }()
     
     lazy var horizontalSeparator: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .darkGray
         return view
     }()
-    
-    lazy var firstTouch = CGPoint()
-    lazy var nextTouch = CGPoint()
     
     override func layoutSubviews() {
         backgroundColor = .white
@@ -50,12 +47,12 @@ class BaseView: UIView {
         verticalSeparator.autoAlignAxis(toSuperviewMarginAxis: .vertical)
         verticalSeparator.autoPinEdge(toSuperviewSafeArea: .top)
         verticalSeparator.autoPinEdge(toSuperviewSafeArea: .bottom)
-        verticalSeparator.autoSetDimension(.width, toSize: 1)
+        verticalSeparator.autoSetDimension(.width, toSize: 2)
         
         horizontalSeparator.autoAlignAxis(toSuperviewMarginAxis: .horizontal)
         horizontalSeparator.autoPinEdge(toSuperviewSafeArea: .left)
         horizontalSeparator.autoPinEdge(toSuperviewSafeArea: .right)
-        horizontalSeparator.autoSetDimension(.height, toSize: 1)
+        horizontalSeparator.autoSetDimension(.height, toSize: 2)
         
         firstQuarterView.autoPinEdge(toSuperviewSafeArea: .top)
         firstQuarterView.autoPinEdge(toSuperviewSafeArea: .left)
