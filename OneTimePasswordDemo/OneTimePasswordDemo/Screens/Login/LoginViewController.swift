@@ -21,9 +21,14 @@ class LoginViewController: UIViewController {
     }
     
     private func setupButtonClosures() {
-        loginView.createUserButton.addAction(for: .touchUpInside) { (_) in
-            let baseVC = BaseViewController()
-            self.navigationController?.pushViewController(baseVC, animated: true)
+        loginView.setupCreateUserButtonAction { _ in
+            let createUserVC = CreateUserViewController()
+            self.navigationController?.pushViewController(createUserVC, animated: true)
+        }
+        
+        loginView.setupVerifieUserButtonAction { _ in
+            let userListVC = UserListViewController()
+            self.navigationController?.pushViewController(userListVC, animated: true)
         }
     }
 }

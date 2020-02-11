@@ -10,18 +10,18 @@ import PureLayout
 
 class BaseView: UIView {
     
-    lazy var firstQuarterView = CanvasView()
-    lazy var secondQuarterView = CanvasView()
-    lazy var thirdQuarterView = CanvasView()
-    lazy var forthQuarterView = CanvasView()
+    private lazy var firstQuarterView = CanvasView()
+    private lazy var secondQuarterView = CanvasView()
+    private lazy var thirdQuarterView = CanvasView()
+    private lazy var forthQuarterView = CanvasView()
     
-    lazy var verticalSeparator: UIView = {
+    private lazy var verticalSeparator: UIView = {
         let view = UIView()
         view.backgroundColor = .darkGray
         return view
     }()
     
-    lazy var horizontalSeparator: UIView = {
+    private lazy var horizontalSeparator: UIView = {
         let view = UIView()
         view.backgroundColor = .darkGray
         return view
@@ -32,7 +32,7 @@ class BaseView: UIView {
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         addSubview(verticalSeparator)
         addSubview(horizontalSeparator)
         
@@ -43,7 +43,7 @@ class BaseView: UIView {
         setupLayout()
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         verticalSeparator.autoAlignAxis(toSuperviewMarginAxis: .vertical)
         verticalSeparator.autoPinEdge(toSuperviewSafeArea: .top)
         verticalSeparator.autoPinEdge(toSuperviewSafeArea: .bottom)

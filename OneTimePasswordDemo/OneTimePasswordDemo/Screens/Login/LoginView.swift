@@ -10,7 +10,7 @@ import PureLayout
 
 class LoginView: UIView {
     
-    lazy var createUserButton: UIButton = {
+    private lazy var createUserButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .darkGray
         button.setTitle("Create user", for: .normal)
@@ -18,7 +18,7 @@ class LoginView: UIView {
         return button
     }()
     
-    lazy var verifieUserButton: UIButton = {
+    private lazy var verifieUserButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .darkGray
         button.setTitle("Verifie user", for: .normal)
@@ -31,18 +31,26 @@ class LoginView: UIView {
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         addSubview(createUserButton)
         addSubview(verifieUserButton)
         setupLayout()
     }
     
-    func setupLayout() {
+    private func setupLayout() {
         createUserButton.autoCenterInSuperview()
         createUserButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
         
         verifieUserButton.autoPinEdge(.top, to: .bottom, of: createUserButton, withOffset: 30)
         verifieUserButton.autoAlignAxis(toSuperviewMarginAxis: .vertical)
         verifieUserButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
+    }
+    
+    func setupCreateUserButtonAction(closure: @escaping UIControl.UIControlTargetClosure) {
+        createUserButton.addAction(for: .touchUpInside, closure: closure)
+    }
+    
+    func setupVerifieUserButtonAction(closure: @escaping UIControl.UIControlTargetClosure) {
+        verifieUserButton.addAction(for: .touchUpInside, closure: closure)
     }
 }
