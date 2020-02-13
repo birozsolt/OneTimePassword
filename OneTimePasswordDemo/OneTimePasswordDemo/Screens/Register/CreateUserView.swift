@@ -24,6 +24,7 @@ class CreateUserView: UIView {
         textField.clearButtonMode = .whileEditing
         textField.isUserInteractionEnabled = true
         textField.clearsOnBeginEditing = true
+        textField.autocorrectionType = .no
         textField.textColor = .darkGray
         textField.tintColor = .black
         return textField
@@ -64,6 +65,10 @@ class CreateUserView: UIView {
     
     func setupContinueButtonAction(closure: @escaping UIControl.UIControlTargetClosure) {
         continueButton.addAction(for: .touchUpInside, closure: closure)
+    }
+    
+    func getTextfieldText() -> String {
+        return userNameTextField.text ?? ""
     }
 }
 

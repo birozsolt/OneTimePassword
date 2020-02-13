@@ -23,8 +23,12 @@ class CreateUserViewController: UIViewController {
     
     private func setupButtonClosures() {
         createUserView.setupContinueButtonAction { _ in
-            let baseVC = BaseViewController()
-            self.navigationController?.pushViewController(baseVC, animated: true)
+            LocalStorage.shared.setUser(withName: self.createUserView.getTextfieldText(), completition: { success in
+                if success {
+                    let baseVC = BaseViewController()
+                    self.navigationController?.pushViewController(baseVC, animated: true)
+                }
+            })
         }
     }
 }
