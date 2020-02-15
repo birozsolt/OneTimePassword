@@ -47,7 +47,7 @@ extension UserListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let baseVC = BaseViewController()
+        let baseVC = BaseViewController(userName: viewModel.userName(forIndex: indexPath.row))
         self.navigationController?.pushViewController(baseVC, animated: true)
     }
 }

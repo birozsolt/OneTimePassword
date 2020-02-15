@@ -11,6 +11,14 @@ import UIKit
 class BaseViewController: UIViewController {
     private lazy var baseView = BaseView()
     
+    init(userName name: String) {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = baseView
     }

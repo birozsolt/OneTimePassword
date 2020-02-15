@@ -23,12 +23,24 @@ class CreateUserViewController: UIViewController {
     
     private func setupButtonClosures() {
         createUserView.setupContinueButtonAction { _ in
-            LocalStorage.shared.setUser(withName: self.createUserView.getTextfieldText(), completition: { success in
-                if success {
-                    let baseVC = BaseViewController()
-                    self.navigationController?.pushViewController(baseVC, animated: true)
-                }
-            })
+            if self.verifieUser(withName: self.createUserView.getTextfieldText()) {
+                LocalStorage.shared.setUser(withName: self.createUserView.getTextfieldText(), completition: { success in
+                    if success {
+                        let baseVC = BaseViewController(userName: self.createUserView.getTextfieldText())
+                        self.navigationController?.pushViewController(baseVC, animated: true)
+                    }
+                })
+            } else {
+                let alert = UIAlertController(title: "Error", message: "User already exist.", preferredStyle: .alert)
+                let okButton = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                alert.addAction(okButton)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
+    }
+    
+    private func verifieUser(withName name: String) -> Bool {
+        let userList = LocalStorage.shared.getUserList()
+        return !userList.contains(name)
     }
 }

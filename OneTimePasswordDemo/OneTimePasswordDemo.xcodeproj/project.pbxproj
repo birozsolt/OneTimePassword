@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E502E2E23F80B15003533F4 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E502E2D23F80B15003533F4 /* BaseViewModel.swift */; };
+		3E502E3023F80C9A003533F4 /* CoordinateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E502E2F23F80C9A003533F4 /* CoordinateModel.swift */; };
 		3E523ECE23F1D0F5007D461B /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E523ECD23F1D0F5007D461B /* CreateUserView.swift */; };
 		3E523ED023F1D941007D461B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E523ECF23F1D941007D461B /* UIViewControllerExtension.swift */; };
 		3E523ED223F1DE05007D461B /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E523ED123F1DE05007D461B /* UserListView.swift */; };
@@ -68,6 +70,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3E502E2D23F80B15003533F4 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		3E502E2F23F80C9A003533F4 /* CoordinateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateModel.swift; sourceTree = "<group>"; };
 		3E523ECD23F1D0F5007D461B /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserView.swift; sourceTree = "<group>"; };
 		3E523ECF23F1D941007D461B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		3E523ED123F1DE05007D461B /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				3E73727D23EF2B7900E703A5 /* CanvasView.swift */,
+				3E502E2F23F80C9A003533F4 /* CoordinateModel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 			children = (
 				3E813DC223EC96A00022D836 /* BaseViewController.swift */,
 				3E73727923EF283300E703A5 /* BaseView.swift */,
+				3E502E2D23F80B15003533F4 /* BaseViewModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -427,9 +433,11 @@
 			files = (
 				3E523ECE23F1D0F5007D461B /* CreateUserView.swift in Sources */,
 				3E68F48E23F0693600AFD0F2 /* LoginViewController.swift in Sources */,
+				3E502E3023F80C9A003533F4 /* CoordinateModel.swift in Sources */,
 				3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */,
 				3E73727E23EF2B7900E703A5 /* CanvasView.swift in Sources */,
 				3E523EDC23F31D47007D461B /* UserListViewController.swift in Sources */,
+				3E502E2E23F80B15003533F4 /* BaseViewModel.swift in Sources */,
 				3E813DC323EC96A00022D836 /* BaseViewController.swift in Sources */,
 				3E523ED423F1E308007D461B /* UserListTableViewCell.swift in Sources */,
 				3E523ED723F31BAC007D461B /* UserListViewModel.swift in Sources */,

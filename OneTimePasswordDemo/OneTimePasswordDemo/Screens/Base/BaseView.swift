@@ -13,7 +13,14 @@ class BaseView: UIView {
     private lazy var firstQuarterView = CanvasView()
     private lazy var secondQuarterView = CanvasView()
     private lazy var thirdQuarterView = CanvasView()
-    private lazy var forthQuarterView = CanvasView()
+    private lazy var fourthQuarterView = CanvasView()
+    
+    enum Quarters: String {
+        case first
+        case second
+        case third
+        case fourth
+    }
     
     private lazy var verticalSeparator: UIView = {
         let view = UIView()
@@ -39,7 +46,7 @@ class BaseView: UIView {
         addSubview(firstQuarterView)
         addSubview(secondQuarterView)
         addSubview(thirdQuarterView)
-        addSubview(forthQuarterView)
+        addSubview(fourthQuarterView)
         setupLayout()
     }
     
@@ -69,9 +76,22 @@ class BaseView: UIView {
         thirdQuarterView.autoPinEdge(.right, to: .left, of: verticalSeparator)
         thirdQuarterView.autoPinEdge(.top, to: .bottom, of: horizontalSeparator)
         
-        forthQuarterView.autoPinEdge(toSuperviewSafeArea: .bottom)
-        forthQuarterView.autoPinEdge(toSuperviewSafeArea: .right)
-        forthQuarterView.autoPinEdge(.left, to: .right, of: verticalSeparator)
-        forthQuarterView.autoPinEdge(.top, to: .bottom, of: horizontalSeparator)
+        fourthQuarterView.autoPinEdge(toSuperviewSafeArea: .bottom)
+        fourthQuarterView.autoPinEdge(toSuperviewSafeArea: .right)
+        fourthQuarterView.autoPinEdge(.left, to: .right, of: verticalSeparator)
+        fourthQuarterView.autoPinEdge(.top, to: .bottom, of: horizontalSeparator)
+    }
+    
+    func getCoordinates(forQuarter quarter: Quarters) -> [CoordinateModel] {
+        switch quarter {
+        case .first:
+            return firstQuarterView.getCoordinates()
+        case .second:
+            return secondQuarterView.getCoordinates()
+        case .third:
+            return thirdQuarterView.getCoordinates()
+        case .fourth:
+            return fourthQuarterView.getCoordinates()
+        }
     }
 }
