@@ -8,7 +8,10 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController, NavigationBarProtocol {
+    var navBarTitle: String?
+    var leftBarButtonItem: UIBarButtonItem?
+    
     private lazy var loginView = LoginView()
     
     override func loadView() {
@@ -16,7 +19,6 @@ class LoginViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        edgesForExtendedLayout = []
         setupButtonClosures()
     }
     

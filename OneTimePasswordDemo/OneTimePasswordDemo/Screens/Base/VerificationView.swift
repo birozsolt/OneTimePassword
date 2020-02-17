@@ -1,5 +1,5 @@
 //
-//  BaseView.swift
+//  VerificationView.swift
 //  OneTimePasswordDemo
 //
 //  Created by Biro Zsolt on 08/02/2020.
@@ -8,7 +8,7 @@
 
 import PureLayout
 
-class BaseView: UIView {
+class VerificationView: UIView {
     
     private lazy var firstQuarterView = CanvasView()
     private lazy var secondQuarterView = CanvasView()

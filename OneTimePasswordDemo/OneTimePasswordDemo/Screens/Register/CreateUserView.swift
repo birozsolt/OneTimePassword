@@ -67,8 +67,8 @@ class CreateUserView: UIView {
         continueButton.addAction(for: .touchUpInside, closure: closure)
     }
     
-    func getTextfieldText() -> String {
-        return userNameTextField.text ?? ""
+    func getTextfieldText() -> String? {
+        return userNameTextField.text
     }
 }
 

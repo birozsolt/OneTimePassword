@@ -8,30 +8,49 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController {
+class CreateUserViewController: BaseViewController, NavigationBarProtocol {
+    var navBarTitle: String?
+    var leftBarButtonItem: UIBarButtonItem?
+    
     private lazy var createUserView = CreateUserView()
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        navBarTitle = "Create user"
+        leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = createUserView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        edgesForExtendedLayout = []
-        setupHideKeyboardOnTap()
         setupButtonClosures()
     }
     
     private func setupButtonClosures() {
         createUserView.setupContinueButtonAction { _ in
-            if self.verifieUser(withName: self.createUserView.getTextfieldText()) {
-                LocalStorage.shared.setUser(withName: self.createUserView.getTextfieldText(), completition: { success in
-                    if success {
-                        let baseVC = BaseViewController(userName: self.createUserView.getTextfieldText())
-                        self.navigationController?.pushViewController(baseVC, animated: true)
-                    }
-                })
+            if let text = self.createUserView.getTextfieldText(), !text.isEmpty {
+                if self.verifieUser(withName: text) {
+                    LocalStorage.shared.setUser(withName: text, completition: { success in
+                        if success {
+                            let baseVC = VerificationViewController(userName: text, viewType: .enrollment)
+                            self.navigationController?.pushViewController(baseVC, animated: true)
+                        }
+                    })
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "User already exist.", preferredStyle: .alert)
+                    let okButton = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                    alert.addAction(okButton)
+                    self.present(alert, animated: true, completion: nil)
+                }
             } else {
-                let alert = UIAlertController(title: "Error", message: "User already exist.", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Warning", message: "You must type a user name to continue.", preferredStyle: .alert)
                 let okButton = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                 alert.addAction(okButton)
                 self.present(alert, animated: true, completion: nil)

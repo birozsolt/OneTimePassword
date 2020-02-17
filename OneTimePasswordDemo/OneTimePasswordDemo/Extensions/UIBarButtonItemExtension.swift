@@ -11,7 +11,7 @@ import UIKit
 extension UIBarButtonItem {
     
     /// Typealias for UIBarButtonItem closure.
-    private typealias UIBarButtonItemTargetClosure = (UIBarButtonItem) -> Void
+    public typealias UIBarButtonItemTargetClosure = (UIBarButtonItem) -> Void
 
     private class UIBarButtonItemClosureWrapper: NSObject {
         let closure: UIBarButtonItemTargetClosure
@@ -37,15 +37,15 @@ extension UIBarButtonItem {
                                      objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
-    private convenience init(title: String?, style: UIBarButtonItem.Style, closure: @escaping UIBarButtonItemTargetClosure) {
-        self.init(title: title, style: style, target: nil, action: nil)
-        targetClosure = closure
-        action = #selector(UIBarButtonItem.closureAction)
-    }
 
     @objc func closureAction() {
         guard let targetClosure = targetClosure else { return }
         targetClosure(self)
+    }
+    
+    public func addTargetClosure(closure: @escaping UIBarButtonItemTargetClosure) {
+        targetClosure = closure
+        target = self
+        action = #selector(closureAction)
     }
 }

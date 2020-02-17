@@ -38,7 +38,7 @@ class LoginView: UIView {
     }
     
     private func setupLayout() {
-        createUserButton.autoCenterInSuperview()
+        createUserButton.autoCenterInSuperviewMargins()
         createUserButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
         
         verifieUserButton.autoPinEdge(.top, to: .bottom, of: createUserButton, withOffset: 30)

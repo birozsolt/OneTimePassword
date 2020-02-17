@@ -8,18 +8,31 @@
 
 import UIKit
 
-class UserListViewController: UIViewController {
+class UserListViewController: BaseViewController, NavigationBarProtocol {
+    var navBarTitle: String?
+    var leftBarButtonItem: UIBarButtonItem?
+    
     private lazy var userListView = UserListView()
     private lazy var viewModel = UserListViewModel()
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        navBarTitle = "User List"
+        leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = userListView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userListView.tableView.delegate = self
         userListView.tableView.dataSource = self
-        edgesForExtendedLayout = []
     }
 }
 
@@ -47,7 +60,7 @@ extension UserListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let baseVC = BaseViewController(userName: viewModel.userName(forIndex: indexPath.row))
+        let baseVC = VerificationViewController(userName: viewModel.userName(forIndex: indexPath.row), viewType: .test)
         self.navigationController?.pushViewController(baseVC, animated: true)
     }
 }

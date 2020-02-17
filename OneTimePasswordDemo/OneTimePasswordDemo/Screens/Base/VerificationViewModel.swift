@@ -1,5 +1,5 @@
 //
-//  BaseViewModel.swift
+//  VerificationViewModel.swift
 //  OneTimePasswordDemo
 //
 //  Created by Biro Zsolt on 15/02/2020.
@@ -8,6 +8,11 @@
 
 import UIKit
 
-class BaseViewModel: NSObject {
+enum ViewType {
+    case enrollment
+    case test
+}
+
+class VerificationViewModel: NSObject {
     private var coordinates: [CoordinateModel] = []
 }

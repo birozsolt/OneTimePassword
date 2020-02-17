@@ -46,5 +46,4 @@ extension UIControl {
         targetClosure = closure
         addTarget(self, action: #selector(UIControl.closureAction), for: event)
     }
-    
 }
