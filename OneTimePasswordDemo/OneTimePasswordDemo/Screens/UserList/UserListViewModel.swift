@@ -13,7 +13,7 @@ class UserListViewModel: NSObject {
     
     override init() {
         super.init()
-        userList = LocalStorage.shared.getUserList()
+        userList = SecureStorage.shared.getUserList()
     }
     
     func numberOfRows() -> Int {

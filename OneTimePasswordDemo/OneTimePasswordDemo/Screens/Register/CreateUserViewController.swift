@@ -37,12 +37,8 @@ class CreateUserViewController: BaseViewController, NavigationBarProtocol {
         createUserView.setupContinueButtonAction { _ in
             if let text = self.createUserView.getTextfieldText(), !text.isEmpty {
                 if self.verifieUser(withName: text) {
-                    LocalStorage.shared.setUser(withName: text, completition: { success in
-                        if success {
-                            let baseVC = VerificationViewController(userName: text, viewType: .enrollment)
-                            self.navigationController?.pushViewController(baseVC, animated: true)
-                        }
-                    })
+                    let baseVC = VerificationViewController(userName: text, viewType: .enrollment)
+                    self.navigationController?.pushViewController(baseVC, animated: true)
                 } else {
                     let alert = UIAlertController(title: "Error", message: "User already exist.", preferredStyle: .alert)
                     let okButton = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
@@ -59,7 +55,7 @@ class CreateUserViewController: BaseViewController, NavigationBarProtocol {
     }
     
     private func verifieUser(withName name: String) -> Bool {
-        let userList = LocalStorage.shared.getUserList()
+        let userList = SecureStorage.shared.getUserList()
         return !userList.contains(name)
     }
 }

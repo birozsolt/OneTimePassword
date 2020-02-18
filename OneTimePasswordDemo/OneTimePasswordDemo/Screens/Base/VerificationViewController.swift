@@ -13,12 +13,14 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
     var leftBarButtonItem: UIBarButtonItem?
     var rightBarButtonItem: UIBarButtonItem?
     
-    private lazy var baseView = VerificationView()
+    private lazy var verificationView = VerificationView()
+    private var viewModel: VerificationViewModel
     
     init(userName name: String, viewType type: ViewType) {
+        viewModel = VerificationViewModel(user: name)
         super.init(nibName: nil, bundle: nil)
         navBarTitle = name
-        leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: nil)
         let buttonTitle = type == .enrollment ? "Save" : "Test"
         rightBarButtonItem = UIBarButtonItem(title: buttonTitle, style: .plain, target: self, action: nil)
     }
@@ -28,9 +30,25 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
     }
     
     override func loadView() {
-        view = baseView
+        view = verificationView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupButtonClosures()
+    }
+    
+    private func setupButtonClosures() {
+        rightBarButtonItem?.addTargetClosure(closure: { (item) in
+            if item.title == "Save" {
+                self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+                self.viewModel.saveUserData { (isSuccess) in
+                    if isSuccess {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                }
+            } else {
+                
+            }
+        })
     }
 }

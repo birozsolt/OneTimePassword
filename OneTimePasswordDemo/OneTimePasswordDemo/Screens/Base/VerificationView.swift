@@ -82,7 +82,7 @@ class VerificationView: UIView {
         fourthQuarterView.autoPinEdge(.top, to: .bottom, of: horizontalSeparator)
     }
     
-    func getCoordinates(forQuarter quarter: Quarters) -> [CoordinateModel] {
+    private func getCoordinates(forQuarter quarter: Quarters) -> [CoordinateModel] {
         switch quarter {
         case .first:
             return firstQuarterView.getCoordinates()
@@ -93,5 +93,14 @@ class VerificationView: UIView {
         case .fourth:
             return fourthQuarterView.getCoordinates()
         }
+    }
+    
+    func getAllCoordinates() -> [[CoordinateModel]] {
+        var samples: [[CoordinateModel]] = []
+        samples.append(getCoordinates(forQuarter: .first))
+        samples.append(getCoordinates(forQuarter: .second))
+        samples.append(getCoordinates(forQuarter: .third))
+        samples.append(getCoordinates(forQuarter: .fourth))
+        return samples
     }
 }
