@@ -58,8 +58,14 @@ class SecureStorage: SecureStorable {
     }
     
     func saveUserData(forUser user: UserModel, completion: LocalStorageCallBack?) {
-        guard var userData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else {
-            try? Locksmith.saveData(data: [StorageKeys.userName.rawValue: [user]], forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
+        guard var storedData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else {
+            do {
+                let userDataToSave = try NSKeyedArchiver.archivedData(withRootObject: user, requiringSecureCoding: false)
+                try Locksmith.saveData(data: [StorageKeys.userName.rawValue: [userDataToSave]],
+                                       forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
+            } catch {
+                print(error)
+            }
             setUser(withName: user.getName()) { (isSuccess) in
                 if isSuccess {
                     completion?(true)
@@ -68,9 +74,14 @@ class SecureStorage: SecureStorable {
             }
             return
         }
-        guard var dataList = userData[StorageKeys.userName.rawValue] as? [UserModel] else {
-            userData[StorageKeys.userName.rawValue] = [user]
-            try? Locksmith.updateData(data: userData, forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
+        guard var dataList = storedData[StorageKeys.userName.rawValue] as? [Data] else {
+            do {
+                let userDataToSave = try NSKeyedArchiver.archivedData(withRootObject: user, requiringSecureCoding: false)
+                storedData[StorageKeys.userName.rawValue] = [userDataToSave]
+                try Locksmith.updateData(data: storedData, forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
+            } catch {
+                print(error)
+            }
             setUser(withName: user.getName()) { (isSuccess) in
                 if isSuccess {
                     completion?(true)
@@ -79,9 +90,14 @@ class SecureStorage: SecureStorable {
             }
             return
         }
-        dataList.append(user)
-        userData[StorageKeys.userName.rawValue] = dataList
-        try? Locksmith.updateData(data: userData, forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
+        do {
+            let userDataToSave = try NSKeyedArchiver.archivedData(withRootObject: user, requiringSecureCoding: false)
+            dataList.append(userDataToSave)
+            storedData[StorageKeys.userName.rawValue] = dataList
+            try Locksmith.updateData(data: storedData, forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
+        } catch {
+            print(error)
+        }
         setUser(withName: user.getName()) { (isSuccess) in
             if isSuccess {
                 completion?(true)
@@ -91,14 +107,18 @@ class SecureStorage: SecureStorable {
     }
     
     func getUserData(forUser name: String) -> UserModel? {
-        guard let userData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else { return nil }
-        guard let dataList = userData[StorageKeys.userName.rawValue] as? [UserModel] else { return nil }
-        let userModel = dataList.filter { (model) -> Bool in
-            if model.getName() == name {
-                return true
+        guard let storedData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else { return nil }
+        guard let dataList = storedData[StorageKeys.userName.rawValue] as? [Data] else { return nil }
+        let userData = dataList.filter { (data) -> Bool in
+            if let model = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UserModel.self, from: data) {
+                if model.getName() == name {
+                    return true
+                }
+                return false
             }
             return false
         }.first
+        let userModel = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UserModel.self, from: userData!)
         return userModel
     }
 }
