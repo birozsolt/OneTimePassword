@@ -20,8 +20,8 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
         viewModel = VerificationViewModel(user: name)
         super.init(nibName: nil, bundle: nil)
         navBarTitle = name
-        leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: nil)
-        let buttonTitle = type == .enrollment ? "Save" : "Test"
+        leftBarButtonItem = UIBarButtonItem(title: LeftBarButtonTitle.cancel.rawValue, style: .plain, target: self, action: nil)
+        let buttonTitle = type == .enrollment ? RightBarButtonTitle.next.rawValue : RightBarButtonTitle.test.rawValue
         rightBarButtonItem = UIBarButtonItem(title: buttonTitle, style: .plain, target: self, action: nil)
     }
     
@@ -38,15 +38,26 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
     }
     
     private func setupButtonClosures() {
+        var counter = 0
         rightBarButtonItem?.addTargetClosure(closure: { (item) in
-            if item.title == "Save" {
-                self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+            if item.title == RightBarButtonTitle.save.rawValue {
                 self.viewModel.saveUserData { (isSuccess) in
                     if isSuccess {
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                 }
-            } else {
+            }
+            
+            if item.title == RightBarButtonTitle.next.rawValue {
+                self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+                self.verificationView.clearCanvas()
+                counter += 1
+                if counter == 3 {
+                    self.rightBarButtonItem?.title = RightBarButtonTitle.save.rawValue
+                }
+            }
+            
+            if item.title == RightBarButtonTitle.test.rawValue {
                 
             }
         })

@@ -15,7 +15,7 @@ class CanvasView: UIView {
     private lazy var startingPoint = CGPoint.zero
     private lazy var touchPoint = CGPoint.zero
     
-    private lazy var coordinates: [CoordinateModel] = []
+    private lazy var coordinateList: [Coordinate] = []
     
     override func layoutSubviews() {
         backgroundColor = .white
@@ -26,9 +26,9 @@ class CanvasView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         startingPoint = touch.location(in: self)
-        coordinates.append(CoordinateModel(x: startingPoint.x,
-                                           y: startingPoint.y,
-                                           force: touch.force))
+        coordinateList.append(Coordinate(x: startingPoint.x,
+                                      y: startingPoint.y,
+                                      force: touch.force))
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -38,9 +38,9 @@ class CanvasView: UIView {
         let maxY = self.frame.size.height
         if location.x < maxX && location.x > 0 && location.y < maxY && location.y > 0 {
             touchPoint = location
-            coordinates.append(CoordinateModel(x: touchPoint.x,
-                                               y: touchPoint.y,
-                                               force: touch.force))
+            coordinateList.append(Coordinate(x: touchPoint.x,
+                                          y: touchPoint.y,
+                                          force: touch.force))
             path.move(to: startingPoint)
             path.addLine(to: touchPoint)
             startingPoint = touchPoint
@@ -59,7 +59,12 @@ class CanvasView: UIView {
         setNeedsDisplay()
     }
     
-    func getCoordinates() -> [CoordinateModel] {
-        return coordinates
+    func clearCanvas() {
+        path.removeAllPoints()
+        layer.sublayers?.removeAll()
+    }
+    
+    func getCoordinateList() -> [Coordinate] {
+        return coordinateList
     }
 }

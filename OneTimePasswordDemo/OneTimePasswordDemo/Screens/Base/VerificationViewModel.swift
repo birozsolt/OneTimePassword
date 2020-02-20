@@ -14,15 +14,16 @@ enum ViewType {
 }
 
 class VerificationViewModel: NSObject {
-    private var coordinates: [[CoordinateModel]] = []
+    private var coordinates: [CoordinateModel] = []
     private let userName: String
+    private var currentUser: UserModel!
     
     init(user: String) {
         self.userName = user
     }
     
-    func setCoordinates(coordinates: [[CoordinateModel]]) {
-        self.coordinates = coordinates
+    func setCoordinates(coordinates: CoordinateModel) {
+        self.coordinates.append(coordinates)
     }
     
     func saveUserData(completion: @escaping (Bool) -> Void) {
@@ -33,5 +34,13 @@ class VerificationViewModel: NSObject {
             }
             completion(false)
         }
+    }
+    
+    func getUserData(completion: @escaping (Bool) -> Void) {
+        if let userData = SecureStorage.shared.getUserData(forUser: userName) {
+            currentUser = userData
+            completion(true)
+        }
+        completion(false)
     }
 }

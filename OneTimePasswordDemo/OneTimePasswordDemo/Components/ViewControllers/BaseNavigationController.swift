@@ -14,6 +14,17 @@ import UIKit
     @objc optional var rightBarButtonItem: UIBarButtonItem? { get set }
 }
 
+enum RightBarButtonTitle: String {
+    case next = "Next"
+    case save = "Save"
+    case test = "Test"
+}
+
+enum LeftBarButtonTitle: String {
+    case back = "Back"
+    case cancel = "Cancel"
+}
+
 class BaseNavigationController: UINavigationController {
     
     // MARK: Lifecycle

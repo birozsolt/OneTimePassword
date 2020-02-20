@@ -10,15 +10,15 @@ import UIKit
 
 class UserModel: NSObject, NSCoding {
     private var name: String!
-    private var samples: [[CoordinateModel]]!
+    private var samples: [CoordinateModel]!
     
     required convenience init(coder decoder: NSCoder) {
         self.init()
         self.name = decoder.decodeObject(forKey: "name") as? String
-        self.samples = decoder.decodeObject(forKey: "samples") as? [[CoordinateModel]]
+        self.samples = decoder.decodeObject(forKey: "samples") as? [CoordinateModel]
     }
     
-    convenience init(name: String, samples: [[CoordinateModel]]) {
+    convenience init(name: String, samples: [CoordinateModel]) {
         self.init()
         self.name = name
         self.samples = samples
@@ -33,7 +33,7 @@ class UserModel: NSObject, NSCoding {
         return name
     }
     
-    func getSamples() -> [[CoordinateModel]] {
+    func getSamples() -> [CoordinateModel] {
         return samples
     }
 }

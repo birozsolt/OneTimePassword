@@ -24,6 +24,7 @@ class LoginViewController: BaseViewController, NavigationBarProtocol {
     
     private func setupButtonClosures() {
         loginView.setupCreateUserButtonAction { _ in
+//            SecureStorage.shared.deleteAllData()
             let createUserVC = CreateUserViewController()
             self.navigationController?.pushViewController(createUserVC, animated: true)
         }

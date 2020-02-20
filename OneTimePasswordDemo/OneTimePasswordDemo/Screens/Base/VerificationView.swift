@@ -82,25 +82,31 @@ class VerificationView: UIView {
         fourthQuarterView.autoPinEdge(.top, to: .bottom, of: horizontalSeparator)
     }
     
-    private func getCoordinates(forQuarter quarter: Quarters) -> [CoordinateModel] {
+    private func getCoordinates(forQuarter quarter: Quarters) -> [Coordinate] {
         switch quarter {
         case .first:
-            return firstQuarterView.getCoordinates()
+            return firstQuarterView.getCoordinateList()
         case .second:
-            return secondQuarterView.getCoordinates()
+            return secondQuarterView.getCoordinateList()
         case .third:
-            return thirdQuarterView.getCoordinates()
+            return thirdQuarterView.getCoordinateList()
         case .fourth:
-            return fourthQuarterView.getCoordinates()
+            return fourthQuarterView.getCoordinateList()
         }
     }
     
-    func getAllCoordinates() -> [[CoordinateModel]] {
-        var samples: [[CoordinateModel]] = []
-        samples.append(getCoordinates(forQuarter: .first))
-        samples.append(getCoordinates(forQuarter: .second))
-        samples.append(getCoordinates(forQuarter: .third))
-        samples.append(getCoordinates(forQuarter: .fourth))
-        return samples
+    func getAllCoordinates() -> CoordinateModel {
+        let coordinateModel = CoordinateModel(coordsQ1: getCoordinates(forQuarter: .first),
+                                              coordsQ2: getCoordinates(forQuarter: .second),
+                                              coordsQ3: getCoordinates(forQuarter: .third),
+                                              coordsQ4: getCoordinates(forQuarter: .fourth))
+        return coordinateModel
+    }
+    
+    func clearCanvas() {
+        firstQuarterView.clearCanvas()
+        secondQuarterView.clearCanvas()
+        thirdQuarterView.clearCanvas()
+        fourthQuarterView.clearCanvas()
     }
 }
