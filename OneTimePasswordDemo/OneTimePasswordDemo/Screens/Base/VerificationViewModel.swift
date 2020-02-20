@@ -16,7 +16,7 @@ enum ViewType {
 class VerificationViewModel: NSObject {
     private var coordinates: [CoordinateModel] = []
     private let userName: String
-    private var currentUser: UserModel!
+    var currentUser: UserModel!
     
     init(user: String) {
         self.userName = user
@@ -36,11 +36,11 @@ class VerificationViewModel: NSObject {
         }
     }
     
-    func getUserData(completion: @escaping (Bool) -> Void) {
+    func getUserData(completion: ((Bool) -> Void)?) {
         if let userData = SecureStorage.shared.getUserData(forUser: userName) {
             currentUser = userData
-            completion(true)
+            completion?(true)
         }
-        completion(false)
+        completion?(false)
     }
 }

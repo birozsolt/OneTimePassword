@@ -18,6 +18,10 @@ enum StorageKeys: String {
 class SecureStorage: SecureStorable {
     static let shared = SecureStorage()
     typealias LocalStorageCallBack = (Bool) -> Void
+    
+    private let decoder = JSONDecoder()
+    private let encoder = JSONEncoder()
+    
     private init() { }
     
     func setUser(withName name: String, completion: LocalStorageCallBack?) {
@@ -60,65 +64,61 @@ class SecureStorage: SecureStorable {
     func saveUserData(forUser user: UserModel, completion: LocalStorageCallBack?) {
         guard var storedData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else {
             do {
-                let userDataToSave = try NSKeyedArchiver.archivedData(withRootObject: user, requiringSecureCoding: false)
-                try Locksmith.saveData(data: [StorageKeys.userName.rawValue: [userDataToSave]],
+                let jsonDataToSave = try encoder.encode(user)
+                try Locksmith.saveData(data: [StorageKeys.userName.rawValue: [jsonDataToSave]],
                                        forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
             } catch {
                 print(error)
             }
             setUser(withName: user.getName()) { (isSuccess) in
-                if isSuccess {
-                    completion?(true)
-                }
-                completion?(false)
+                completion?(isSuccess)
             }
             return
         }
         guard var dataList = storedData[StorageKeys.userName.rawValue] as? [Data] else {
             do {
-                let userDataToSave = try NSKeyedArchiver.archivedData(withRootObject: user, requiringSecureCoding: false)
-                storedData[StorageKeys.userName.rawValue] = [userDataToSave]
+                let jsonDataToSave = try encoder.encode(user)
+                storedData[StorageKeys.userName.rawValue] = [jsonDataToSave]
                 try Locksmith.updateData(data: storedData, forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
             } catch {
                 print(error)
             }
             setUser(withName: user.getName()) { (isSuccess) in
-                if isSuccess {
-                    completion?(true)
-                }
-                completion?(false)
+                completion?(isSuccess)
             }
             return
         }
         do {
-            let userDataToSave = try NSKeyedArchiver.archivedData(withRootObject: user, requiringSecureCoding: false)
-            dataList.append(userDataToSave)
+            let jsonDataToSave = try encoder.encode(user)
+            dataList.append(jsonDataToSave)
             storedData[StorageKeys.userName.rawValue] = dataList
             try Locksmith.updateData(data: storedData, forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
         } catch {
             print(error)
         }
         setUser(withName: user.getName()) { (isSuccess) in
-            if isSuccess {
-                completion?(true)
-            }
-            completion?(false)
+            completion?(isSuccess)
         }
     }
     
     func getUserData(forUser name: String) -> UserModel? {
         guard let storedData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else { return nil }
         guard let dataList = storedData[StorageKeys.userName.rawValue] as? [Data] else { return nil }
-        let userData = dataList.filter { (data) -> Bool in
-            if let model = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UserModel.self, from: data) {
+        do {
+            let userData = try dataList.first { (data) -> Bool in
+                let model = try decoder.decode(UserModel.self, from: data)
                 if model.getName() == name {
                     return true
                 }
                 return false
             }
-            return false
-        }.first
-        let userModel = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UserModel.self, from: userData!)
-        return userModel
+            if let userData = userData {
+                let userModel = try decoder.decode(UserModel.self, from: userData)
+                return userModel
+            }
+        } catch {
+            print(error)
+        }
+        return nil
     }
 }

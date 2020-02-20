@@ -8,25 +8,13 @@
 
 import UIKit
 
-class UserModel: NSObject, NSCoding {
+class UserModel: Codable {
     private var name: String!
     private var samples: [CoordinateModel]!
     
-    required convenience init(coder decoder: NSCoder) {
-        self.init()
-        self.name = decoder.decodeObject(forKey: "name") as? String
-        self.samples = decoder.decodeObject(forKey: "samples") as? [CoordinateModel]
-    }
-    
-    convenience init(name: String, samples: [CoordinateModel]) {
-        self.init()
+    init(name: String, samples: [CoordinateModel]) {
         self.name = name
         self.samples = samples
-    }
-    
-    func encode(with coder: NSCoder) {
-        if let name = name { coder.encode(name, forKey: "name") }
-        if let samples = samples { coder.encode(samples, forKey: "samples") }
     }
     
     func getName() -> String {

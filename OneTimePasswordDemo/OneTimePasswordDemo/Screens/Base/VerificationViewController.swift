@@ -19,6 +19,9 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
     init(userName name: String, viewType type: ViewType) {
         viewModel = VerificationViewModel(user: name)
         super.init(nibName: nil, bundle: nil)
+        if type == .test {
+            viewModel.getUserData(completion: nil)
+        }
         navBarTitle = name
         leftBarButtonItem = UIBarButtonItem(title: LeftBarButtonTitle.cancel.rawValue, style: .plain, target: self, action: nil)
         let buttonTitle = type == .enrollment ? RightBarButtonTitle.next.rawValue : RightBarButtonTitle.test.rawValue
@@ -58,7 +61,10 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
             }
             
             if item.title == RightBarButtonTitle.test.rawValue {
-                
+                let samples = self.viewModel.currentUser.getSamples()
+                for coordinate in samples[0].getQ1Coordinates() {
+                    print("X: ", coordinate.getXCoordinate(), "Y: ", coordinate.getYCoordinate())
+                }
             }
         })
     }
