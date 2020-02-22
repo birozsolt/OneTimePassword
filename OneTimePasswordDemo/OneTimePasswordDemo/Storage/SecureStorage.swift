@@ -70,7 +70,7 @@ class SecureStorage: SecureStorable {
             } catch {
                 print(error)
             }
-            setUser(withName: user.getName()) { (isSuccess) in
+            setUser(withName: user.name) { (isSuccess) in
                 completion?(isSuccess)
             }
             return
@@ -83,7 +83,7 @@ class SecureStorage: SecureStorable {
             } catch {
                 print(error)
             }
-            setUser(withName: user.getName()) { (isSuccess) in
+            setUser(withName: user.name) { (isSuccess) in
                 completion?(isSuccess)
             }
             return
@@ -96,7 +96,7 @@ class SecureStorage: SecureStorable {
         } catch {
             print(error)
         }
-        setUser(withName: user.getName()) { (isSuccess) in
+        setUser(withName: user.name) { (isSuccess) in
             completion?(isSuccess)
         }
     }
@@ -107,7 +107,7 @@ class SecureStorage: SecureStorable {
         do {
             let userData = try dataList.first { (data) -> Bool in
                 let model = try decoder.decode(UserModel.self, from: data)
-                if model.getName() == name {
+                if model.name == name {
                     return true
                 }
                 return false

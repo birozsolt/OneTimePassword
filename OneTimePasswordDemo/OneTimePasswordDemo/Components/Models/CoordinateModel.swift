@@ -9,31 +9,15 @@
 import UIKit
 
 class CoordinateModel: Codable {
-    private var coordsQ1: [Coordinate]!
-    private var coordsQ2: [Coordinate]!
-    private var coordsQ3: [Coordinate]!
-    private var coordsQ4: [Coordinate]!
+    public private(set) var timeSerieQ1: TimeSerieModel
+    public private(set) var timeSerieQ2: TimeSerieModel
+    public private(set) var timeSerieQ3: TimeSerieModel
+    public private(set) var timeSerieQ4: TimeSerieModel
     
     init(coordsQ1: [Coordinate], coordsQ2: [Coordinate], coordsQ3: [Coordinate], coordsQ4: [Coordinate]) {
-        self.coordsQ1 = coordsQ1
-        self.coordsQ2 = coordsQ2
-        self.coordsQ3 = coordsQ3
-        self.coordsQ4 = coordsQ4
-    }
-    
-    func getQ1Coordinates() -> [Coordinate] {
-        return coordsQ1
-    }
-    
-    func getQ2Coordinates() -> [Coordinate] {
-        return coordsQ2
-    }
-    
-    func getQ3Coordinates() -> [Coordinate] {
-        return coordsQ3
-    }
-    
-    func getQ4Coordinates() -> [Coordinate] {
-        return coordsQ4
+        timeSerieQ1 = TimeSerieModel(coordinates: coordsQ1)
+        timeSerieQ2 = TimeSerieModel(coordinates: coordsQ2)
+        timeSerieQ3 = TimeSerieModel(coordinates: coordsQ3)
+        timeSerieQ4 = TimeSerieModel(coordinates: coordsQ4)
     }
 }

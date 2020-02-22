@@ -9,19 +9,11 @@
 import UIKit
 
 class UserModel: Codable {
-    private var name: String!
-    private var samples: [CoordinateModel]!
+    public private(set) var name: String
+    public private(set) var samples: [CoordinateModel]
     
     init(name: String, samples: [CoordinateModel]) {
         self.name = name
         self.samples = samples
-    }
-    
-    func getName() -> String {
-        return name
-    }
-    
-    func getSamples() -> [CoordinateModel] {
-        return samples
     }
 }

@@ -23,6 +23,7 @@
 		3E53F6E823F5A5B600378EF0 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E53F6E723F5A5B600378EF0 /* SecureStorage.swift */; };
 		3E53F6EB23F5F23D00378EF0 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E53F6EA23F5F23D00378EF0 /* Locksmith.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		3E53F6ED23F5F28500378EF0 /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E53F6EC23F5F28500378EF0 /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E5677ED240125A1003E8ED0 /* TimeSerieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */; };
 		3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48523F060E500AFD0F2 /* LoginView.swift */; };
 		3E68F48923F0639300AFD0F2 /* UIBarButtonItemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */; };
 		3E68F48B23F066B100AFD0F2 /* UIControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */; };
@@ -91,6 +92,7 @@
 		3E53F6E923F5AB2E00378EF0 /* OneTimePasswordDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneTimePasswordDemo.entitlements; sourceTree = "<group>"; };
 		3E53F6EA23F5F23D00378EF0 /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
 		3E53F6EC23F5F28500378EF0 /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
+		3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSerieModel.swift; sourceTree = "<group>"; };
 		3E68F48523F060E500AFD0F2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtension.swift; sourceTree = "<group>"; };
 		3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIControlExtension.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				3E53B6AC23FEF88A000D6293 /* Coordinate.swift */,
 				3E46590823FB145C00747F38 /* UserModel.swift */,
 				3E53B6AE23FEF9D4000D6293 /* CoordinateModel.swift */,
+				3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				3E523ED423F1E308007D461B /* UserListTableViewCell.swift in Sources */,
 				3E523ED723F31BAC007D461B /* UserListViewModel.swift in Sources */,
 				3E813DBF23EC96A00022D836 /* AppDelegate.swift in Sources */,
+				3E5677ED240125A1003E8ED0 /* TimeSerieModel.swift in Sources */,
 				3E68F48923F0639300AFD0F2 /* UIBarButtonItemExtension.swift in Sources */,
 				3E523ED023F1D941007D461B /* UIViewControllerExtension.swift in Sources */,
 				3E523EDA23F31CAB007D461B /* CreateUserViewController.swift in Sources */,

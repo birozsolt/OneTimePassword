@@ -61,10 +61,7 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
             }
             
             if item.title == RightBarButtonTitle.test.rawValue {
-                let samples = self.viewModel.currentUser.getSamples()
-                for coordinate in samples[0].getQ1Coordinates() {
-                    print("X: ", coordinate.getXCoordinate(), "Y: ", coordinate.getYCoordinate())
-                }
+                let samples = self.viewModel.currentUser.samples
             }
         })
     }
