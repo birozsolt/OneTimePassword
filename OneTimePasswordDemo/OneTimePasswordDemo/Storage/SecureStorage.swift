@@ -62,10 +62,10 @@ class SecureStorage: SecureStorable {
     }
     
     func saveUserData(forUser user: UserModel, completion: LocalStorageCallBack?) {
-        guard var storedData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else {
+        guard let storedData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else {
             do {
                 let jsonDataToSave = try encoder.encode(user)
-                try Locksmith.saveData(data: [StorageKeys.userName.rawValue: [jsonDataToSave]],
+                try Locksmith.saveData(data: [user.name: jsonDataToSave],
                                        forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
             } catch {
                 print(error)
@@ -75,11 +75,11 @@ class SecureStorage: SecureStorable {
             }
             return
         }
-        guard var dataList = storedData[StorageKeys.userName.rawValue] as? [Data] else {
+        guard (storedData[user.name] as? Data) != nil else {
             do {
                 let jsonDataToSave = try encoder.encode(user)
-                storedData[StorageKeys.userName.rawValue] = [jsonDataToSave]
-                try Locksmith.updateData(data: storedData, forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
+                try Locksmith.saveData(data: [user.name: jsonDataToSave],
+                                       forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
             } catch {
                 print(error)
             }
@@ -88,34 +88,14 @@ class SecureStorage: SecureStorable {
             }
             return
         }
-        do {
-            let jsonDataToSave = try encoder.encode(user)
-            dataList.append(jsonDataToSave)
-            storedData[StorageKeys.userName.rawValue] = dataList
-            try Locksmith.updateData(data: storedData, forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
-        } catch {
-            print(error)
-        }
-        setUser(withName: user.name) { (isSuccess) in
-            completion?(isSuccess)
-        }
     }
     
     func getUserData(forUser name: String) -> UserModel? {
         guard let storedData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else { return nil }
-        guard let dataList = storedData[StorageKeys.userName.rawValue] as? [Data] else { return nil }
+        guard let userData = storedData[name] as? Data else { return nil }
         do {
-            let userData = try dataList.first { (data) -> Bool in
-                let model = try decoder.decode(UserModel.self, from: data)
-                if model.name == name {
-                    return true
-                }
-                return false
-            }
-            if let userData = userData {
-                let userModel = try decoder.decode(UserModel.self, from: userData)
-                return userModel
-            }
+            let model = try decoder.decode(UserModel.self, from: userData)
+            return model
         } catch {
             print(error)
         }
