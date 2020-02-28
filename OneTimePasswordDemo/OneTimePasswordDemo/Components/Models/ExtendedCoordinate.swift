@@ -18,7 +18,9 @@ class ExtendedCoordinate: Codable {
     var xAcceleration: CGFloat
     var yAcceleration: CGFloat
     
-    init(x: CGFloat, y: CGFloat, force: CGFloat, xVelocity: CGFloat, yVelocity: CGFloat, xAcceleration: CGFloat, yAcceleration: CGFloat) {
+    init(x: CGFloat, y: CGFloat, force: CGFloat,
+         xVelocity: CGFloat, yVelocity: CGFloat,
+         xAcceleration: CGFloat, yAcceleration: CGFloat) {
         self.x = x
         self.y = y
         self.force = force

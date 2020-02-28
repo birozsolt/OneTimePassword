@@ -10,6 +10,10 @@
 		3E46590723FB03D800747F38 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46590623FB03D800747F38 /* BaseNavigationController.swift */; };
 		3E46590923FB145C00747F38 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46590823FB145C00747F38 /* UserModel.swift */; };
 		3E4DA68C2406E30D0095C054 /* ExtendedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4DA68B2406E30D0095C054 /* ExtendedCoordinate.swift */; };
+		3E4DA68E2409B2840095C054 /* CreateUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4DA68D2409B2840095C054 /* CreateUserViewModel.swift */; };
+		3E4DA6902409B72B0095C054 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E4DA68F2409B72B0095C054 /* Localizable.strings */; };
+		3E4DA6922409BAB60095C054 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4DA6912409BAB60095C054 /* StringExtension.swift */; };
+		3E4DA6952409BB2A0095C054 /* LocalizationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4DA6942409BB2A0095C054 /* LocalizationKeys.swift */; };
 		3E502E2E23F80B15003533F4 /* VerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E502E2D23F80B15003533F4 /* VerificationViewModel.swift */; };
 		3E502E3223F81808003533F4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E502E3123F81808003533F4 /* BaseViewController.swift */; };
 		3E523ECE23F1D0F5007D461B /* CreateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E523ECD23F1D0F5007D461B /* CreateUserView.swift */; };
@@ -79,6 +83,10 @@
 		3E46590623FB03D800747F38 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		3E46590823FB145C00747F38 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3E4DA68B2406E30D0095C054 /* ExtendedCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedCoordinate.swift; sourceTree = "<group>"; };
+		3E4DA68D2409B2840095C054 /* CreateUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewModel.swift; sourceTree = "<group>"; };
+		3E4DA68F2409B72B0095C054 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		3E4DA6912409BAB60095C054 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		3E4DA6942409BB2A0095C054 /* LocalizationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationKeys.swift; sourceTree = "<group>"; };
 		3E502E2D23F80B15003533F4 /* VerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewModel.swift; sourceTree = "<group>"; };
 		3E502E3123F81808003533F4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3E523ECD23F1D0F5007D461B /* CreateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserView.swift; sourceTree = "<group>"; };
@@ -174,6 +182,15 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		3E4DA6932409BAE30095C054 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				3E4DA68F2409B72B0095C054 /* Localizable.strings */,
+				3E4DA6942409BB2A0095C054 /* LocalizationKeys.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		3E523ED523F31B83007D461B /* UserList */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +207,7 @@
 			children = (
 				3E523ECD23F1D0F5007D461B /* CreateUserView.swift */,
 				3E523ED923F31CAB007D461B /* CreateUserViewController.swift */,
+				3E4DA68D2409B2840095C054 /* CreateUserViewModel.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -217,6 +235,7 @@
 				3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */,
 				3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */,
 				3E523ECF23F1D941007D461B /* UIViewControllerExtension.swift */,
+				3E4DA6912409BAB60095C054 /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -277,6 +296,7 @@
 		3E813DBD23EC96A00022D836 /* OneTimePasswordDemo */ = {
 			isa = PBXGroup;
 			children = (
+				3E4DA6932409BAE30095C054 /* Localization */,
 				3E53F6E923F5AB2E00378EF0 /* OneTimePasswordDemo.entitlements */,
 				3E53F6E623F5A5A100378EF0 /* Storage */,
 				3E68F48723F0638000AFD0F2 /* Extensions */,
@@ -426,6 +446,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E68F49023F06C0B00AFD0F2 /* Main.storyboard in Resources */,
+				3E4DA6902409B72B0095C054 /* Localizable.strings in Resources */,
 				3E813DCB23EC96A10022D836 /* LaunchScreen.storyboard in Resources */,
 				3E813DC823EC96A10022D836 /* Assets.xcassets in Resources */,
 			);
@@ -478,6 +499,7 @@
 				3E68F48E23F0693600AFD0F2 /* LoginViewController.swift in Sources */,
 				3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */,
 				3E73727E23EF2B7900E703A5 /* CanvasView.swift in Sources */,
+				3E4DA6922409BAB60095C054 /* StringExtension.swift in Sources */,
 				3E502E3223F81808003533F4 /* BaseViewController.swift in Sources */,
 				3E53B6AD23FEF88A000D6293 /* Coordinate.swift in Sources */,
 				3E523EDC23F31D47007D461B /* UserListViewController.swift in Sources */,
@@ -488,6 +510,7 @@
 				3E523ED423F1E308007D461B /* UserListTableViewCell.swift in Sources */,
 				3E523ED723F31BAC007D461B /* UserListViewModel.swift in Sources */,
 				3E813DBF23EC96A00022D836 /* AppDelegate.swift in Sources */,
+				3E4DA68E2409B2840095C054 /* CreateUserViewModel.swift in Sources */,
 				3E5677ED240125A1003E8ED0 /* TimeSerieModel.swift in Sources */,
 				3E68F48923F0639300AFD0F2 /* UIBarButtonItemExtension.swift in Sources */,
 				3E523ED023F1D941007D461B /* UIViewControllerExtension.swift in Sources */,
@@ -497,6 +520,7 @@
 				3E73727A23EF283300E703A5 /* VerificationView.swift in Sources */,
 				3E4DA68C2406E30D0095C054 /* ExtendedCoordinate.swift in Sources */,
 				3E68F48B23F066B100AFD0F2 /* UIControlExtension.swift in Sources */,
+				3E4DA6952409BB2A0095C054 /* LocalizationKeys.swift in Sources */,
 				3E523ED223F1DE05007D461B /* UserListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

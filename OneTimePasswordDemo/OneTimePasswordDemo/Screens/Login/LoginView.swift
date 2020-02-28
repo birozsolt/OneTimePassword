@@ -13,7 +13,7 @@ class LoginView: UIView {
     private lazy var createUserButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .darkGray
-        button.setTitle("Create user", for: .normal)
+        button.setTitle(LocalizationKeys.createUser.rawValue.localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
@@ -21,7 +21,7 @@ class LoginView: UIView {
     private lazy var verifieUserButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .darkGray
-        button.setTitle("Verifie user", for: .normal)
+        button.setTitle(LocalizationKeys.verifieUser.rawValue.localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         return button
     }()

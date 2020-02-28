@@ -40,6 +40,7 @@ class CoordinateModel: Codable {
             y.append(coord.y)
             force.append(coord.force)
         }
+        
         let minX = x.min() ?? 0
         let maxX = x.max() ?? 0
         let normalizedX = x.map { ($0 - minX) / (maxX - minX) }
@@ -54,6 +55,7 @@ class CoordinateModel: Codable {
             xVelocity.append(normalizedX[index] - normalizedX[index - 1])
             yVelocity.append(normalizedY[index] - normalizedY[index - 1])
         }
+        
         xAcceleration.append(0)
         xAcceleration.append(0)
         yAcceleration.append(0)

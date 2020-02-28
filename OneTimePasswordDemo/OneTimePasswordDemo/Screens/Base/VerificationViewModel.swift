@@ -70,7 +70,7 @@ class VerificationViewModel: NSObject {
             }
             return dtwMatrix[n - 1][m - 1] / CGFloat(m + n)
         }
-        return 9999999999999999
+        return CGFloat.greatestFiniteMagnitude
     }
     // swiftlint:enable identifier_name
 }

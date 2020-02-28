@@ -17,8 +17,8 @@ class UserListViewController: BaseViewController, NavigationBarProtocol {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        navBarTitle = "User List"
-        leftBarButtonItem = UIBarButtonItem(title: LeftBarButtonTitle.back.rawValue, style: .plain, target: self, action: nil)
+        navBarTitle = LocalizationKeys.userList.rawValue.localized
+        leftBarButtonItem = UIBarButtonItem(title: LocalizationKeys.back.rawValue.localized, style: .plain, target: self, action: nil)
     }
     
     required init?(coder: NSCoder) {

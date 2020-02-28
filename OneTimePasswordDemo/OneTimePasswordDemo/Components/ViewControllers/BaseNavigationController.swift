@@ -14,17 +14,6 @@ import UIKit
     @objc optional var rightBarButtonItem: UIBarButtonItem? { get set }
 }
 
-enum RightBarButtonTitle: String {
-    case next = "Next"
-    case save = "Save"
-    case test = "Test"
-}
-
-enum LeftBarButtonTitle: String {
-    case back = "Back"
-    case cancel = "Cancel"
-}
-
 class BaseNavigationController: UINavigationController {
     
     // MARK: Lifecycle
@@ -35,7 +24,7 @@ class BaseNavigationController: UINavigationController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setNeedsStatusBarAppearanceUpdate()
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -57,7 +46,7 @@ class BaseNavigationController: UINavigationController {
         super.pushViewController(viewController, animated: animated)
     }
     
-    fileprivate func setupAppearance() {
+    private func setupAppearance() {
         navigationBar.barStyle = .black
         navigationBar.barTintColor = .lightGray
         navigationBar.layer.borderWidth = 0.0

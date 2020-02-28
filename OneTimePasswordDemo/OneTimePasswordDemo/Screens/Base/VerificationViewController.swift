@@ -23,8 +23,8 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
             viewModel.getUserData(completion: nil)
         }
         navBarTitle = name
-        leftBarButtonItem = UIBarButtonItem(title: LeftBarButtonTitle.cancel.rawValue, style: .plain, target: self, action: nil)
-        let buttonTitle = type == .enrollment ? RightBarButtonTitle.next.rawValue : RightBarButtonTitle.test.rawValue
+        leftBarButtonItem = UIBarButtonItem(title: LocalizationKeys.cancel.rawValue.localized, style: .plain, target: self, action: nil)
+        let buttonTitle = type == .enrollment ? LocalizationKeys.next.rawValue.localized : LocalizationKeys.test.rawValue.localized
         rightBarButtonItem = UIBarButtonItem(title: buttonTitle, style: .plain, target: self, action: nil)
     }
     
@@ -43,7 +43,8 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
     private func setupButtonClosures() {
         var counter = 0
         rightBarButtonItem?.addTargetClosure(closure: { (item) in
-            if item.title == RightBarButtonTitle.save.rawValue {
+            if item.title == LocalizationKeys.save.rawValue.localized {
+                self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
                 self.viewModel.saveUserData { (isSuccess) in
                     if isSuccess {
                         self.navigationController?.popToRootViewController(animated: true)
@@ -51,16 +52,16 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
                 }
             }
             
-            if item.title == RightBarButtonTitle.next.rawValue {
+            if item.title == LocalizationKeys.next.rawValue.localized {
                 self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
                 self.verificationView.clearCanvas()
                 counter += 1
                 if counter == 3 {
-                    self.rightBarButtonItem?.title = RightBarButtonTitle.save.rawValue
+                    self.rightBarButtonItem?.title = LocalizationKeys.save.rawValue.localized
                 }
             }
             
-            if item.title == RightBarButtonTitle.test.rawValue {
+            if item.title == LocalizationKeys.test.rawValue.localized {
                 self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
                 let dtwDistance = self.viewModel.dtwDistance()
                 print(dtwDistance)

@@ -17,6 +17,7 @@ class LoginViewController: BaseViewController, NavigationBarProtocol {
     override func loadView() {
         view = loginView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonClosures()

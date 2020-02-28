@@ -33,7 +33,7 @@ class CreateUserView: UIView {
     private lazy var continueButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .darkGray
-        button.setTitle("Continue", for: .normal)
+        button.setTitle(LocalizationKeys.continue.rawValue.localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         return button
     }()

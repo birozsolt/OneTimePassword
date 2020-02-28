@@ -11,7 +11,6 @@ import Locksmith
 enum StorageKeys: String {
     case userName
     case userList
-    case userData
     case oneTimePasswordAccount
 }
 

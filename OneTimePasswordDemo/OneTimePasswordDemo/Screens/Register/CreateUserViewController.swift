@@ -13,11 +13,12 @@ class CreateUserViewController: BaseViewController, NavigationBarProtocol {
     var leftBarButtonItem: UIBarButtonItem?
     
     private lazy var createUserView = CreateUserView()
+    private lazy var viewModel = CreateUserViewModel()
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        navBarTitle = "Create user"
-        leftBarButtonItem = UIBarButtonItem(title: LeftBarButtonTitle.back.rawValue, style: .plain, target: self, action: nil)
+        navBarTitle = LocalizationKeys.createUser.rawValue.localized
+        leftBarButtonItem = UIBarButtonItem(title: LocalizationKeys.back.rawValue.localized, style: .plain, target: self, action: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -34,28 +35,20 @@ class CreateUserViewController: BaseViewController, NavigationBarProtocol {
     }
     
     private func setupButtonClosures() {
-        createUserView.setupContinueButtonAction { _ in
+        createUserView.setupContinueButtonAction { [weak self] _ in
+            guard let self = self else { return }
             if let text = self.createUserView.getTextfieldText(), !text.isEmpty {
-                if self.verifieUser(withName: text) {
+                if self.viewModel.verifieUser(withName: text) {
                     let baseVC = VerificationViewController(userName: text, viewType: .enrollment)
                     self.navigationController?.pushViewController(baseVC, animated: true)
                 } else {
-                    let alert = UIAlertController(title: "Error", message: "User already exist.", preferredStyle: .alert)
-                    let okButton = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                    alert.addAction(okButton)
-                    self.present(alert, animated: true, completion: nil)
+                    self.showAlert(title: LocalizationKeys.error.rawValue.localized,
+                                   message: LocalizationKeys.userAlreadyExist.rawValue.localized)
                 }
             } else {
-                let alert = UIAlertController(title: "Warning", message: "You must type a user name to continue.", preferredStyle: .alert)
-                let okButton = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                alert.addAction(okButton)
-                self.present(alert, animated: true, completion: nil)
+                self.showAlert(title: LocalizationKeys.warning.rawValue.localized,
+                               message: LocalizationKeys.emptyUserName.rawValue.localized)
             }
         }
-    }
-    
-    private func verifieUser(withName name: String) -> Bool {
-        let userList = SecureStorage.shared.getUserList()
-        return !userList.contains(name)
     }
 }

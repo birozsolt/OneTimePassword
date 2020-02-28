@@ -27,20 +27,20 @@ class CanvasView: UIView {
         guard let touch = touches.first else { return }
         startingPoint = touch.location(in: self)
         coordinateList.append(Coordinate(x: startingPoint.x,
-                                      y: startingPoint.y,
-                                      force: touch.force))
+                                         y: startingPoint.y,
+                                         force: touch.force))
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
-        let maxX = self.frame.size.width
-        let maxY = self.frame.size.height
+        let maxX = frame.size.width
+        let maxY = frame.size.height
         if location.x < maxX && location.x > 0 && location.y < maxY && location.y > 0 {
             touchPoint = location
             coordinateList.append(Coordinate(x: touchPoint.x,
-                                          y: touchPoint.y,
-                                          force: touch.force))
+                                             y: touchPoint.y,
+                                             force: touch.force))
             path.move(to: startingPoint)
             path.addLine(to: touchPoint)
             startingPoint = touchPoint
