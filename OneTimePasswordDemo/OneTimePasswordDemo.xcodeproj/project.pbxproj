@@ -185,10 +185,19 @@
 		3E4DA6932409BAE30095C054 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				3E4DA68F2409B72B0095C054 /* Localizable.strings */,
 				3E4DA6942409BB2A0095C054 /* LocalizationKeys.swift */,
+				3E4DA68F2409B72B0095C054 /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		3E4DA6962409BFFD0095C054 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				3E53F6E723F5A5B600378EF0 /* SecureStorage.swift */,
+				3E4DA6932409BAE30095C054 /* Localization */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		3E523ED523F31B83007D461B /* UserList */ = {
@@ -210,14 +219,6 @@
 				3E4DA68D2409B2840095C054 /* CreateUserViewModel.swift */,
 			);
 			path = Register;
-			sourceTree = "<group>";
-		};
-		3E53F6E623F5A5A100378EF0 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				3E53F6E723F5A5B600378EF0 /* SecureStorage.swift */,
-			);
-			path = Storage;
 			sourceTree = "<group>";
 		};
 		3E68F48423F060C700AFD0F2 /* Login */ = {
@@ -296,12 +297,11 @@
 		3E813DBD23EC96A00022D836 /* OneTimePasswordDemo */ = {
 			isa = PBXGroup;
 			children = (
-				3E4DA6932409BAE30095C054 /* Localization */,
 				3E53F6E923F5AB2E00378EF0 /* OneTimePasswordDemo.entitlements */,
-				3E53F6E623F5A5A100378EF0 /* Storage */,
 				3E68F48723F0638000AFD0F2 /* Extensions */,
 				3E73727B23EF2B4400E703A5 /* Components */,
 				3E68F48C23F0685900AFD0F2 /* Screens */,
+				3E4DA6962409BFFD0095C054 /* Utils */,
 				3E813DBE23EC96A00022D836 /* AppDelegate.swift */,
 				3E813DC023EC96A00022D836 /* SceneDelegate.swift */,
 				3E68F48F23F06C0B00AFD0F2 /* Main.storyboard */,

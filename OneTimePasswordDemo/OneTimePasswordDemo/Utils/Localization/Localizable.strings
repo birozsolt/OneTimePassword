@@ -1,0 +1,23 @@
+/* 
+  Localizable.string.strings
+  OneTimePasswordDemo
+
+  Created by Biro Zsolt on 28/02/2020.
+  Copyright © 2020 Biro Zsolt. All rights reserved.
+*/
+
+ok = "Ok";
+next = "Next";
+save = "Save";
+test = "Test";
+back = "Back";
+cancel = "Cancel";
+createUser = "Create user";
+userList = "User List";
+verifieUser = "Verifie user";
+continue = "Continue";
+userName = "User name:";
+error = "Error";
+userAlreadyExist = "User already exist.";
+warning = "Warning";
+emptyUserName = "You must type a user name to continue.";
