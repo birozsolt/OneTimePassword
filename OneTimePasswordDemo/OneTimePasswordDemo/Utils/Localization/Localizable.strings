@@ -21,3 +21,6 @@ error = "Error";
 userAlreadyExist = "User already exist.";
 warning = "Warning";
 emptyUserName = "You must type a user name to continue.";
+chooseType = "Choose experiment type.";
+fourVone = "4v1";
+oneVone = "1v1";

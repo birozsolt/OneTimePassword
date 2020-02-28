@@ -39,7 +39,7 @@ class CreateUserViewController: BaseViewController, NavigationBarProtocol {
             guard let self = self else { return }
             if let text = self.createUserView.getTextfieldText(), !text.isEmpty {
                 if self.viewModel.verifieUser(withName: text) {
-                    let baseVC = VerificationViewController(userName: text, viewType: .enrollment)
+                    let baseVC = VerificationViewController(userName: text, viewType: .enrollment, experimentType: .none)
                     self.navigationController?.pushViewController(baseVC, animated: true)
                 } else {
                     self.showAlert(title: LocalizationKeys.error.rawValue.localized,

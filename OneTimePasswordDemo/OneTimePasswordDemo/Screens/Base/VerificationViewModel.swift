@@ -13,13 +13,21 @@ enum ViewType {
     case test
 }
 
+enum ExperimentType {
+    case fourVone
+    case oneVone
+    case none
+}
+
 class VerificationViewModel: NSObject {
-    private var coordinates: [CoordinateModel] = []
+    public private(set) var coordinates: [CoordinateModel] = []
     private let userName: String
     public private(set) var currentUser: UserModel?
+    public private(set) var experimentType: ExperimentType
     
-    init(user: String) {
+    init(user: String, expType: ExperimentType) {
         self.userName = user
+        self.experimentType = expType
     }
     
     func setCoordinates(coordinates: CoordinateModel) {
@@ -54,23 +62,19 @@ class VerificationViewModel: NSObject {
             pow((exCoord1.yAcceleration - exCoord2.yAcceleration), 2))
     }
     
-    func dtwDistance() -> CGFloat {
-        if let currentUser = currentUser {
-            let n = currentUser.samples[0].timeSerieQ1.exCoordinates.count
-            let m = coordinates[0].timeSerieQ1.exCoordinates.count
-            var dtwMatrix = Array(repeating: Array(repeating: CGFloat.greatestFiniteMagnitude, count: m), count: n)
-            dtwMatrix[0][0] = 0
-            
-            for i in 1..<n {
-                for j in 1..<m {
-                    let cost = eucledeanDistance(between: currentUser.samples[0].timeSerieQ1.exCoordinates[i],
-                                                 coordinates[0].timeSerieQ1.exCoordinates[j])
-                    dtwMatrix[i][j] = cost + min(dtwMatrix[i - 1][j], dtwMatrix[i][j - 1], dtwMatrix[i - 1][j - 1])
-                }
+    func dtwDistance(serie1: [ExtendedCoordinate], serie2: [ExtendedCoordinate]) -> CGFloat {
+        let n = serie1.count
+        let m = serie2.count
+        var dtwMatrix = Array(repeating: Array(repeating: CGFloat.greatestFiniteMagnitude, count: m), count: n)
+        dtwMatrix[0][0] = 0
+        
+        for i in 1..<n {
+            for j in 1..<m {
+                let cost = eucledeanDistance(between: serie1[i], serie2[j])
+                dtwMatrix[i][j] = cost + min(dtwMatrix[i - 1][j], dtwMatrix[i][j - 1], dtwMatrix[i - 1][j - 1])
             }
-            return dtwMatrix[n - 1][m - 1] / CGFloat(m + n)
         }
-        return CGFloat.greatestFiniteMagnitude
+        return dtwMatrix[n - 1][m - 1] / CGFloat(m + n)
     }
     // swiftlint:enable identifier_name
 }

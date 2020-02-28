@@ -60,7 +60,17 @@ extension UserListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let baseVC = VerificationViewController(userName: viewModel.userName(forIndex: indexPath.row), viewType: .test)
-        self.navigationController?.pushViewController(baseVC, animated: true)
+        showActionSheet(title: LocalizationKeys.chooseType.rawValue.localized,
+                        action1Title: LocalizationKeys.oneVone.rawValue.localized,
+                        action1Completion: { _ in
+                            let baseVC = VerificationViewController(userName: self.viewModel.userName(forIndex: indexPath.row),
+                                                                    viewType: .test, experimentType: .oneVone)
+                            self.navigationController?.pushViewController(baseVC, animated: true)
+        }, action2Title: LocalizationKeys.fourVone.rawValue.localized,
+           action2Completion: { _ in
+            let baseVC = VerificationViewController(userName: self.viewModel.userName(forIndex: indexPath.row),
+                                                    viewType: .test, experimentType: .fourVone)
+            self.navigationController?.pushViewController(baseVC, animated: true)
+        })
     }
 }
