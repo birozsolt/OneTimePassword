@@ -17,7 +17,7 @@ class CreateUserViewModel: NSObject {
         userList = SecureStorage.shared.getUserList()
     }
     
-    func verifieUser(withName name: String) -> Bool {
+    func verifyUser(withName name: String) -> Bool {
         return !userList.contains(name)
     }
 }

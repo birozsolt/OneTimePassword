@@ -16,8 +16,8 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
     private lazy var verificationView = VerificationView()
     private var viewModel: VerificationViewModel
     
-    init(userName name: String, viewType type: ViewType, experimentType: ExperimentType) {
-        viewModel = VerificationViewModel(user: name, expType: experimentType)
+    init(userName name: String, viewType type: ViewType) {
+        viewModel = VerificationViewModel(user: name)
         super.init(nibName: nil, bundle: nil)
         if type == .test {
             viewModel.getUserData(completion: nil)
@@ -63,51 +63,31 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
             
             if item.title == LocalizationKeys.test.rawValue.localized {
                 self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
-                switch self.viewModel.experimentType {
-                case .fourVone:
-                    guard let currentUser = self.viewModel.currentUser else { return }
-                    var dtwDistance = CGFloat.zero
-                    for serie in currentUser.samples {
-                        dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ1.exCoordinates,
-                                                                  serie2: self.viewModel.coordinates[0].timeSerieQ1.exCoordinates)
-                    }
-                    print("Quarter 1: ", dtwDistance / 4)
-                    dtwDistance = CGFloat.zero
-                    for serie in currentUser.samples {
-                        dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ2.exCoordinates,
-                                                                  serie2: self.viewModel.coordinates[0].timeSerieQ2.exCoordinates)
-                    }
-                    print("Quarter 2: ", dtwDistance / 4)
-                    dtwDistance = CGFloat.zero
-                    for serie in currentUser.samples {
-                        dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ3.exCoordinates,
-                                                                  serie2: self.viewModel.coordinates[0].timeSerieQ3.exCoordinates)
-                    }
-                    print("Quarter 3: ", dtwDistance / 4)
-                    dtwDistance = CGFloat.zero
-                    for serie in currentUser.samples {
-                        dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ4.exCoordinates,
-                                                                  serie2: self.viewModel.coordinates[0].timeSerieQ4.exCoordinates)
-                    }
-                    print("Quarter 4: ", dtwDistance / 4)
-                case .oneVone:
-                    guard let currentUser = self.viewModel.currentUser else { return }
-                    var dtwDistance = self.viewModel.dtwDistance(serie1: currentUser.samples[0].timeSerieQ1.exCoordinates,
-                                                                 serie2: self.viewModel.coordinates[0].timeSerieQ1.exCoordinates)
-                    print("Quarter 1: ", dtwDistance)
-                    dtwDistance = self.viewModel.dtwDistance(serie1: currentUser.samples[0].timeSerieQ2.exCoordinates,
-                                                             serie2: self.viewModel.coordinates[0].timeSerieQ2.exCoordinates)
-                    print("Quarter 2: ", dtwDistance)
-                    dtwDistance = self.viewModel.dtwDistance(serie1: currentUser.samples[0].timeSerieQ3.exCoordinates,
-                                                             serie2: self.viewModel.coordinates[0].timeSerieQ3.exCoordinates)
-                    print("Quarter 3: ", dtwDistance)
-                    dtwDistance = self.viewModel.dtwDistance(serie1: currentUser.samples[0].timeSerieQ4.exCoordinates,
-                                                             serie2: self.viewModel.coordinates[0].timeSerieQ4.exCoordinates)
-                    print("Quarter 4: ", dtwDistance)
-                case .none:
-                    break
+                guard let currentUser = self.viewModel.testedUser else { return }
+                var dtwDistance = CGFloat.zero
+                for serie in currentUser.samples {
+                    dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ1.exCoordinates,
+                                                              serie2: self.viewModel.coordinates[0].timeSerieQ1.exCoordinates)
                 }
-                
+                print("Quarter 1: ", dtwDistance / 4)
+                dtwDistance = CGFloat.zero
+                for serie in currentUser.samples {
+                    dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ2.exCoordinates,
+                                                              serie2: self.viewModel.coordinates[0].timeSerieQ2.exCoordinates)
+                }
+                print("Quarter 2: ", dtwDistance / 4)
+                dtwDistance = CGFloat.zero
+                for serie in currentUser.samples {
+                    dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ3.exCoordinates,
+                                                              serie2: self.viewModel.coordinates[0].timeSerieQ3.exCoordinates)
+                }
+                print("Quarter 3: ", dtwDistance / 4)
+                dtwDistance = CGFloat.zero
+                for serie in currentUser.samples {
+                    dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ4.exCoordinates,
+                                                              serie2: self.viewModel.coordinates[0].timeSerieQ4.exCoordinates)
+                }
+                print("Quarter 4: ", dtwDistance / 4)
             }
         })
     }

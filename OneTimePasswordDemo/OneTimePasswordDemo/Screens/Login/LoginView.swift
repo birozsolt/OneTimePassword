@@ -13,15 +13,15 @@ class LoginView: UIView {
     private lazy var createUserButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .darkGray
-        button.setTitle(LocalizationKeys.createUser.rawValue.localized, for: .normal)
+        button.setTitle(LocalizationKeys.registerUser.rawValue.localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
     
-    private lazy var verifieUserButton: UIButton = {
+    private lazy var verifyUserButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = .darkGray
-        button.setTitle(LocalizationKeys.verifieUser.rawValue.localized, for: .normal)
+        button.setTitle(LocalizationKeys.verifyUser.rawValue.localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
@@ -33,7 +33,7 @@ class LoginView: UIView {
     
     private func setupView() {
         addSubview(createUserButton)
-        addSubview(verifieUserButton)
+        addSubview(verifyUserButton)
         setupLayout()
     }
     
@@ -41,16 +41,16 @@ class LoginView: UIView {
         createUserButton.autoCenterInSuperviewMargins()
         createUserButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
         
-        verifieUserButton.autoPinEdge(.top, to: .bottom, of: createUserButton, withOffset: 30)
-        verifieUserButton.autoAlignAxis(toSuperviewMarginAxis: .vertical)
-        verifieUserButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
+        verifyUserButton.autoPinEdge(.top, to: .bottom, of: createUserButton, withOffset: 30)
+        verifyUserButton.autoAlignAxis(toSuperviewMarginAxis: .vertical)
+        verifyUserButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
     }
     
     func setupCreateUserButtonAction(closure: @escaping UIControl.UIControlTargetClosure) {
         createUserButton.addAction(for: .touchUpInside, closure: closure)
     }
     
-    func setupVerifieUserButtonAction(closure: @escaping UIControl.UIControlTargetClosure) {
-        verifieUserButton.addAction(for: .touchUpInside, closure: closure)
+    func setupVerifyUserButtonAction(closure: @escaping UIControl.UIControlTargetClosure) {
+        verifyUserButton.addAction(for: .touchUpInside, closure: closure)
     }
 }

@@ -13,21 +13,13 @@ enum ViewType {
     case test
 }
 
-enum ExperimentType {
-    case fourVone
-    case oneVone
-    case none
-}
-
 class VerificationViewModel: NSObject {
     public private(set) var coordinates: [CoordinateModel] = []
     private let userName: String
-    public private(set) var currentUser: UserModel?
-    public private(set) var experimentType: ExperimentType
+    public private(set) var testedUser: UserModel?
     
-    init(user: String, expType: ExperimentType) {
+    init(user: String) {
         self.userName = user
-        self.experimentType = expType
     }
     
     func setCoordinates(coordinates: CoordinateModel) {
@@ -46,7 +38,7 @@ class VerificationViewModel: NSObject {
     
     func getUserData(completion: ((Bool) -> Void)?) {
         if let userData = SecureStorage.shared.getUserData(forUser: userName) {
-            currentUser = userData
+            testedUser = userData
             completion?(true)
         }
         completion?(false)

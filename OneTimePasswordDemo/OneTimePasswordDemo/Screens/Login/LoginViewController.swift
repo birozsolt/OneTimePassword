@@ -30,7 +30,7 @@ class LoginViewController: BaseViewController, NavigationBarProtocol {
             self.navigationController?.pushViewController(createUserVC, animated: true)
         }
         
-        loginView.setupVerifieUserButtonAction { _ in
+        loginView.setupVerifyUserButtonAction { _ in
             let userListVC = UserListViewController()
             self.navigationController?.pushViewController(userListVC, animated: true)
         }

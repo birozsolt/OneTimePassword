@@ -17,7 +17,7 @@ class CreateUserViewController: BaseViewController, NavigationBarProtocol {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        navBarTitle = LocalizationKeys.createUser.rawValue.localized
+        navBarTitle = LocalizationKeys.registerUser.rawValue.localized
         leftBarButtonItem = UIBarButtonItem(title: LocalizationKeys.back.rawValue.localized, style: .plain, target: self, action: nil)
     }
     
@@ -38,8 +38,8 @@ class CreateUserViewController: BaseViewController, NavigationBarProtocol {
         createUserView.setupContinueButtonAction { [weak self] _ in
             guard let self = self else { return }
             if let text = self.createUserView.getTextfieldText(), !text.isEmpty {
-                if self.viewModel.verifieUser(withName: text) {
-                    let baseVC = VerificationViewController(userName: text, viewType: .enrollment, experimentType: .none)
+                if self.viewModel.verifyUser(withName: text) {
+                    let baseVC = VerificationViewController(userName: text, viewType: .enrollment)
                     self.navigationController?.pushViewController(baseVC, animated: true)
                 } else {
                     self.showAlert(title: LocalizationKeys.error.rawValue.localized,
