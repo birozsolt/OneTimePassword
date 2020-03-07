@@ -76,4 +76,26 @@ class CoordinateModel: Codable {
         }
         return timeSerie
     }
+    
+    func getSerie(forQuarter quarter: Quarters) -> TimeSerieModel {
+        switch quarter {
+        case .first:
+            return timeSerieQ1
+        case .second:
+            return timeSerieQ2
+        case .third:
+            return timeSerieQ3
+        case .fourth:
+            return timeSerieQ4
+        }
+    }
+}
+
+extension CoordinateModel: Equatable {
+    static func == (lhs: CoordinateModel, rhs: CoordinateModel) -> Bool {
+        return lhs.timeSerieQ1 == rhs.timeSerieQ1 &&
+            lhs.timeSerieQ2 == rhs.timeSerieQ2 &&
+            lhs.timeSerieQ3 == rhs.timeSerieQ3 &&
+            lhs.timeSerieQ4 == rhs.timeSerieQ4
+    }
 }

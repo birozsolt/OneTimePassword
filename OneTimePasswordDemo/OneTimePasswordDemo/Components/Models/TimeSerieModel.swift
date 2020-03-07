@@ -19,3 +19,9 @@ class TimeSerieModel: Codable {
         exCoordinates.append(coord)
     }
 }
+
+extension TimeSerieModel: Equatable {
+    static func == (lhs: TimeSerieModel, rhs: TimeSerieModel) -> Bool {
+        return lhs.exCoordinates == rhs.exCoordinates
+    }
+}

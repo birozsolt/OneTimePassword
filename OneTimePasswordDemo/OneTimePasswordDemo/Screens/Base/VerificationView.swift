@@ -8,19 +8,19 @@
 
 import PureLayout
 
+enum Quarters: String {
+    case first
+    case second
+    case third
+    case fourth
+}
+
 class VerificationView: UIView {
     
     private lazy var firstQuarterView = CanvasView()
     private lazy var secondQuarterView = CanvasView()
     private lazy var thirdQuarterView = CanvasView()
     private lazy var fourthQuarterView = CanvasView()
-    
-    enum Quarters: String {
-        case first
-        case second
-        case third
-        case fourth
-    }
     
     private lazy var verticalSeparator: UIView = {
         let view = UIView()

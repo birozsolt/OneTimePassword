@@ -24,7 +24,8 @@ enum LocalizationKeys: String {
     case userAlreadyExist
     case warning
     case emptyUserName
-    case chooseType
-    case fourVone
-    case oneVone
+    case verifySuccessTitle
+    case verifySuccessMessage
+    case verifyFailedTitle
+    case verifyFailedMessage
 }

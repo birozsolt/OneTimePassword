@@ -63,31 +63,20 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
             
             if item.title == LocalizationKeys.test.rawValue.localized {
                 self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
-                guard let currentUser = self.viewModel.testedUser else { return }
-                var dtwDistance = CGFloat.zero
-                for serie in currentUser.samples {
-                    dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ1.exCoordinates,
-                                                              serie2: self.viewModel.coordinates[0].timeSerieQ1.exCoordinates)
+                
+                var validPassword: [Bool] = []
+                validPassword.append(self.viewModel.testUser(forQuarter: .first))
+                validPassword.append(self.viewModel.testUser(forQuarter: .second))
+                validPassword.append(self.viewModel.testUser(forQuarter: .third))
+                validPassword.append(self.viewModel.testUser(forQuarter: .fourth))
+                
+                if validPassword.allSatisfy({ $0 == true }) {
+                    self.showAlert(title: LocalizationKeys.verifySuccessTitle.rawValue.localized,
+                                   message: LocalizationKeys.verifySuccessMessage.rawValue.localized)
+                } else {
+                    self.showAlert(title: LocalizationKeys.verifyFailedTitle.rawValue.localized,
+                                   message: LocalizationKeys.verifyFailedMessage.rawValue.localized)
                 }
-                print("Quarter 1: ", dtwDistance / 4)
-                dtwDistance = CGFloat.zero
-                for serie in currentUser.samples {
-                    dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ2.exCoordinates,
-                                                              serie2: self.viewModel.coordinates[0].timeSerieQ2.exCoordinates)
-                }
-                print("Quarter 2: ", dtwDistance / 4)
-                dtwDistance = CGFloat.zero
-                for serie in currentUser.samples {
-                    dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ3.exCoordinates,
-                                                              serie2: self.viewModel.coordinates[0].timeSerieQ3.exCoordinates)
-                }
-                print("Quarter 3: ", dtwDistance / 4)
-                dtwDistance = CGFloat.zero
-                for serie in currentUser.samples {
-                    dtwDistance += self.viewModel.dtwDistance(serie1: serie.timeSerieQ4.exCoordinates,
-                                                              serie2: self.viewModel.coordinates[0].timeSerieQ4.exCoordinates)
-                }
-                print("Quarter 4: ", dtwDistance / 4)
             }
         })
     }

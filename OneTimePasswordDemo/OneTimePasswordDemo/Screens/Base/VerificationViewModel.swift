@@ -18,6 +18,7 @@ class VerificationViewModel: NSObject {
     private let userName: String
     public private(set) var testedUser: UserModel?
     
+    typealias AcceptedLimits = (min: CGFloat, max: CGFloat)
     init(user: String) {
         self.userName = user
     }
@@ -69,4 +70,42 @@ class VerificationViewModel: NSObject {
         return dtwMatrix[n - 1][m - 1] / CGFloat(m + n)
     }
     // swiftlint:enable identifier_name
+    
+    func calculateLimits(forQuarter quarter: Quarters) -> AcceptedLimits {
+        guard let testedUser = self.testedUser else { return (min: 0, max: 0) }
+        var dtwDistance: [CGFloat] = []
+        let countOfSamples = testedUser.samples.count
+        for index in 0..<countOfSamples {
+            for serie in testedUser.samples {
+                if index < (testedUser.samples.firstIndex { $0.self == serie }) ?? 0 {
+                    dtwDistance.append(
+                        self.dtwDistance(serie1: testedUser.samples[index].getSerie(forQuarter: quarter).exCoordinates,
+                                         serie2: serie.getSerie(forQuarter: quarter).exCoordinates))
+                }
+            }
+        }
+        let count = CGFloat(dtwDistance.count)
+        let sumOfArray = dtwDistance.reduce(0, +)
+        let avarageDistance = sumOfArray / count
+        var sum = CGFloat.zero
+        for dist in dtwDistance {
+            sum += pow((dist - avarageDistance), 2)
+        }
+        let variation = sum / count
+        let standardDeviation = sqrt(variation)
+        return (min: avarageDistance - standardDeviation, max: avarageDistance + standardDeviation)
+    }
+    
+    func testUser(forQuarter quarter: Quarters) -> Bool {
+        guard let testedUser = self.testedUser else { return false }
+        var distance = CGFloat.zero
+        let sampleCount = CGFloat(testedUser.samples.count)
+        let limits = calculateLimits(forQuarter: quarter)
+        for serie in testedUser.samples {
+            distance += dtwDistance(serie1: serie.getSerie(forQuarter: quarter).exCoordinates,
+                                    serie2: coordinates[0].getSerie(forQuarter: quarter).exCoordinates)
+        }
+        
+        return (limits.min < (distance / sampleCount) && limits.max > (distance / sampleCount)) ? true : false
+    }
 }

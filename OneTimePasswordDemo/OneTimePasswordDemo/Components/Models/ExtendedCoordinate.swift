@@ -30,3 +30,14 @@ class ExtendedCoordinate: Codable {
         self.yAcceleration = yAcceleration
     }
 }
+
+extension ExtendedCoordinate: Equatable {
+    static func == (lhs: ExtendedCoordinate, rhs: ExtendedCoordinate) -> Bool {
+        return lhs.x == rhs.x &&
+            lhs.xVelocity == rhs.xVelocity &&
+            lhs.xAcceleration == rhs.xAcceleration &&
+            lhs.y == rhs.y &&
+            lhs.yVelocity == rhs.yVelocity &&
+            lhs.yAcceleration == rhs.yAcceleration
+    }
+}
