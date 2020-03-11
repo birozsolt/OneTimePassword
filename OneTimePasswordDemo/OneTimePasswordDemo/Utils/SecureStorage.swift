@@ -61,12 +61,13 @@ class SecureStorage: SecureStorable {
     }
     
     func saveUserData(forUser user: UserModel, completion: LocalStorageCallBack?) {
-        guard let storedData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else {
+        guard var storedData = Locksmith.loadDataForUserAccount(userAccount: StorageKeys.oneTimePasswordAccount.rawValue) else {
             do {
                 let jsonDataToSave = try encoder.encode(user)
                 try Locksmith.saveData(data: [user.name: jsonDataToSave],
                                        forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
             } catch {
+                completion?(false)
                 print(error)
             }
             setUser(withName: user.name) { (isSuccess) in
@@ -77,14 +78,16 @@ class SecureStorage: SecureStorable {
         guard (storedData[user.name] as? Data) != nil else {
             do {
                 let jsonDataToSave = try encoder.encode(user)
-                try Locksmith.saveData(data: [user.name: jsonDataToSave],
-                                       forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
+                storedData.updateValue(jsonDataToSave, forKey: user.name)
+                try Locksmith.updateData(data: storedData, forUserAccount: StorageKeys.oneTimePasswordAccount.rawValue)
             } catch {
+                completion?(false)
                 print(error)
             }
             setUser(withName: user.name) { (isSuccess) in
                 completion?(isSuccess)
             }
+            completion?(false)
             return
         }
     }
