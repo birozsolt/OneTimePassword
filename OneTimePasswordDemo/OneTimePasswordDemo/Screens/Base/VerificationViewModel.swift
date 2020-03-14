@@ -8,19 +8,21 @@
 
 import UIKit
 
-enum ViewType {
+enum VerificationViewType {
     case enrollment
     case test
 }
 
 class VerificationViewModel: NSObject {
     public private(set) var coordinates: [CoordinateModel] = []
-    private let userName: String
+    let userName: String
+    let viewType: VerificationViewType
     public private(set) var testedUser: UserModel?
     
     typealias AcceptedLimits = (min: CGFloat, max: CGFloat)
-    init(user: String) {
+    init(user: String, type: VerificationViewType) {
         self.userName = user
+        self.viewType = type
     }
     
     func setCoordinates(coordinates: CoordinateModel) {
@@ -55,19 +57,22 @@ class VerificationViewModel: NSObject {
             pow((exCoord1.yAcceleration - exCoord2.yAcceleration), 2))
     }
     
-    func dtwDistance(serie1: [ExtendedCoordinate], serie2: [ExtendedCoordinate]) -> CGFloat {
+    func dtwDistanceCalculator(serie1: [ExtendedCoordinate], serie2: [ExtendedCoordinate]) -> CGFloat {
         let n = serie1.count
         let m = serie2.count
-        var dtwMatrix = Array(repeating: Array(repeating: CGFloat.greatestFiniteMagnitude, count: m), count: n)
-        dtwMatrix[0][0] = 0
-        
-        for i in 1..<n {
-            for j in 1..<m {
-                let cost = eucledeanDistance(between: serie1[i], serie2[j])
-                dtwMatrix[i][j] = cost + min(dtwMatrix[i - 1][j], dtwMatrix[i][j - 1], dtwMatrix[i - 1][j - 1])
+        if n > 0 && m > 0 {
+            var dtwMatrix = Array(repeating: Array(repeating: CGFloat.greatestFiniteMagnitude, count: m), count: n)
+            dtwMatrix[0][0] = 0
+            
+            for i in 1..<n {
+                for j in 1..<m {
+                    let cost = eucledeanDistance(between: serie1[i], serie2[j])
+                    dtwMatrix[i][j] = cost + min(dtwMatrix[i - 1][j], dtwMatrix[i][j - 1], dtwMatrix[i - 1][j - 1])
+                }
             }
+            return dtwMatrix[n - 1][m - 1] / CGFloat(m + n)
         }
-        return dtwMatrix[n - 1][m - 1] / CGFloat(m + n)
+        return CGFloat.infinity
     }
     // swiftlint:enable identifier_name
     
@@ -79,7 +84,7 @@ class VerificationViewModel: NSObject {
             for serie in testedUser.samples {
                 if index < (testedUser.samples.firstIndex { $0.self == serie }) ?? 0 {
                     dtwDistance.append(
-                        self.dtwDistance(serie1: testedUser.samples[index].getSerie(forQuarter: quarter).exCoordinates,
+                        self.dtwDistanceCalculator(serie1: testedUser.samples[index].getSerie(forQuarter: quarter).exCoordinates,
                                          serie2: serie.getSerie(forQuarter: quarter).exCoordinates))
                 }
             }
@@ -102,7 +107,7 @@ class VerificationViewModel: NSObject {
         let sampleCount = CGFloat(testedUser.samples.count)
         let limits = calculateLimits(forQuarter: quarter)
         for serie in testedUser.samples {
-            distance += dtwDistance(serie1: serie.getSerie(forQuarter: quarter).exCoordinates,
+            distance += dtwDistanceCalculator(serie1: serie.getSerie(forQuarter: quarter).exCoordinates,
                                     serie2: coordinates[0].getSerie(forQuarter: quarter).exCoordinates)
         }
         

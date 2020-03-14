@@ -25,3 +25,6 @@ verifySuccessTitle = "Verification succeeded";
 verifySuccessMessage = "Your password match with the saved one!";
 verifyFailedTitle = "Verification failed";
 verifyFailedMessage = "Your password does not match with the saved one!";
+verifyInvalidTitle = "Verification cannot be preformed!";
+verifyInvalidMessage = "Please draw in all square to test the @s user";
+settings = "Settings";

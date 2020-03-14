@@ -10,22 +10,19 @@ import UIKit
 
 class VerificationViewController: BaseViewController, NavigationBarProtocol {
     var navBarTitle: String?
-    var leftBarButtonItem: UIBarButtonItem?
-    var rightBarButtonItem: UIBarButtonItem?
+    var leftBarButtonItem: NavBarButton?
+    var rightBarButtonItem: NavBarButton = NavBarButton()
     
     private lazy var verificationView = VerificationView()
     private var viewModel: VerificationViewModel
     
-    init(userName name: String, viewType type: ViewType) {
-        viewModel = VerificationViewModel(user: name)
+    init(userName name: String, viewType type: VerificationViewType) {
+        viewModel = VerificationViewModel(user: name, type: type)
         super.init(nibName: nil, bundle: nil)
         if type == .test {
             viewModel.getUserData(completion: nil)
         }
-        navBarTitle = name
-        leftBarButtonItem = UIBarButtonItem(title: LocalizationKeys.cancel.rawValue.localized, style: .plain, target: self, action: nil)
-        let buttonTitle = type == .enrollment ? LocalizationKeys.next.rawValue.localized : LocalizationKeys.test.rawValue.localized
-        rightBarButtonItem = UIBarButtonItem(title: buttonTitle, style: .plain, target: self, action: nil)
+        setNavigationAppearance()
     }
     
     required init?(coder: NSCoder) {
@@ -40,44 +37,60 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
         setupButtonClosures()
     }
     
+    func setNavigationAppearance() {
+        navBarTitle = viewModel.userName
+        leftBarButtonItem = NavBarButton(withType: .back)
+
+        let buttonTitle = viewModel.viewType == .enrollment ? LocalizationKeys.next.rawValue.localized : LocalizationKeys.test.rawValue.localized
+        rightBarButtonItem = NavBarButton(withTitle: buttonTitle)
+    }
+    
     private func setupButtonClosures() {
         var counter = 0
-        rightBarButtonItem?.addTargetClosure(closure: { (item) in
-            if item.title == LocalizationKeys.save.rawValue.localized {
-                self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
-                self.viewModel.saveUserData { (isSuccess) in
-                    if isSuccess {
-                        self.navigationController?.popToRootViewController(animated: true)
+        rightBarButtonItem.addAction(for: .touchUpInside) { (item) in
+            if let item = item as? NavBarButton {
+                if item.currentTitle == LocalizationKeys.save.rawValue.localized {
+                    self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+                    self.viewModel.saveUserData { (isSuccess) in
+                        if isSuccess {
+                            self.navigationController?.popToRootViewController(animated: true)
+                        }
+                    }
+                }
+                
+                if item.currentTitle == LocalizationKeys.next.rawValue.localized {
+                    self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+                    self.verificationView.clearCanvas()
+                    counter += 1
+                    if counter == 3 {
+                        self.rightBarButtonItem.setTitle(LocalizationKeys.save.rawValue.localized, for: .normal)
+                    }
+                }
+                
+                if item.currentTitle == LocalizationKeys.test.rawValue.localized {
+                    if !self.verificationView.getAllCoordinates().isEmpty() {
+                        self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+                        
+                        var validPassword: [Bool] = []
+                        validPassword.append(self.viewModel.testUser(forQuarter: .first))
+                        validPassword.append(self.viewModel.testUser(forQuarter: .second))
+                        validPassword.append(self.viewModel.testUser(forQuarter: .third))
+                        validPassword.append(self.viewModel.testUser(forQuarter: .fourth))
+                        
+                        if validPassword.allSatisfy({ $0 == true }) {
+                            self.showAlert(title: LocalizationKeys.verifySuccessTitle.rawValue.localized,
+                                           message: LocalizationKeys.verifySuccessMessage.rawValue.localized)
+                        } else {
+                            self.showAlert(title: LocalizationKeys.verifyFailedTitle.rawValue.localized,
+                                           message: LocalizationKeys.verifyFailedMessage.rawValue.localized)
+                        }
+                    } else {
+                        self.showAlert(title: LocalizationKeys.verifyInvalidTitle.rawValue.localized,
+                                       message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
+                                        .replacingOccurrences(of: "@s", with: self.viewModel.userName))
                     }
                 }
             }
-            
-            if item.title == LocalizationKeys.next.rawValue.localized {
-                self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
-                self.verificationView.clearCanvas()
-                counter += 1
-                if counter == 3 {
-                    self.rightBarButtonItem?.title = LocalizationKeys.save.rawValue.localized
-                }
-            }
-            
-            if item.title == LocalizationKeys.test.rawValue.localized {
-                self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
-                
-                var validPassword: [Bool] = []
-                validPassword.append(self.viewModel.testUser(forQuarter: .first))
-                validPassword.append(self.viewModel.testUser(forQuarter: .second))
-                validPassword.append(self.viewModel.testUser(forQuarter: .third))
-                validPassword.append(self.viewModel.testUser(forQuarter: .fourth))
-                
-                if validPassword.allSatisfy({ $0 == true }) {
-                    self.showAlert(title: LocalizationKeys.verifySuccessTitle.rawValue.localized,
-                                   message: LocalizationKeys.verifySuccessMessage.rawValue.localized)
-                } else {
-                    self.showAlert(title: LocalizationKeys.verifyFailedTitle.rawValue.localized,
-                                   message: LocalizationKeys.verifyFailedMessage.rawValue.localized)
-                }
-            }
-        })
+        }
     }
 }

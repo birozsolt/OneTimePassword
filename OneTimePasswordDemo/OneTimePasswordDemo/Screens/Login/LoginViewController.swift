@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: BaseViewController, NavigationBarProtocol {
     var navBarTitle: String?
-    var leftBarButtonItem: UIBarButtonItem?
+    var leftBarButtonItem: NavBarButton?
     
     private lazy var loginView = LoginView()
     

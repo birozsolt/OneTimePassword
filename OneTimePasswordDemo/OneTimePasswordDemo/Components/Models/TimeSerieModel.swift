@@ -18,6 +18,10 @@ class TimeSerieModel: Codable {
     func addCoordinate(coord: ExtendedCoordinate) {
         exCoordinates.append(coord)
     }
+    
+    func isEmpty() -> Bool {
+        return exCoordinates.isEmpty
+    }
 }
 
 extension TimeSerieModel: Equatable {

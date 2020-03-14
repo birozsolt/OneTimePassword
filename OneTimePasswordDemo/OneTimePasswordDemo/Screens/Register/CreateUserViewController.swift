@@ -10,19 +10,18 @@ import UIKit
 
 class CreateUserViewController: BaseViewController, NavigationBarProtocol {
     var navBarTitle: String?
-    var leftBarButtonItem: UIBarButtonItem?
+    var leftBarButtonItem: NavBarButton?
     
     private lazy var createUserView = CreateUserView()
     private lazy var viewModel = CreateUserViewModel()
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        navBarTitle = LocalizationKeys.registerUser.rawValue.localized
-        leftBarButtonItem = UIBarButtonItem(title: LocalizationKeys.back.rawValue.localized, style: .plain, target: self, action: nil)
+        setNavigationAppearance()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
     
     override func loadView() {
@@ -32,6 +31,11 @@ class CreateUserViewController: BaseViewController, NavigationBarProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonClosures()
+    }
+    
+    func setNavigationAppearance() {
+        navBarTitle = LocalizationKeys.userList.rawValue.localized
+        leftBarButtonItem = NavBarButton(withType: .back)
     }
     
     private func setupButtonClosures() {

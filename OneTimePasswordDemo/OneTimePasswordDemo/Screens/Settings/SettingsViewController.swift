@@ -1,20 +1,19 @@
 //
-//  UserListViewController.swift
+//  SettingsViewController.swift
 //  OneTimePasswordDemo
 //
-//  Created by Biro Zsolt on 11/02/2020.
+//  Created by Biro Zsolt on 14/03/2020.
 //  Copyright © 2020 Biro Zsolt. All rights reserved.
 //
 
 import UIKit
 
-class UserListViewController: BaseViewController, NavigationBarProtocol {
+class SettingsViewController: BaseViewController, NavigationBarProtocol {
     var navBarTitle: String?
     var leftBarButtonItem: NavBarButton?
-    var rightBarButtonItem: NavBarButton = NavBarButton()
     
-    private lazy var userListView = UserListView()
-    private lazy var viewModel = UserListViewModel()
+    private lazy var settingsView = SettingsView()
+    private lazy var viewModel = SettingsViewModel()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -26,23 +25,22 @@ class UserListViewController: BaseViewController, NavigationBarProtocol {
     }
     
     override func loadView() {
-        view = userListView
+        view = settingsView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userListView.tableView.delegate = self
-        userListView.tableView.dataSource = self
+        settingsView.tableView.delegate = self
+        settingsView.tableView.dataSource = self
     }
     
     func setNavigationAppearance() {
-        navBarTitle = LocalizationKeys.userList.rawValue.localized
+        navBarTitle = LocalizationKeys.settings.rawValue.localized
         leftBarButtonItem = NavBarButton(withType: .back)
-        rightBarButtonItem = NavBarButton(withType: .settings)
     }
 }
 
-extension UserListViewController: UITableViewDataSource {
+extension SettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRows()
     }
@@ -52,22 +50,20 @@ extension UserListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: UserListTableViewCell.identifier) as? UserListTableViewCell {
-            cell.configure(withText: viewModel.userName(forIndex: indexPath.row))
+        if let cell = tableView.dequeueReusableCell(withIdentifier: SettingsBasicCell.identifier) as? SettingsBasicCell {
+            cell.configure(withText: "test")
             return cell
         }
         return UITableViewCell()
     }
 }
 
-extension UserListViewController: UITableViewDelegate {
+extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let baseVC = VerificationViewController(userName: self.viewModel.userName(forIndex: indexPath.row),
-                                                viewType: .test)
-        self.navigationController?.pushViewController(baseVC, animated: true)
+        
     }
 }

@@ -28,4 +28,7 @@ enum LocalizationKeys: String {
     case verifySuccessMessage
     case verifyFailedTitle
     case verifyFailedMessage
+    case verifyInvalidTitle
+    case verifyInvalidMessage
+    case settings
 }

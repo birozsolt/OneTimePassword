@@ -45,6 +45,13 @@
 		3E813DE123EC96A20022D836 /* OneTimePasswordDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E813DE023EC96A20022D836 /* OneTimePasswordDemoUITests.swift */; };
 		3E813DF023EC9B150022D836 /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E813DEF23EC9B150022D836 /* PureLayout.framework */; };
 		3E813DF123EC9B150022D836 /* PureLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E813DEF23EC9B150022D836 /* PureLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E9A95AA241D4E920006CAE5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95A9241D4E920006CAE5 /* SettingsView.swift */; };
+		3E9A95AC241D4EA20006CAE5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */; };
+		3E9A95AE241D4F160006CAE5 /* SettingsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95AD241D4F160006CAE5 /* SettingsBasicCell.swift */; };
+		3E9A95B0241D503E0006CAE5 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95AF241D503E0006CAE5 /* SettingsViewModel.swift */; };
+		3E9A95B3241D54D90006CAE5 /* NavBarTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95B2241D54D90006CAE5 /* NavBarTitleLabel.swift */; };
+		3E9A95B7241D74EC0006CAE5 /* NavBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95B6241D74EC0006CAE5 /* NavBarButton.swift */; };
+		3E9A95B9241D76C30006CAE5 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95B8241D76C30006CAE5 /* UIImageExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +131,13 @@
 		3E813DE023EC96A20022D836 /* OneTimePasswordDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimePasswordDemoUITests.swift; sourceTree = "<group>"; };
 		3E813DE223EC96A20022D836 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E813DEF23EC9B150022D836 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
+		3E9A95A9241D4E920006CAE5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		3E9A95AD241D4F160006CAE5 /* SettingsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBasicCell.swift; sourceTree = "<group>"; };
+		3E9A95AF241D503E0006CAE5 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		3E9A95B2241D54D90006CAE5 /* NavBarTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarTitleLabel.swift; sourceTree = "<group>"; };
+		3E9A95B6241D74EC0006CAE5 /* NavBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarButton.swift; sourceTree = "<group>"; };
+		3E9A95B8241D76C30006CAE5 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				3E502E3123F81808003533F4 /* BaseViewController.swift */,
-				3E46590623FB03D800747F38 /* BaseNavigationController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -237,6 +250,7 @@
 				3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */,
 				3E523ECF23F1D941007D461B /* UIViewControllerExtension.swift */,
 				3E4DA6912409BAB60095C054 /* StringExtension.swift */,
+				3E9A95B8241D76C30006CAE5 /* UIImageExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -244,6 +258,7 @@
 		3E68F48C23F0685900AFD0F2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				3E9A95A8241D4E7C0006CAE5 /* Settings */,
 				3E68F48423F060C700AFD0F2 /* Login */,
 				3E523ED823F31C85007D461B /* Register */,
 				3E523ED523F31B83007D461B /* UserList */,
@@ -255,6 +270,7 @@
 		3E73727B23EF2B4400E703A5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				3E9A95B1241D54910006CAE5 /* Navigation */,
 				3E46590A23FB15CF00747F38 /* Models */,
 				3E46590B23FB15DE00747F38 /* Views */,
 				3E46590C23FB15ED00747F38 /* ViewControllers */,
@@ -337,6 +353,27 @@
 				3E813DEF23EC9B150022D836 /* PureLayout.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3E9A95A8241D4E7C0006CAE5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3E9A95A9241D4E920006CAE5 /* SettingsView.swift */,
+				3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */,
+				3E9A95AD241D4F160006CAE5 /* SettingsBasicCell.swift */,
+				3E9A95AF241D503E0006CAE5 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		3E9A95B1241D54910006CAE5 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				3E46590623FB03D800747F38 /* BaseNavigationController.swift */,
+				3E9A95B2241D54D90006CAE5 /* NavBarTitleLabel.swift */,
+				3E9A95B6241D74EC0006CAE5 /* NavBarButton.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -495,9 +532,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E53B6AF23FEF9D4000D6293 /* CoordinateModel.swift in Sources */,
+				3E9A95B3241D54D90006CAE5 /* NavBarTitleLabel.swift in Sources */,
 				3E523ECE23F1D0F5007D461B /* CreateUserView.swift in Sources */,
 				3E68F48E23F0693600AFD0F2 /* LoginViewController.swift in Sources */,
 				3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */,
+				3E9A95B7241D74EC0006CAE5 /* NavBarButton.swift in Sources */,
+				3E9A95AE241D4F160006CAE5 /* SettingsBasicCell.swift in Sources */,
 				3E73727E23EF2B7900E703A5 /* CanvasView.swift in Sources */,
 				3E4DA6922409BAB60095C054 /* StringExtension.swift in Sources */,
 				3E502E3223F81808003533F4 /* BaseViewController.swift in Sources */,
@@ -508,14 +548,18 @@
 				3E813DC323EC96A00022D836 /* VerificationViewController.swift in Sources */,
 				3E46590923FB145C00747F38 /* UserModel.swift in Sources */,
 				3E523ED423F1E308007D461B /* UserListTableViewCell.swift in Sources */,
+				3E9A95B0241D503E0006CAE5 /* SettingsViewModel.swift in Sources */,
 				3E523ED723F31BAC007D461B /* UserListViewModel.swift in Sources */,
 				3E813DBF23EC96A00022D836 /* AppDelegate.swift in Sources */,
 				3E4DA68E2409B2840095C054 /* CreateUserViewModel.swift in Sources */,
 				3E5677ED240125A1003E8ED0 /* TimeSerieModel.swift in Sources */,
+				3E9A95AA241D4E920006CAE5 /* SettingsView.swift in Sources */,
+				3E9A95B9241D76C30006CAE5 /* UIImageExtension.swift in Sources */,
 				3E68F48923F0639300AFD0F2 /* UIBarButtonItemExtension.swift in Sources */,
 				3E523ED023F1D941007D461B /* UIViewControllerExtension.swift in Sources */,
 				3E523EDA23F31CAB007D461B /* CreateUserViewController.swift in Sources */,
 				3E53F6E823F5A5B600378EF0 /* SecureStorage.swift in Sources */,
+				3E9A95AC241D4EA20006CAE5 /* SettingsViewController.swift in Sources */,
 				3E813DC123EC96A00022D836 /* SceneDelegate.swift in Sources */,
 				3E73727A23EF283300E703A5 /* VerificationView.swift in Sources */,
 				3E4DA68C2406E30D0095C054 /* ExtendedCoordinate.swift in Sources */,
