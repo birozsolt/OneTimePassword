@@ -10,12 +10,22 @@ import PureLayout
 
 class CanvasView: UIView {
     private lazy var lineWidth: CGFloat = 5
-    private lazy var lineColor = UIColor.black
+    private var lineColor: UIColor
     private lazy var path = UIBezierPath()
     private lazy var startingPoint = CGPoint.zero
     private lazy var touchPoint = CGPoint.zero
     
     private lazy var coordinateList: [Coordinate] = []
+    
+    init() {
+        let isSecure = LocalStorage.shared.getValue(forKey: LocalStorageKeys.secureInput) as? Bool ?? false
+        lineColor = isSecure ? UIColor.clear : UIColor.black
+        super.init(frame: CGRect.zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func layoutSubviews() {
         backgroundColor = .white

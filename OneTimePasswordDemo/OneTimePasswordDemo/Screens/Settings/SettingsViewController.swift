@@ -51,7 +51,14 @@ extension SettingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: SettingsBasicCell.identifier) as? SettingsBasicCell {
-            cell.configure(withText: "test")
+            cell.configure(withText: LocalizationKeys.secureInput.rawValue.localized)
+            cell.setupOnOffSwitchAction { _ in
+                if cell.onSwitchIsOn() {
+                    cell.setSwitch(toValue: true)
+                } else {
+                    cell.setSwitch(toValue: false)
+                }
+            }
             return cell
         }
         return UITableViewCell()

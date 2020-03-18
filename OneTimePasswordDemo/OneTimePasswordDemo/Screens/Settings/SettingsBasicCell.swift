@@ -11,10 +11,17 @@ import UIKit
 class SettingsBasicCell: UITableViewCell {
     static let identifier = "SettingsBasicCellIdentifier"
     
-    private lazy var nameLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         return label
+    }()
+    
+    private lazy var onOffSwitch: UISwitch = {
+        let cellSwitch = UISwitch()
+        cellSwitch.thumbTintColor = .white
+        cellSwitch.onTintColor = .darkGray
+        return cellSwitch
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -32,15 +39,34 @@ class SettingsBasicCell: UITableViewCell {
     }
     
     private func setupView() {
-        addSubview(nameLabel)
+        addSubview(titleLabel)
+        addSubview(onOffSwitch)
         setupLayout()
     }
     
     private func setupLayout() {
-        nameLabel.autoCenterInSuperview()
+        titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 20)
+        titleLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
+        
+        onOffSwitch.autoPinEdge(toSuperviewEdge: .right, withInset: 20)
+        onOffSwitch.autoAlignAxis(toSuperviewAxis: .horizontal)
+    }
+    
+    func onSwitchIsOn() -> Bool {
+        return onOffSwitch.isOn
+    }
+    
+    func setSwitch(toValue value: Bool) {
+//        onOffSwitch.setOn(value, animated: true)
+        LocalStorage.shared.saveValue(value, forKey: LocalStorageKeys.secureInput)
     }
     
     func configure(withText text: String) {
-        nameLabel.text = text
+        titleLabel.text = text
+        onOffSwitch.isOn = LocalStorage.shared.getValue(forKey: LocalStorageKeys.secureInput) as? Bool ?? false
+    }
+    
+    func setupOnOffSwitchAction(closure: @escaping UIControl.UIControlTargetClosure) {
+        onOffSwitch.addAction(for: .touchUpInside, closure: closure)
     }
 }

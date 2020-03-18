@@ -79,10 +79,14 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
                         
                         if validPassword.allSatisfy({ $0 == true }) {
                             self.showAlert(title: LocalizationKeys.verifySuccessTitle.rawValue.localized,
-                                           message: LocalizationKeys.verifySuccessMessage.rawValue.localized)
+                                           message: LocalizationKeys.verifySuccessMessage.rawValue.localized) { _ in
+                                            self.verificationView.clearCanvas()
+                            }
                         } else {
                             self.showAlert(title: LocalizationKeys.verifyFailedTitle.rawValue.localized,
-                                           message: LocalizationKeys.verifyFailedMessage.rawValue.localized)
+                                           message: LocalizationKeys.verifyFailedMessage.rawValue.localized) { _ in
+                                            self.verificationView.clearCanvas()
+                            }
                         }
                     } else {
                         self.showAlert(title: LocalizationKeys.verifyInvalidTitle.rawValue.localized,

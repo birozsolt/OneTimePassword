@@ -27,4 +27,7 @@ verifyFailedTitle = "Verification failed";
 verifyFailedMessage = "Your password does not match with the saved one!";
 verifyInvalidTitle = "Verification cannot be preformed!";
 verifyInvalidMessage = "Please draw in all square to test the @s user";
+
+// MARK: - Settings
 settings = "Settings";
+secureInput = "Secure input";

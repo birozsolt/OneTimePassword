@@ -31,4 +31,5 @@ enum LocalizationKeys: String {
     case verifyInvalidTitle
     case verifyInvalidMessage
     case settings
+    case secureInput
 }
