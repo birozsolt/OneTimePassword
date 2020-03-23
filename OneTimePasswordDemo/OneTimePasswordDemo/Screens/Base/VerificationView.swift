@@ -24,18 +24,18 @@ class VerificationView: UIView {
     
     private lazy var verticalSeparator: UIView = {
         let view = UIView()
-        view.backgroundColor = .darkGray
+        view.backgroundColor = AssetCatalog.getColor(.buttonBg)
         return view
     }()
     
     private lazy var horizontalSeparator: UIView = {
         let view = UIView()
-        view.backgroundColor = .darkGray
+        view.backgroundColor = AssetCatalog.getColor(.buttonBg)
         return view
     }()
     
     override func layoutSubviews() {
-        backgroundColor = .white
+        backgroundColor = .clear
         setupView()
     }
     
@@ -54,12 +54,12 @@ class VerificationView: UIView {
         verticalSeparator.autoAlignAxis(toSuperviewMarginAxis: .vertical)
         verticalSeparator.autoPinEdge(toSuperviewSafeArea: .top)
         verticalSeparator.autoPinEdge(toSuperviewSafeArea: .bottom)
-        verticalSeparator.autoSetDimension(.width, toSize: 2)
+        verticalSeparator.autoSetDimension(.width, toSize: 1)
         
         horizontalSeparator.autoAlignAxis(toSuperviewMarginAxis: .horizontal)
         horizontalSeparator.autoPinEdge(toSuperviewSafeArea: .left)
         horizontalSeparator.autoPinEdge(toSuperviewSafeArea: .right)
-        horizontalSeparator.autoSetDimension(.height, toSize: 2)
+        horizontalSeparator.autoSetDimension(.height, toSize: 1)
         
         firstQuarterView.autoPinEdge(toSuperviewSafeArea: .top)
         firstQuarterView.autoPinEdge(toSuperviewSafeArea: .left)

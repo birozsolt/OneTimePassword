@@ -12,7 +12,7 @@ enum LocalStorageKeys: String {
     case secureInput
 }
 
-class LocalStorage: NSObject {
+final class LocalStorage: NSObject {
     static let shared = LocalStorage()
     private let defaults: UserDefaults
     

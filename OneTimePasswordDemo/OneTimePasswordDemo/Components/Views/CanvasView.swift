@@ -18,8 +18,8 @@ class CanvasView: UIView {
     private lazy var coordinateList: [Coordinate] = []
     
     init() {
-        let isSecure = LocalStorage.shared.getValue(forKey: LocalStorageKeys.secureInput) as? Bool ?? false
-        lineColor = isSecure ? UIColor.clear : UIColor.black
+        let isSecure = LocalStorage.shared.getValue(forKey: .secureInput) as? Bool ?? false
+        lineColor = isSecure ? UIColor.clear : AssetCatalog.getColor(.text)
         super.init(frame: CGRect.zero)
     }
     
@@ -28,7 +28,7 @@ class CanvasView: UIView {
     }
     
     override func layoutSubviews() {
-        backgroundColor = .white
+        backgroundColor = AssetCatalog.getColor(.background)
         isMultipleTouchEnabled = false
         clipsToBounds = true
     }

@@ -14,15 +14,17 @@ class UserListView: UIView {
         let tableView = UITableView()
         tableView.allowsMultipleSelection = false
         tableView.register(UserListTableViewCell.self, forCellReuseIdentifier: UserListTableViewCell.identifier)
-        tableView.separatorColor = .white
+        tableView.separatorColor = AssetCatalog.getColor(.buttonBg)
         tableView.separatorStyle = .singleLine
+        tableView.separatorInset = .zero
         tableView.backgroundColor = .clear
         tableView.tableFooterView = UIView()
+        tableView.tableHeaderView = UIView()
         return tableView
     }()
 
     override func layoutSubviews() {
-        backgroundColor = .lightGray
+        backgroundColor = AssetCatalog.getColor(.background)
         setupView()
     }
     

@@ -11,35 +11,29 @@ import PureLayout
 class CreateUserView: UIView {
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "User name:"
+        label.text = LocalizationKeys.userName.rawValue.localized
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = .white
+        label.textColor = AssetCatalog.getColor(.text)
         label.backgroundColor = .clear
         return label
     }()
     
     private lazy var userNameTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .white
+        textField.backgroundColor = AssetCatalog.getColor(.textfieldBg)
         textField.clearButtonMode = .whileEditing
         textField.isUserInteractionEnabled = true
         textField.clearsOnBeginEditing = true
         textField.autocorrectionType = .no
-        textField.textColor = .darkGray
-        textField.tintColor = .black
+        textField.textColor = AssetCatalog.getColor(.text)
+        textField.tintColor = AssetCatalog.getColor(.buttonBg)
         return textField
     }()
     
-    private lazy var continueButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.backgroundColor = .darkGray
-        button.setTitle(LocalizationKeys.continue.rawValue.localized, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
+    private lazy var continueButton = OTPButton(withTitle: LocalizationKeys.continue.rawValue.localized)
     
     override func layoutSubviews() {
-        backgroundColor = .lightGray
+        backgroundColor = AssetCatalog.getColor(.background)
         setupView()
         userNameTextField.delegate = self
     }

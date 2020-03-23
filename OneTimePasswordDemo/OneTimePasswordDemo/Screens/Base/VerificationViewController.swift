@@ -47,7 +47,8 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
     
     private func setupButtonClosures() {
         var counter = 0
-        rightBarButtonItem.addAction(for: .touchUpInside) { (item) in
+        rightBarButtonItem.addAction(for: .touchUpInside) { [weak self] (item) in
+            guard let self = self else { return }
             if let item = item as? NavBarButton {
                 if item.currentTitle == LocalizationKeys.save.rawValue.localized {
                     self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())

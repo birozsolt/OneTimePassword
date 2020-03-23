@@ -28,6 +28,8 @@
 		3E53F6E823F5A5B600378EF0 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E53F6E723F5A5B600378EF0 /* SecureStorage.swift */; };
 		3E53F6EB23F5F23D00378EF0 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E53F6EA23F5F23D00378EF0 /* Locksmith.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		3E53F6ED23F5F28500378EF0 /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E53F6EC23F5F28500378EF0 /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E54CFE424292CFD005A2CD9 /* AssetCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54CFE324292CFD005A2CD9 /* AssetCatalog.swift */; };
+		3E54CFE724295CF6005A2CD9 /* OTPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54CFE624295CF6005A2CD9 /* OTPButton.swift */; };
 		3E55B16C2422A6C30027D626 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E55B16B2422A6C30027D626 /* LocalStorage.swift */; };
 		3E5677ED240125A1003E8ED0 /* TimeSerieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */; };
 		3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48523F060E500AFD0F2 /* LoginView.swift */; };
@@ -110,6 +112,8 @@
 		3E53F6E923F5AB2E00378EF0 /* OneTimePasswordDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneTimePasswordDemo.entitlements; sourceTree = "<group>"; };
 		3E53F6EA23F5F23D00378EF0 /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
 		3E53F6EC23F5F28500378EF0 /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
+		3E54CFE324292CFD005A2CD9 /* AssetCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCatalog.swift; sourceTree = "<group>"; };
+		3E54CFE624295CF6005A2CD9 /* OTPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPButton.swift; sourceTree = "<group>"; };
 		3E55B16B2422A6C30027D626 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSerieModel.swift; sourceTree = "<group>"; };
 		3E68F48523F060E500AFD0F2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				3E73727D23EF2B7900E703A5 /* CanvasView.swift */,
+				3E54CFE624295CF6005A2CD9 /* OTPButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 			children = (
 				3E53F6E723F5A5B600378EF0 /* SecureStorage.swift */,
 				3E55B16B2422A6C30027D626 /* LocalStorage.swift */,
+				3E54CFE524292E3B005A2CD9 /* AssetCatalog */,
 				3E4DA6932409BAE30095C054 /* Localization */,
 			);
 			path = Utils;
@@ -235,6 +241,15 @@
 				3E4DA68D2409B2840095C054 /* CreateUserViewModel.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		3E54CFE524292E3B005A2CD9 /* AssetCatalog */ = {
+			isa = PBXGroup;
+			children = (
+				3E54CFE324292CFD005A2CD9 /* AssetCatalog.swift */,
+				3E813DC723EC96A10022D836 /* Assets.xcassets */,
+			);
+			path = AssetCatalog;
 			sourceTree = "<group>";
 		};
 		3E68F48423F060C700AFD0F2 /* Login */ = {
@@ -324,7 +339,6 @@
 				3E813DBE23EC96A00022D836 /* AppDelegate.swift */,
 				3E813DC023EC96A00022D836 /* SceneDelegate.swift */,
 				3E68F48F23F06C0B00AFD0F2 /* Main.storyboard */,
-				3E813DC723EC96A10022D836 /* Assets.xcassets */,
 				3E813DC923EC96A10022D836 /* LaunchScreen.storyboard */,
 				3E813DCC23EC96A20022D836 /* Info.plist */,
 			);
@@ -545,6 +559,7 @@
 				3E4DA6922409BAB60095C054 /* StringExtension.swift in Sources */,
 				3E55B16C2422A6C30027D626 /* LocalStorage.swift in Sources */,
 				3E502E3223F81808003533F4 /* BaseViewController.swift in Sources */,
+				3E54CFE724295CF6005A2CD9 /* OTPButton.swift in Sources */,
 				3E53B6AD23FEF88A000D6293 /* Coordinate.swift in Sources */,
 				3E523EDC23F31D47007D461B /* UserListViewController.swift in Sources */,
 				3E502E2E23F80B15003533F4 /* VerificationViewModel.swift in Sources */,
@@ -554,6 +569,7 @@
 				3E523ED423F1E308007D461B /* UserListTableViewCell.swift in Sources */,
 				3E9A95B0241D503E0006CAE5 /* SettingsViewModel.swift in Sources */,
 				3E523ED723F31BAC007D461B /* UserListViewModel.swift in Sources */,
+				3E54CFE424292CFD005A2CD9 /* AssetCatalog.swift in Sources */,
 				3E813DBF23EC96A00022D836 /* AppDelegate.swift in Sources */,
 				3E4DA68E2409B2840095C054 /* CreateUserViewModel.swift in Sources */,
 				3E5677ED240125A1003E8ED0 /* TimeSerieModel.swift in Sources */,

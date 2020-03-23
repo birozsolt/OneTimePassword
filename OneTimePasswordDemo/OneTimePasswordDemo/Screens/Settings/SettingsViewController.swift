@@ -53,7 +53,7 @@ extension SettingsViewController: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: SettingsBasicCell.identifier) as? SettingsBasicCell {
             cell.configure(withText: LocalizationKeys.secureInput.rawValue.localized)
             cell.setupOnOffSwitchAction { _ in
-                if cell.onSwitchIsOn() {
+                if cell.switchIsOn() {
                     cell.setSwitch(toValue: true)
                 } else {
                     cell.setSwitch(toValue: false)

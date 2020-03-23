@@ -10,24 +10,11 @@ import PureLayout
 
 class LoginView: UIView {
     
-    private lazy var createUserButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.backgroundColor = .darkGray
-        button.setTitle(LocalizationKeys.registerUser.rawValue.localized, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
-    
-    private lazy var verifyUserButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.backgroundColor = .darkGray
-        button.setTitle(LocalizationKeys.verifyUser.rawValue.localized, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        return button
-    }()
+    private lazy var createUserButton = OTPButton(withTitle: LocalizationKeys.registerUser.rawValue.localized)
+    private lazy var verifyUserButton = OTPButton(withTitle: LocalizationKeys.verifyUser.rawValue.localized)
     
     override func layoutSubviews() {
-        backgroundColor = .lightGray
+        backgroundColor = AssetCatalog.getColor(.background)
         setupView()
     }
     

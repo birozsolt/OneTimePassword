@@ -53,7 +53,9 @@ extension UserListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: UserListTableViewCell.identifier) as? UserListTableViewCell {
-            cell.configure(withText: viewModel.userName(forIndex: indexPath.row))
+            print(viewModel.numberOfRows())
+            cell.configure(withText: viewModel.userName(forIndex: indexPath.row),
+                           separatorVisible: indexPath.row == viewModel.numberOfRows() - 1 ? false : true)
             return cell
         }
         return UITableViewCell()

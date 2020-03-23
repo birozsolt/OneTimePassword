@@ -14,16 +14,16 @@ enum SecureStorageKeys: String {
     case oneTimePasswordAccount
 }
 
-class SecureStorage: SecureStorable {
+final class SecureStorage: SecureStorable {
     static let shared = SecureStorage()
-    typealias LocalStorageCallBack = (Bool) -> Void
+    typealias SecureStoreCallBack = (Bool) -> Void
     
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     
     private init() { }
     
-    func setUser(withName name: String, completion: LocalStorageCallBack?) {
+    func setUser(withName name: String, completion: SecureStoreCallBack?) {
         saveUserList(newName: name)
         completion?(true)
     }
@@ -61,7 +61,7 @@ class SecureStorage: SecureStorable {
         return (userData[SecureStorageKeys.userList.rawValue] as? [String]) ?? []
     }
     
-    func saveUserData(forUser user: UserModel, completion: LocalStorageCallBack?) {
+    func saveUserData(forUser user: UserModel, completion: SecureStoreCallBack?) {
         guard var storedData = Locksmith.loadDataForUserAccount(userAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue) else {
             do {
                 let jsonDataToSave = try encoder.encode(user)

@@ -24,9 +24,9 @@ class NavBarButton: UIButton {
         navBarButtonType = type
         switch type {
         case .back:
-            setImage(UIImage(named: "back")?.scaleWithin(height: 30), for: .normal)
+            setImage(AssetCatalog.getImage(.back).scaleWithin(height: 30), for: .normal)
         case .settings:
-            setImage(UIImage(named: "settings")?.scaleWithin(height: 30), for: .normal)
+            setImage(AssetCatalog.getImage(.settings).scaleWithin(height: 30), for: .normal)
         }
         contentMode = .scaleAspectFit
     }
@@ -34,6 +34,7 @@ class NavBarButton: UIButton {
     init(withTitle title: String) {
         super.init(frame: CGRect.zero)
         setTitle(title, for: .normal)
+        tintColor = AssetCatalog.getColor(.buttonTitle)
         titleLabel?.adjustsFontSizeToFitWidth = true
     }
     

@@ -14,6 +14,7 @@ class SettingsBasicCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
+        label.textColor = AssetCatalog.getColor(.buttonTitle)
         return label
     }()
     
@@ -52,18 +53,17 @@ class SettingsBasicCell: UITableViewCell {
         onOffSwitch.autoAlignAxis(toSuperviewAxis: .horizontal)
     }
     
-    func onSwitchIsOn() -> Bool {
+    func switchIsOn() -> Bool {
         return onOffSwitch.isOn
     }
     
     func setSwitch(toValue value: Bool) {
-//        onOffSwitch.setOn(value, animated: true)
-        LocalStorage.shared.saveValue(value, forKey: LocalStorageKeys.secureInput)
+        LocalStorage.shared.saveValue(value, forKey: .secureInput)
     }
     
     func configure(withText text: String) {
         titleLabel.text = text
-        onOffSwitch.isOn = LocalStorage.shared.getValue(forKey: LocalStorageKeys.secureInput) as? Bool ?? false
+        onOffSwitch.isOn = LocalStorage.shared.getValue(forKey: .secureInput) as? Bool ?? false
     }
     
     func setupOnOffSwitchAction(closure: @escaping UIControl.UIControlTargetClosure) {
