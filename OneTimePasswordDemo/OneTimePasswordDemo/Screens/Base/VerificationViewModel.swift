@@ -14,16 +14,25 @@ enum VerificationViewType {
 }
 
 class VerificationViewModel: NSObject {
-    public private(set) var coordinates: [CoordinateModel] = []
+    
+    // MARK: - Properties
+    
     let userName: String
     let viewType: VerificationViewType
-    public private(set) var testedUser: UserModel?
+    private(set) var coordinates: [CoordinateModel] = []
+    private(set) var testedUser: UserModel?
     
     typealias AcceptedLimits = (min: CGFloat, max: CGFloat)
+    
+    // MARK: - Init
+    
     init(user: String, type: VerificationViewType) {
         self.userName = user
         self.viewType = type
+        super.init()
     }
+    
+    // MARK: - Public methods
     
     func setCoordinates(coordinates: CoordinateModel) {
         self.coordinates.append(coordinates)
@@ -46,17 +55,8 @@ class VerificationViewModel: NSObject {
         }
         completion?(false)
     }
-    
+
     // swiftlint:disable identifier_name
-    private func eucledeanDistance(between exCoord1: ExtendedCoordinate, _ exCoord2: ExtendedCoordinate) -> CGFloat {
-        return sqrt(pow((exCoord1.x - exCoord2.x), 2) +
-            pow((exCoord1.y - exCoord2.y), 2) +
-            pow((exCoord1.xVelocity - exCoord2.xVelocity), 2) +
-            pow((exCoord1.yVelocity - exCoord2.yVelocity), 2) +
-            pow((exCoord1.xAcceleration - exCoord2.xAcceleration), 2) +
-            pow((exCoord1.yAcceleration - exCoord2.yAcceleration), 2))
-    }
-    
     func dtwDistanceCalculator(serie1: [ExtendedCoordinate], serie2: [ExtendedCoordinate]) -> CGFloat {
         let n = serie1.count
         let m = serie2.count
@@ -112,5 +112,16 @@ class VerificationViewModel: NSObject {
         }
         
         return (limits.min < (distance / sampleCount) && limits.max > (distance / sampleCount)) ? true : false
+    }
+    
+    // MARK: - Private methods
+    
+    private func eucledeanDistance(between exCoord1: ExtendedCoordinate, _ exCoord2: ExtendedCoordinate) -> CGFloat {
+        return sqrt(pow((exCoord1.x - exCoord2.x), 2) +
+            pow((exCoord1.y - exCoord2.y), 2) +
+            pow((exCoord1.xVelocity - exCoord2.xVelocity), 2) +
+            pow((exCoord1.yVelocity - exCoord2.yVelocity), 2) +
+            pow((exCoord1.xAcceleration - exCoord2.xAcceleration), 2) +
+            pow((exCoord1.yAcceleration - exCoord2.yAcceleration), 2))
     }
 }

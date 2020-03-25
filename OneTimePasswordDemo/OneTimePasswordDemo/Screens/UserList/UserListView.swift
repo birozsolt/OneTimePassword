@@ -10,23 +10,26 @@ import PureLayout
 
 class UserListView: UIView {
     
+    // MARK: - Properties
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.allowsMultipleSelection = false
         tableView.register(UserListTableViewCell.self, forCellReuseIdentifier: UserListTableViewCell.identifier)
-        tableView.separatorColor = AssetCatalog.getColor(.buttonBg)
-        tableView.separatorStyle = .singleLine
-        tableView.separatorInset = .zero
         tableView.backgroundColor = .clear
         tableView.tableFooterView = UIView()
         tableView.tableHeaderView = UIView()
         return tableView
     }()
 
+    // MARK: - View lifecycle
+    
     override func layoutSubviews() {
         backgroundColor = AssetCatalog.getColor(.background)
         setupView()
     }
+    
+    // MARK: - Private methods
     
     private func setupView() {
         addSubview(tableView)

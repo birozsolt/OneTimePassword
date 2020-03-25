@@ -9,12 +9,17 @@
 import UIKit
 
 class VerificationViewController: BaseViewController, NavigationBarProtocol {
+    
+    // MARK: - Properties
+    
     var navBarTitle: String?
     var leftBarButtonItem: NavBarButton?
     var rightBarButtonItem: NavBarButton = NavBarButton()
     
     private lazy var verificationView = VerificationView()
     private var viewModel: VerificationViewModel
+    
+    // MARK: - Init
     
     init(userName name: String, viewType type: VerificationViewType) {
         viewModel = VerificationViewModel(user: name, type: type)
@@ -29,6 +34,8 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - VC lifecycle
+    
     override func loadView() {
         view = verificationView
     }
@@ -37,7 +44,9 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
         setupButtonClosures()
     }
     
-    func setNavigationAppearance() {
+    // MARK: - Private methods
+    
+    private func setNavigationAppearance() {
         navBarTitle = viewModel.userName
         leftBarButtonItem = NavBarButton(withType: .back)
 

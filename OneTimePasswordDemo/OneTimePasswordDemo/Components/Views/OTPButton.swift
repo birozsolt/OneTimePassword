@@ -10,14 +10,18 @@ import UIKit
 
 class OTPButton: UIButton {
     
+    // MARK: - Init
+    
     init(withTitle title: String) {
         super.init(frame: CGRect.zero)
         setupAppearance(title: title)
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
+    
+    // MARK: - Private methods
     
     private func setupAppearance(title: String) {
         backgroundColor = AssetCatalog.getColor(.buttonBg)

@@ -9,20 +9,28 @@
 import UIKit
 
 class SettingsViewController: BaseViewController, NavigationBarProtocol {
+    
+    // MARK: - Properties
+    
     var navBarTitle: String?
     var leftBarButtonItem: NavBarButton?
     
     private lazy var settingsView = SettingsView()
     private lazy var viewModel = SettingsViewModel()
     
-    init() {
+    // MARK: - Init
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
         setNavigationAppearance()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setNavigationAppearance()
     }
+    
+    // MARK: - VC lifecycle
     
     override func loadView() {
         view = settingsView
@@ -34,11 +42,15 @@ class SettingsViewController: BaseViewController, NavigationBarProtocol {
         settingsView.tableView.dataSource = self
     }
     
-    func setNavigationAppearance() {
+    // MARK: - Private methods
+    
+    private func setNavigationAppearance() {
         navBarTitle = LocalizationKeys.settings.rawValue.localized
         leftBarButtonItem = NavBarButton(withType: .back)
     }
 }
+
+// MARK: - UITableViewDataSource methods
 
 extension SettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,7 +63,8 @@ extension SettingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: SettingsBasicCell.identifier) as? SettingsBasicCell {
-            cell.configure(withText: LocalizationKeys.secureInput.rawValue.localized)
+            cell.configure(withText: LocalizationKeys.secureInput.rawValue.localized,
+                           separatorVisible: indexPath.row == viewModel.numberOfRows() - 1 ? false : true)
             cell.setupOnOffSwitchAction { _ in
                 if cell.switchIsOn() {
                     cell.setSwitch(toValue: true)
@@ -64,6 +77,8 @@ extension SettingsViewController: UITableViewDataSource {
         return UITableViewCell()
     }
 }
+
+// MARK: - UITableViewDelegate methods
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

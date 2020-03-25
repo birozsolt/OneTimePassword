@@ -8,15 +8,20 @@
 
 import UIKit
 
+// MARK: -
+
 @objc protocol NavigationBarProtocol {
     var navBarTitle: String? { get set }
     var leftBarButtonItem: NavBarButton? { get set }
     @objc optional var rightBarButtonItem: NavBarButton { get set }
 }
 
+// MARK: -
+
 class BaseNavigationController: UINavigationController {
     
-    // MARK: Lifecycle
+    // MARK: - VC Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAppearance()
@@ -51,6 +56,8 @@ class BaseNavigationController: UINavigationController {
         setNavigationBarHidden(viewController is LoginViewController ? true : false, animated: false)
         super.pushViewController(viewController, animated: animated)
     }
+    
+    // MARK: - Private methods
     
     private func setupAppearance() {
         navigationBar.barStyle = .black

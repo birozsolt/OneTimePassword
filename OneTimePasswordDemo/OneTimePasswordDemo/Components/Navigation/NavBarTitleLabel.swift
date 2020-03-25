@@ -9,18 +9,27 @@
 import UIKit
 
 class NavBarTitleLabel: UILabel {
-
+    
+    // MARK: - Init
+    
     init(withTitle title: String?) {
         super.init(frame: CGRect.zero)
         text = title
+        setupAppearance()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupAppearance()
+    }
+    
+    // MARK: - Private methods
+    
+    private func setupAppearance() {
         font = UIFont.boldSystemFont(ofSize: 30)
         textColor = .darkGray
         textAlignment = .center
         clipsToBounds = true
         sizeToFit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -10,21 +10,25 @@ import PureLayout
 
 class SettingsView: UIView {
     
+    // MARK: - Properties
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.allowsMultipleSelection = true
         tableView.register(SettingsBasicCell.self, forCellReuseIdentifier: SettingsBasicCell.identifier)
-        tableView.separatorColor = .white
-        tableView.separatorStyle = .singleLine
         tableView.backgroundColor = .clear
         tableView.tableFooterView = UIView()
         return tableView
     }()
 
+    // MARK: - View lifecycle
+    
     override func layoutSubviews() {
-        backgroundColor = .lightGray
+        backgroundColor = AssetCatalog.getColor(.background)
         setupView()
     }
+    
+    // MARK: - Private methods
     
     private func setupView() {
         addSubview(tableView)

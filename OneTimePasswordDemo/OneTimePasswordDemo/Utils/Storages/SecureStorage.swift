@@ -15,13 +15,21 @@ enum SecureStorageKeys: String {
 }
 
 final class SecureStorage: SecureStorable {
+    
+    // MARK: - Properties
+    
     static let shared = SecureStorage()
-    typealias SecureStoreCallBack = (Bool) -> Void
     
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     
+    typealias SecureStoreCallBack = (Bool) -> Void
+    
+    // MARK: - Init
+    
     private init() { }
+    
+    // MARK: - Public methods
     
     func setUser(withName name: String, completion: SecureStoreCallBack?) {
         saveUserList(newName: name)
@@ -37,21 +45,6 @@ final class SecureStorage: SecureStorable {
             return nil
         }
         return userData[SecureStorageKeys.userName.rawValue] as? String
-    }
-    
-    private func saveUserList(newName name: String) {
-        guard var userData = Locksmith.loadDataForUserAccount(userAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue) else {
-            try? Locksmith.saveData(data: [SecureStorageKeys.userList.rawValue: [name]],
-                                    forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
-            return }
-        guard var list = userData[SecureStorageKeys.userList.rawValue] as? [String] else {
-            userData[SecureStorageKeys.userList.rawValue] = [name]
-            try? Locksmith.updateData(data: userData, forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
-            return
-        }
-        list.append(name)
-        userData[SecureStorageKeys.userList.rawValue] = list
-        try? Locksmith.updateData(data: userData, forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
     }
     
     func getUserList() -> [String] {
@@ -103,5 +96,22 @@ final class SecureStorage: SecureStorable {
             print(error)
         }
         return nil
+    }
+    
+    // MARK: - Private methods
+    
+    private func saveUserList(newName name: String) {
+        guard var userData = Locksmith.loadDataForUserAccount(userAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue) else {
+            try? Locksmith.saveData(data: [SecureStorageKeys.userList.rawValue: [name]],
+                                    forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
+            return }
+        guard var list = userData[SecureStorageKeys.userList.rawValue] as? [String] else {
+            userData[SecureStorageKeys.userList.rawValue] = [name]
+            try? Locksmith.updateData(data: userData, forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
+            return
+        }
+        list.append(name)
+        userData[SecureStorageKeys.userList.rawValue] = list
+        try? Locksmith.updateData(data: userData, forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
     }
 }

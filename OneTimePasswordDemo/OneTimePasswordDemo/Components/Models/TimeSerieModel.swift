@@ -9,11 +9,18 @@
 import UIKit
 
 class TimeSerieModel: Codable {
+    
+    // MARK: - Properties
+    
     var exCoordinates: [ExtendedCoordinate]
+    
+    // MARK: - Init
     
     init() {
         exCoordinates = []
     }
+    
+    // MARK: - Public methods
     
     func addCoordinate(coord: ExtendedCoordinate) {
         exCoordinates.append(coord)
@@ -23,6 +30,8 @@ class TimeSerieModel: Codable {
         return exCoordinates.isEmpty
     }
 }
+
+// MARK: - Equatable methods
 
 extension TimeSerieModel: Equatable {
     static func == (lhs: TimeSerieModel, rhs: TimeSerieModel) -> Bool {

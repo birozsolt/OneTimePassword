@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E46590723FB03D800747F38 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46590623FB03D800747F38 /* BaseNavigationController.swift */; };
 		3E46590923FB145C00747F38 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46590823FB145C00747F38 /* UserModel.swift */; };
+		3E46AB19242BC8D500100736 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46AB18242BC8D500100736 /* SettingsViewModel.swift */; };
 		3E4DA68C2406E30D0095C054 /* ExtendedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4DA68B2406E30D0095C054 /* ExtendedCoordinate.swift */; };
 		3E4DA68E2409B2840095C054 /* CreateUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4DA68D2409B2840095C054 /* CreateUserViewModel.swift */; };
 		3E4DA6902409B72B0095C054 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E4DA68F2409B72B0095C054 /* Localizable.strings */; };
@@ -51,7 +52,6 @@
 		3E9A95AA241D4E920006CAE5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95A9241D4E920006CAE5 /* SettingsView.swift */; };
 		3E9A95AC241D4EA20006CAE5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */; };
 		3E9A95AE241D4F160006CAE5 /* SettingsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95AD241D4F160006CAE5 /* SettingsBasicCell.swift */; };
-		3E9A95B0241D503E0006CAE5 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95AF241D503E0006CAE5 /* SettingsViewModel.swift */; };
 		3E9A95B3241D54D90006CAE5 /* NavBarTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95B2241D54D90006CAE5 /* NavBarTitleLabel.swift */; };
 		3E9A95B7241D74EC0006CAE5 /* NavBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95B6241D74EC0006CAE5 /* NavBarButton.swift */; };
 		3E9A95B9241D76C30006CAE5 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95B8241D76C30006CAE5 /* UIImageExtension.swift */; };
@@ -92,6 +92,7 @@
 /* Begin PBXFileReference section */
 		3E46590623FB03D800747F38 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		3E46590823FB145C00747F38 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		3E46AB18242BC8D500100736 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		3E4DA68B2406E30D0095C054 /* ExtendedCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedCoordinate.swift; sourceTree = "<group>"; };
 		3E4DA68D2409B2840095C054 /* CreateUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewModel.swift; sourceTree = "<group>"; };
 		3E4DA68F2409B72B0095C054 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -140,7 +141,6 @@
 		3E9A95A9241D4E920006CAE5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3E9A95AD241D4F160006CAE5 /* SettingsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBasicCell.swift; sourceTree = "<group>"; };
-		3E9A95AF241D503E0006CAE5 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		3E9A95B2241D54D90006CAE5 /* NavBarTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarTitleLabel.swift; sourceTree = "<group>"; };
 		3E9A95B6241D74EC0006CAE5 /* NavBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarButton.swift; sourceTree = "<group>"; };
 		3E9A95B8241D76C30006CAE5 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -176,9 +176,9 @@
 		3E46590A23FB15CF00747F38 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3E46590823FB145C00747F38 /* UserModel.swift */,
 				3E53B6AC23FEF88A000D6293 /* Coordinate.swift */,
 				3E4DA68B2406E30D0095C054 /* ExtendedCoordinate.swift */,
-				3E46590823FB145C00747F38 /* UserModel.swift */,
 				3E53B6AE23FEF9D4000D6293 /* CoordinateModel.swift */,
 				3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */,
 			);
@@ -202,6 +202,15 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		3E46AB17242BBE4A00100736 /* Storages */ = {
+			isa = PBXGroup;
+			children = (
+				3E53F6E723F5A5B600378EF0 /* SecureStorage.swift */,
+				3E55B16B2422A6C30027D626 /* LocalStorage.swift */,
+			);
+			path = Storages;
+			sourceTree = "<group>";
+		};
 		3E4DA6932409BAE30095C054 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,8 +223,7 @@
 		3E4DA6962409BFFD0095C054 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				3E53F6E723F5A5B600378EF0 /* SecureStorage.swift */,
-				3E55B16B2422A6C30027D626 /* LocalStorage.swift */,
+				3E46AB17242BBE4A00100736 /* Storages */,
 				3E54CFE524292E3B005A2CD9 /* AssetCatalog */,
 				3E4DA6932409BAE30095C054 /* Localization */,
 			);
@@ -237,8 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				3E523ECD23F1D0F5007D461B /* CreateUserView.swift */,
-				3E523ED923F31CAB007D461B /* CreateUserViewController.swift */,
 				3E4DA68D2409B2840095C054 /* CreateUserViewModel.swift */,
+				3E523ED923F31CAB007D461B /* CreateUserViewController.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -264,11 +272,11 @@
 		3E68F48723F0638000AFD0F2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */,
-				3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */,
-				3E523ECF23F1D941007D461B /* UIViewControllerExtension.swift */,
 				3E4DA6912409BAB60095C054 /* StringExtension.swift */,
 				3E9A95B8241D76C30006CAE5 /* UIImageExtension.swift */,
+				3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */,
+				3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */,
+				3E523ECF23F1D941007D461B /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -299,9 +307,9 @@
 		3E73727C23EF2B5000E703A5 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				3E813DC223EC96A00022D836 /* VerificationViewController.swift */,
 				3E73727923EF283300E703A5 /* VerificationView.swift */,
 				3E502E2D23F80B15003533F4 /* VerificationViewModel.swift */,
+				3E813DC223EC96A00022D836 /* VerificationViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -375,10 +383,10 @@
 		3E9A95A8241D4E7C0006CAE5 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				3E9A95A9241D4E920006CAE5 /* SettingsView.swift */,
-				3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */,
 				3E9A95AD241D4F160006CAE5 /* SettingsBasicCell.swift */,
-				3E9A95AF241D503E0006CAE5 /* SettingsViewModel.swift */,
+				3E9A95A9241D4E920006CAE5 /* SettingsView.swift */,
+				3E46AB18242BC8D500100736 /* SettingsViewModel.swift */,
+				3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -386,9 +394,9 @@
 		3E9A95B1241D54910006CAE5 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				3E46590623FB03D800747F38 /* BaseNavigationController.swift */,
-				3E9A95B2241D54D90006CAE5 /* NavBarTitleLabel.swift */,
 				3E9A95B6241D74EC0006CAE5 /* NavBarButton.swift */,
+				3E9A95B2241D54D90006CAE5 /* NavBarTitleLabel.swift */,
+				3E46590623FB03D800747F38 /* BaseNavigationController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -553,6 +561,7 @@
 				3E523ECE23F1D0F5007D461B /* CreateUserView.swift in Sources */,
 				3E68F48E23F0693600AFD0F2 /* LoginViewController.swift in Sources */,
 				3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */,
+				3E46AB19242BC8D500100736 /* SettingsViewModel.swift in Sources */,
 				3E9A95B7241D74EC0006CAE5 /* NavBarButton.swift in Sources */,
 				3E9A95AE241D4F160006CAE5 /* SettingsBasicCell.swift in Sources */,
 				3E73727E23EF2B7900E703A5 /* CanvasView.swift in Sources */,
@@ -567,7 +576,6 @@
 				3E813DC323EC96A00022D836 /* VerificationViewController.swift in Sources */,
 				3E46590923FB145C00747F38 /* UserModel.swift in Sources */,
 				3E523ED423F1E308007D461B /* UserListTableViewCell.swift in Sources */,
-				3E9A95B0241D503E0006CAE5 /* SettingsViewModel.swift in Sources */,
 				3E523ED723F31BAC007D461B /* UserListViewModel.swift in Sources */,
 				3E54CFE424292CFD005A2CD9 /* AssetCatalog.swift in Sources */,
 				3E813DBF23EC96A00022D836 /* AppDelegate.swift in Sources */,

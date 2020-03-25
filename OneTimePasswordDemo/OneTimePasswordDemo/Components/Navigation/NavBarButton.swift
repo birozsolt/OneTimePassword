@@ -13,11 +13,12 @@ enum NavBarButtonType {
     case settings
 }
 class NavBarButton: UIButton {
+    
+    // MARK: - Properties
+    
     var navBarButtonType: NavBarButtonType?
     
-    init() {
-        super.init(frame: CGRect.zero)
-    }
+    // MARK: - Init
     
     init(withType type: NavBarButtonType) {
         super.init(frame: CGRect.zero)
@@ -31,7 +32,7 @@ class NavBarButton: UIButton {
         contentMode = .scaleAspectFit
     }
     
-    init(withTitle title: String) {
+    init(withTitle title: String = "") {
         super.init(frame: CGRect.zero)
         setTitle(title, for: .normal)
         tintColor = AssetCatalog.getColor(.buttonTitle)

@@ -10,9 +10,14 @@ import UIKit
 
 // swiftlint:disable identifier_name
 class Coordinate: Codable {
+    
+    // MARK: - Properties
+    
     var x: CGFloat
     var y: CGFloat
     var force: CGFloat
+    
+    // MARK: - Init
     
     init(x: CGFloat, y: CGFloat, force: CGFloat = 0) {
         self.x = x

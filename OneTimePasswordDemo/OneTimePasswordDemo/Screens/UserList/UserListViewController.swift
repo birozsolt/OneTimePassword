@@ -9,12 +9,17 @@
 import UIKit
 
 class UserListViewController: BaseViewController, NavigationBarProtocol {
+    
+    // MARK: - Properties
+    
     var navBarTitle: String?
     var leftBarButtonItem: NavBarButton?
     var rightBarButtonItem: NavBarButton = NavBarButton()
     
     private lazy var userListView = UserListView()
     private lazy var viewModel = UserListViewModel()
+    
+    // MARK: - Init
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -23,7 +28,10 @@ class UserListViewController: BaseViewController, NavigationBarProtocol {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setNavigationAppearance()
     }
+    
+    // MARK: - VC lifecycle
     
     override func loadView() {
         view = userListView
@@ -35,12 +43,16 @@ class UserListViewController: BaseViewController, NavigationBarProtocol {
         userListView.tableView.dataSource = self
     }
     
-    func setNavigationAppearance() {
+    // MARK: - Private methods
+    
+    private func setNavigationAppearance() {
         navBarTitle = LocalizationKeys.userList.rawValue.localized
         leftBarButtonItem = NavBarButton(withType: .back)
         rightBarButtonItem = NavBarButton(withType: .settings)
     }
 }
+
+// MARK: - UITableViewDataSource methods
 
 extension UserListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,7 +65,6 @@ extension UserListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: UserListTableViewCell.identifier) as? UserListTableViewCell {
-            print(viewModel.numberOfRows())
             cell.configure(withText: viewModel.userName(forIndex: indexPath.row),
                            separatorVisible: indexPath.row == viewModel.numberOfRows() - 1 ? false : true)
             return cell
@@ -61,6 +72,8 @@ extension UserListViewController: UITableViewDataSource {
         return UITableViewCell()
     }
 }
+
+// MARK: - UITableViewDelegate methods
 
 extension UserListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

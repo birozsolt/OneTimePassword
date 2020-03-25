@@ -9,12 +9,19 @@
 import UIKit
 
 class UserListViewModel: NSObject {
+    
+    // MARK: - Properties
+    
     private var userList = [String]()
+    
+    // MARK: - Init
     
     override init() {
         super.init()
         userList = SecureStorage.shared.getUserList()
     }
+    
+    // MARK: - Public methods
     
     func numberOfRows() -> Int {
         return userList.count

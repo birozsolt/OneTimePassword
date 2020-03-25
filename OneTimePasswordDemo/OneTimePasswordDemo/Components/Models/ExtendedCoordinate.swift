@@ -10,6 +10,9 @@ import UIKit
 
 // swiftlint:disable identifier_name
 class ExtendedCoordinate: Codable {
+    
+    // MARK: - Properties
+    
     var x: CGFloat
     var y: CGFloat
     var force: CGFloat
@@ -17,6 +20,8 @@ class ExtendedCoordinate: Codable {
     var yVelocity: CGFloat
     var xAcceleration: CGFloat
     var yAcceleration: CGFloat
+    
+    // MARK: - Init
     
     init(x: CGFloat, y: CGFloat, force: CGFloat,
          xVelocity: CGFloat, yVelocity: CGFloat,
@@ -30,6 +35,8 @@ class ExtendedCoordinate: Codable {
         self.yAcceleration = yAcceleration
     }
 }
+
+// MARK: - Equatable methods
 
 extension ExtendedCoordinate: Equatable {
     static func == (lhs: ExtendedCoordinate, rhs: ExtendedCoordinate) -> Bool {

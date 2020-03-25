@@ -9,10 +9,15 @@
 import UIKit
 
 class LoginViewController: BaseViewController, NavigationBarProtocol {
+    
+    // MARK: - Properties
+    
     var navBarTitle: String?
     var leftBarButtonItem: NavBarButton?
     
     private lazy var loginView = LoginView()
+    
+    // MARK: - VC lifecycle
     
     override func loadView() {
         view = loginView
@@ -22,6 +27,8 @@ class LoginViewController: BaseViewController, NavigationBarProtocol {
         super.viewDidLoad()
         setupButtonClosures()
     }
+    
+    // MARK: - Private methods
     
     private func setupButtonClosures() {
         loginView.setupCreateUserButtonAction { _ in

@@ -10,12 +10,18 @@ import UIKit
 
 class CreateUserViewModel: NSObject {
     
+    // MARK: - Properties
+    
     private var userList = [String]()
+    
+    // MARK: - Init
     
     override init() {
         super.init()
         userList = SecureStorage.shared.getUserList()
     }
+    
+    // MARK: - Public methods
     
     func verifyUser(withName name: String) -> Bool {
         return !userList.contains(name)

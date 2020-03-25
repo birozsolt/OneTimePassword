@@ -9,6 +9,9 @@
 import PureLayout
 
 class CreateUserView: UIView {
+    
+    // MARK: - Properties
+    
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.text = LocalizationKeys.userName.rawValue.localized
@@ -32,11 +35,25 @@ class CreateUserView: UIView {
     
     private lazy var continueButton = OTPButton(withTitle: LocalizationKeys.continue.rawValue.localized)
     
+    // MARK: - View lifecycle
+    
     override func layoutSubviews() {
         backgroundColor = AssetCatalog.getColor(.background)
         setupView()
         userNameTextField.delegate = self
     }
+    
+    // MARK: - Public methods
+    
+    func setupContinueButtonAction(closure: @escaping UIControl.UIControlTargetClosure) {
+        continueButton.addAction(for: .touchUpInside, closure: closure)
+    }
+    
+    func getTextfieldText() -> String? {
+        return userNameTextField.text
+    }
+    
+    // MARK: - Private methods
     
     private func setupView() {
         addSubview(userNameTextField)
@@ -55,14 +72,6 @@ class CreateUserView: UIView {
         continueButton.autoPinEdge(.top, to: .bottom, of: userNameTextField, withOffset: 30)
         continueButton.autoAlignAxis(toSuperviewMarginAxis: .vertical)
         continueButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
-    }
-    
-    func setupContinueButtonAction(closure: @escaping UIControl.UIControlTargetClosure) {
-        continueButton.addAction(for: .touchUpInside, closure: closure)
-    }
-    
-    func getTextfieldText() -> String? {
-        return userNameTextField.text
     }
 }
 

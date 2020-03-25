@@ -9,8 +9,13 @@
 import UIKit
 
 class UserModel: Codable {
+    
+    // MARK: - Properties
+    
     var name: String
     var samples: [CoordinateModel]
+    
+    // MARK: - Init
     
     init(name: String, samples: [CoordinateModel]) {
         self.name = name

@@ -17,6 +17,8 @@ enum Quarters: String {
 
 class VerificationView: UIView {
     
+    // MARK: - Properties
+    
     private lazy var firstQuarterView = CanvasView()
     private lazy var secondQuarterView = CanvasView()
     private lazy var thirdQuarterView = CanvasView()
@@ -34,10 +36,31 @@ class VerificationView: UIView {
         return view
     }()
     
+    // MARK: - View lifecycle
+    
     override func layoutSubviews() {
         backgroundColor = .clear
         setupView()
     }
+    
+    // MARK: - Public methods
+    
+    func getAllCoordinates() -> CoordinateModel {
+        let coordinateModel = CoordinateModel(coordsQ1: getCoordinates(forQuarter: .first),
+                                              coordsQ2: getCoordinates(forQuarter: .second),
+                                              coordsQ3: getCoordinates(forQuarter: .third),
+                                              coordsQ4: getCoordinates(forQuarter: .fourth))
+        return coordinateModel
+    }
+    
+    func clearCanvas() {
+        firstQuarterView.clearCanvas()
+        secondQuarterView.clearCanvas()
+        thirdQuarterView.clearCanvas()
+        fourthQuarterView.clearCanvas()
+    }
+    
+    // MARK: - Private methods
     
     private func setupView() {
         addSubview(verticalSeparator)
@@ -93,20 +116,5 @@ class VerificationView: UIView {
         case .fourth:
             return fourthQuarterView.getCoordinateList()
         }
-    }
-    
-    func getAllCoordinates() -> CoordinateModel {
-        let coordinateModel = CoordinateModel(coordsQ1: getCoordinates(forQuarter: .first),
-                                              coordsQ2: getCoordinates(forQuarter: .second),
-                                              coordsQ3: getCoordinates(forQuarter: .third),
-                                              coordsQ4: getCoordinates(forQuarter: .fourth))
-        return coordinateModel
-    }
-    
-    func clearCanvas() {
-        firstQuarterView.clearCanvas()
-        secondQuarterView.clearCanvas()
-        thirdQuarterView.clearCanvas()
-        fourthQuarterView.clearCanvas()
     }
 }

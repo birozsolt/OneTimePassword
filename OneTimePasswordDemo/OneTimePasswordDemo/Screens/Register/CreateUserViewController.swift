@@ -9,11 +9,16 @@
 import UIKit
 
 class CreateUserViewController: BaseViewController, NavigationBarProtocol {
+    
+    // MARK: - Properties
+    
     var navBarTitle: String?
     var leftBarButtonItem: NavBarButton?
     
     private lazy var createUserView = CreateUserView()
     private lazy var viewModel = CreateUserViewModel()
+    
+    // MARK: - Init
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -22,7 +27,10 @@ class CreateUserViewController: BaseViewController, NavigationBarProtocol {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setNavigationAppearance()
     }
+    
+    // MARK: - VC lifecycle
     
     override func loadView() {
         view = createUserView
@@ -33,7 +41,9 @@ class CreateUserViewController: BaseViewController, NavigationBarProtocol {
         setupButtonClosures()
     }
     
-    func setNavigationAppearance() {
+    // MARK: - Private methods
+    
+    private func setNavigationAppearance() {
         navBarTitle = LocalizationKeys.userList.rawValue.localized
         leftBarButtonItem = NavBarButton(withType: .back)
     }

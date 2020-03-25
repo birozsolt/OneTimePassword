@@ -9,6 +9,9 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+    // MARK: - VC lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         edgesForExtendedLayout = []

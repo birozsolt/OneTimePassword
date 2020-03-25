@@ -9,10 +9,15 @@
 import UIKit
 
 class CoordinateModel: Codable {
+    
+    // MARK: - Properties
+    
     var timeSerieQ1: TimeSerieModel
     var timeSerieQ2: TimeSerieModel
     var timeSerieQ3: TimeSerieModel
     var timeSerieQ4: TimeSerieModel
+    
+    // MARK: - Init
     
     init(coordsQ1: [Coordinate], coordsQ2: [Coordinate], coordsQ3: [Coordinate], coordsQ4: [Coordinate]) {
         timeSerieQ1 = TimeSerieModel()
@@ -24,6 +29,27 @@ class CoordinateModel: Codable {
         timeSerieQ3 = convert(coordsQ3, to: timeSerieQ3)
         timeSerieQ4 = convert(coordsQ4, to: timeSerieQ4)
     }
+    
+    // MARK: - Public methods
+    
+    func getSerie(forQuarter quarter: Quarters) -> TimeSerieModel {
+        switch quarter {
+        case .first:
+            return timeSerieQ1
+        case .second:
+            return timeSerieQ2
+        case .third:
+            return timeSerieQ3
+        case .fourth:
+            return timeSerieQ4
+        }
+    }
+    
+    func isEmpty() -> Bool {
+        return timeSerieQ1.isEmpty() || timeSerieQ2.isEmpty() || timeSerieQ3.isEmpty() || timeSerieQ4.isEmpty()
+    }
+    
+    // MARK: - Private methods
     
     // swiftlint:disable identifier_name
     private func convert(_ coords: [Coordinate], to timeSerie: TimeSerieModel) -> TimeSerieModel {
@@ -78,24 +104,9 @@ class CoordinateModel: Codable {
         }
         return timeSerie
     }
-    
-    func getSerie(forQuarter quarter: Quarters) -> TimeSerieModel {
-        switch quarter {
-        case .first:
-            return timeSerieQ1
-        case .second:
-            return timeSerieQ2
-        case .third:
-            return timeSerieQ3
-        case .fourth:
-            return timeSerieQ4
-        }
-    }
-    
-    func isEmpty() -> Bool {
-        return timeSerieQ1.isEmpty() || timeSerieQ2.isEmpty() || timeSerieQ3.isEmpty() || timeSerieQ4.isEmpty()
-    }
 }
+
+// MARK: - Equatable methods
 
 extension CoordinateModel: Equatable {
     static func == (lhs: CoordinateModel, rhs: CoordinateModel) -> Bool {

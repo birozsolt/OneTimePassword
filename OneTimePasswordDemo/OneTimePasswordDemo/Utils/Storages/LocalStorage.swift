@@ -13,12 +13,20 @@ enum LocalStorageKeys: String {
 }
 
 final class LocalStorage: NSObject {
+    
+    // MARK: - Properties
+    
     static let shared = LocalStorage()
     private let defaults: UserDefaults
     
+    // MARK: - Init
+    
     private override init() {
         defaults = .standard
+        super.init()
     }
+    
+    // MARK: - Public methods
     
     func saveValue(_ value: Any, forKey key: LocalStorageKeys) {
         defaults.setValue(value, forKey: key.rawValue)
