@@ -63,7 +63,7 @@ class CreateUserView: UIView {
     }
     
     private func setupLayout() {
-        userNameTextField.autoCenterInSuperview()
+        userNameTextField.autoCenterInSuperviewMargins()
         userNameTextField.autoSetDimensions(to: CGSize(width: 200, height: 50))
         
         userNameLabel.autoPinEdge(.bottom, to: .top, of: userNameTextField, withOffset: -10)

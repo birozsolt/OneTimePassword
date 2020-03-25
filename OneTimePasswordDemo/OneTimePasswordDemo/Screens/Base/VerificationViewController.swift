@@ -39,9 +39,25 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
     override func loadView() {
         view = verificationView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtonClosures()
+        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscapeLeft
+    }
+    
+    override var shouldAutorotate: Bool {
+        return true
     }
     
     // MARK: - Private methods

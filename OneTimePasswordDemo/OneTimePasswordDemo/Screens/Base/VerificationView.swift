@@ -24,22 +24,10 @@ class VerificationView: UIView {
     private lazy var thirdQuarterView = CanvasView()
     private lazy var fourthQuarterView = CanvasView()
     
-    private lazy var verticalSeparator: UIView = {
-        let view = UIView()
-        view.backgroundColor = AssetCatalog.getColor(.buttonBg)
-        return view
-    }()
-    
-    private lazy var horizontalSeparator: UIView = {
-        let view = UIView()
-        view.backgroundColor = AssetCatalog.getColor(.buttonBg)
-        return view
-    }()
-    
     // MARK: - View lifecycle
     
     override func layoutSubviews() {
-        backgroundColor = .clear
+        backgroundColor = AssetCatalog.getColor(.background)
         setupView()
     }
     
@@ -63,9 +51,6 @@ class VerificationView: UIView {
     // MARK: - Private methods
     
     private func setupView() {
-        addSubview(verticalSeparator)
-        addSubview(horizontalSeparator)
-        
         addSubview(firstQuarterView)
         addSubview(secondQuarterView)
         addSubview(thirdQuarterView)
@@ -74,35 +59,20 @@ class VerificationView: UIView {
     }
     
     private func setupLayout() {
-        verticalSeparator.autoAlignAxis(toSuperviewMarginAxis: .vertical)
-        verticalSeparator.autoPinEdge(toSuperviewSafeArea: .top)
-        verticalSeparator.autoPinEdge(toSuperviewSafeArea: .bottom)
-        verticalSeparator.autoSetDimension(.width, toSize: 1)
+        let quarterWidth = self.safeAreaLayoutGuide.layoutFrame.width / 4
         
-        horizontalSeparator.autoAlignAxis(toSuperviewMarginAxis: .horizontal)
-        horizontalSeparator.autoPinEdge(toSuperviewSafeArea: .left)
-        horizontalSeparator.autoPinEdge(toSuperviewSafeArea: .right)
-        horizontalSeparator.autoSetDimension(.height, toSize: 1)
+        firstQuarterView.autoPinEdge(toSuperviewSafeArea: .left) 
+        secondQuarterView.autoPinEdge(.left, to: .right, of: firstQuarterView)
+        thirdQuarterView.autoPinEdge(.left, to: .right, of: secondQuarterView)
+        fourthQuarterView.autoPinEdge(.left, to: .right, of: thirdQuarterView)
         
-        firstQuarterView.autoPinEdge(toSuperviewSafeArea: .top)
-        firstQuarterView.autoPinEdge(toSuperviewSafeArea: .left)
-        firstQuarterView.autoPinEdge(.right, to: .left, of: verticalSeparator)
-        firstQuarterView.autoPinEdge(.bottom, to: .top, of: horizontalSeparator)
-        
-        secondQuarterView.autoPinEdge(toSuperviewSafeArea: .top)
-        secondQuarterView.autoPinEdge(toSuperviewSafeArea: .right)
-        secondQuarterView.autoPinEdge(.left, to: .right, of: verticalSeparator)
-        secondQuarterView.autoPinEdge(.bottom, to: .top, of: horizontalSeparator)
-        
-        thirdQuarterView.autoPinEdge(toSuperviewSafeArea: .bottom)
-        thirdQuarterView.autoPinEdge(toSuperviewSafeArea: .left)
-        thirdQuarterView.autoPinEdge(.right, to: .left, of: verticalSeparator)
-        thirdQuarterView.autoPinEdge(.top, to: .bottom, of: horizontalSeparator)
-        
-        fourthQuarterView.autoPinEdge(toSuperviewSafeArea: .bottom)
-        fourthQuarterView.autoPinEdge(toSuperviewSafeArea: .right)
-        fourthQuarterView.autoPinEdge(.left, to: .right, of: verticalSeparator)
-        fourthQuarterView.autoPinEdge(.top, to: .bottom, of: horizontalSeparator)
+        for view in subviews {
+            view.autoPinEdge(toSuperviewSafeArea: .top)
+            view.autoPinEdge(toSuperviewSafeArea: .bottom)
+            view.autoSetDimension(.width, toSize: quarterWidth)
+            view.layer.borderColor = AssetCatalog.getColor(.buttonBg).cgColor
+            view.layer.borderWidth = 1
+        }
     }
     
     private func getCoordinates(forQuarter quarter: Quarters) -> [Coordinate] {

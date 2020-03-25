@@ -10,6 +10,7 @@
 		3E46590723FB03D800747F38 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46590623FB03D800747F38 /* BaseNavigationController.swift */; };
 		3E46590923FB145C00747F38 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46590823FB145C00747F38 /* UserModel.swift */; };
 		3E46AB19242BC8D500100736 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46AB18242BC8D500100736 /* SettingsViewModel.swift */; };
+		3E46AB1B242BCB5C00100736 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E46AB1A242BCB5C00100736 /* UINavigationControllerExtension.swift */; };
 		3E4DA68C2406E30D0095C054 /* ExtendedCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4DA68B2406E30D0095C054 /* ExtendedCoordinate.swift */; };
 		3E4DA68E2409B2840095C054 /* CreateUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4DA68D2409B2840095C054 /* CreateUserViewModel.swift */; };
 		3E4DA6902409B72B0095C054 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E4DA68F2409B72B0095C054 /* Localizable.strings */; };
@@ -93,6 +94,7 @@
 		3E46590623FB03D800747F38 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		3E46590823FB145C00747F38 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3E46AB18242BC8D500100736 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		3E46AB1A242BCB5C00100736 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		3E4DA68B2406E30D0095C054 /* ExtendedCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedCoordinate.swift; sourceTree = "<group>"; };
 		3E4DA68D2409B2840095C054 /* CreateUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewModel.swift; sourceTree = "<group>"; };
 		3E4DA68F2409B72B0095C054 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */,
 				3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */,
 				3E523ECF23F1D941007D461B /* UIViewControllerExtension.swift */,
+				3E46AB1A242BCB5C00100736 /* UINavigationControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 			files = (
 				3E53B6AF23FEF9D4000D6293 /* CoordinateModel.swift in Sources */,
 				3E9A95B3241D54D90006CAE5 /* NavBarTitleLabel.swift in Sources */,
+				3E46AB1B242BCB5C00100736 /* UINavigationControllerExtension.swift in Sources */,
 				3E523ECE23F1D0F5007D461B /* CreateUserView.swift in Sources */,
 				3E68F48E23F0693600AFD0F2 /* LoginViewController.swift in Sources */,
 				3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */,
