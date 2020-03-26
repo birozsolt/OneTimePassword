@@ -14,6 +14,7 @@ final class CreateUserViewController: BaseViewController, NavigationBarProtocol 
     
     var navBarTitle: String?
     var leftBarButtonItem: NavBarButton?
+    var rightBarButtonItem: NavBarButton = NavBarButton()
     
     private lazy var createUserView = CreateUserView()
     private lazy var viewModel = CreateUserViewModel()
@@ -46,6 +47,7 @@ final class CreateUserViewController: BaseViewController, NavigationBarProtocol 
     private func setNavigationAppearance() {
         navBarTitle = LocalizationKeys.userList.rawValue.localized
         leftBarButtonItem = NavBarButton(withType: .back)
+        rightBarButtonItem = NavBarButton(withType: .settings)
     }
     
     private func setupButtonClosures() {
