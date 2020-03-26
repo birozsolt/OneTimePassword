@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateUserViewModel: NSObject {
+final class CreateUserViewModel: NSObject {
     
     // MARK: - Properties
     

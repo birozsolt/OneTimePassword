@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateUserViewController: BaseViewController, NavigationBarProtocol {
+final class CreateUserViewController: BaseViewController, NavigationBarProtocol {
     
     // MARK: - Properties
     

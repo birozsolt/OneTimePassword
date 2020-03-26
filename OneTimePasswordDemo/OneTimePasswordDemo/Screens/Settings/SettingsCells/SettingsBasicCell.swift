@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsBasicCell: UITableViewCell {
+final class SettingsBasicCell: UITableViewCell {
     
     // MARK: - Properties
     
@@ -18,6 +18,7 @@ class SettingsBasicCell: UITableViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textColor = AssetCatalog.getColor(.text)
+        label.font = UIFont.boldSystemFont(ofSize: 25)
         return label
     }()
     

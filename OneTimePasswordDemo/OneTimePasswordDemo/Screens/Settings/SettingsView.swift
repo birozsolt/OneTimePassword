@@ -8,7 +8,7 @@
 
 import PureLayout
 
-class SettingsView: UIView {
+final class SettingsView: UIView {
     
     // MARK: - Properties
     
@@ -16,7 +16,9 @@ class SettingsView: UIView {
         let tableView = UITableView()
         tableView.allowsMultipleSelection = true
         tableView.register(SettingsBasicCell.self, forCellReuseIdentifier: SettingsBasicCell.identifier)
+        tableView.register(SettingsCounterCell.self, forCellReuseIdentifier: SettingsCounterCell.identifier)
         tableView.backgroundColor = .clear
+        tableView.alwaysBounceVertical = false
         tableView.tableFooterView = UIView()
         return tableView
     }()

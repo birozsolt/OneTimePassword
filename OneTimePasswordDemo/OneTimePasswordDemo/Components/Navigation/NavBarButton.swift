@@ -12,7 +12,7 @@ enum NavBarButtonType {
     case back
     case settings
 }
-class NavBarButton: UIButton {
+final class NavBarButton: UIButton {
     
     // MARK: - Properties
     
@@ -25,9 +25,9 @@ class NavBarButton: UIButton {
         navBarButtonType = type
         switch type {
         case .back:
-            setImage(AssetCatalog.getImage(.back).scaleWithin(height: 30), for: .normal)
+            setImage(AssetCatalog.getImage(.back).scaleWithin(height: 25), for: .normal)
         case .settings:
-            setImage(AssetCatalog.getImage(.settings).scaleWithin(height: 30), for: .normal)
+            setImage(AssetCatalog.getImage(.settings).scaleWithin(height: 25), for: .normal)
         }
         contentMode = .scaleAspectFit
     }

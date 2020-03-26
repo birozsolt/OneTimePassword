@@ -18,7 +18,7 @@ import UIKit
 
 // MARK: -
 
-class BaseNavigationController: UINavigationController {
+final class BaseNavigationController: UINavigationController {
     
     // MARK: - VC Lifecycle
     

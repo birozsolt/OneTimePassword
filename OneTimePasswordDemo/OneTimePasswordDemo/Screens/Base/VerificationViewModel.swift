@@ -13,7 +13,7 @@ enum VerificationViewType {
     case test
 }
 
-class VerificationViewModel: NSObject {
+final class VerificationViewModel: NSObject {
     
     // MARK: - Properties
     

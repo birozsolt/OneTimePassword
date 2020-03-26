@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NavBarTitleLabel: UILabel {
+final class NavBarTitleLabel: UILabel {
     
     // MARK: - Init
     

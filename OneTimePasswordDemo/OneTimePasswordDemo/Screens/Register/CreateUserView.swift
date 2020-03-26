@@ -8,7 +8,7 @@
 
 import PureLayout
 
-class CreateUserView: UIView {
+final class CreateUserView: UIView {
     
     // MARK: - Properties
     
@@ -28,6 +28,7 @@ class CreateUserView: UIView {
         textField.isUserInteractionEnabled = true
         textField.clearsOnBeginEditing = true
         textField.autocorrectionType = .no
+        textField.font = UIFont.systemFont(ofSize: 20)
         textField.textColor = AssetCatalog.getColor(.text)
         textField.tintColor = AssetCatalog.getColor(.buttonBg)
         return textField

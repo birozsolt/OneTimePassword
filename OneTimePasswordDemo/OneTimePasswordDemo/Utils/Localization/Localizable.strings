@@ -12,6 +12,7 @@ save = "Save";
 test = "Test";
 back = "Back";
 cancel = "Cancel";
+done = "Done";
 registerUser = "Register user";
 userList = "User list";
 verifyUser = "Verify user";
@@ -31,3 +32,4 @@ verifyInvalidMessage = "Please draw in all square to test the @s user";
 // MARK: - Settings
 settings = "Settings";
 secureInput = "Secure input";
+numberOfInput = "Number of samples";

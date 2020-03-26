@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserListViewController: BaseViewController, NavigationBarProtocol {
+final class UserListViewController: BaseViewController, NavigationBarProtocol {
     
     // MARK: - Properties
     
@@ -77,7 +77,7 @@ extension UserListViewController: UITableViewDataSource {
 
 extension UserListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 60
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

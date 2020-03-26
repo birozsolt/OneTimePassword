@@ -15,6 +15,7 @@ enum LocalizationKeys: String {
     case test
     case back
     case cancel
+    case done
     case registerUser
     case userList
     case verifyUser
@@ -32,4 +33,5 @@ enum LocalizationKeys: String {
     case verifyInvalidMessage
     case settings
     case secureInput
+    case numberOfInput
 }

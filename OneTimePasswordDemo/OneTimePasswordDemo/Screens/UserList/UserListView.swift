@@ -8,7 +8,7 @@
 
 import PureLayout
 
-class UserListView: UIView {
+final class UserListView: UIView {
     
     // MARK: - Properties
     

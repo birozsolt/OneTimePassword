@@ -10,6 +10,7 @@ import UIKit
 
 enum LocalStorageKeys: String {
     case secureInput
+    case numberOfInput
 }
 
 final class LocalStorage: NSObject {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: BaseViewController, NavigationBarProtocol {
+final class SettingsViewController: BaseViewController, NavigationBarProtocol {
     
     // MARK: - Properties
     
@@ -62,9 +62,11 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: SettingsBasicCell.identifier) as? SettingsBasicCell {
-            cell.configure(withText: LocalizationKeys.secureInput.rawValue.localized,
-                           separatorVisible: indexPath.row == viewModel.numberOfRows() - 1 ? false : true)
+        if indexPath.row == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsBasicCell.identifier) as? SettingsBasicCell else {
+                return UITableViewCell()
+            }
+            cell.configure(withText: LocalizationKeys.secureInput.rawValue.localized, separatorVisible: true)
             cell.setupOnOffSwitchAction { _ in
                 if cell.switchIsOn() {
                     cell.setSwitch(toValue: true)
@@ -72,6 +74,12 @@ extension SettingsViewController: UITableViewDataSource {
                     cell.setSwitch(toValue: false)
                 }
             }
+            return cell
+        } else if indexPath.row == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCounterCell.identifier) as? SettingsCounterCell else {
+                return UITableViewCell()
+            }
+            cell.configure(withText: LocalizationKeys.numberOfInput.rawValue.localized, separatorVisible: false)
             return cell
         }
         return UITableViewCell()
@@ -82,7 +90,7 @@ extension SettingsViewController: UITableViewDataSource {
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 60
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserListTableViewCell: UITableViewCell {
+final class UserListTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
@@ -17,6 +17,7 @@ class UserListTableViewCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = AssetCatalog.getColor(.text)
         return label
     }()

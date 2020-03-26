@@ -8,7 +8,7 @@
 
 import PureLayout
 
-class CanvasView: UIView {
+final class CanvasView: UIView {
     
     // MARK: - Properties
     

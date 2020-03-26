@@ -34,6 +34,9 @@
 		3E54CFE724295CF6005A2CD9 /* OTPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54CFE624295CF6005A2CD9 /* OTPButton.swift */; };
 		3E55B16C2422A6C30027D626 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E55B16B2422A6C30027D626 /* LocalStorage.swift */; };
 		3E5677ED240125A1003E8ED0 /* TimeSerieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */; };
+		3E57E945242D21610030CA52 /* SettingsCounterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E944242D21610030CA52 /* SettingsCounterCell.swift */; };
+		3E57E947242D26550030CA52 /* OTPDropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E946242D26550030CA52 /* OTPDropDownPickerView.swift */; };
+		3E57E949242D27E70030CA52 /* UITextfieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E948242D27E70030CA52 /* UITextfieldExtension.swift */; };
 		3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48523F060E500AFD0F2 /* LoginView.swift */; };
 		3E68F48923F0639300AFD0F2 /* UIBarButtonItemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */; };
 		3E68F48B23F066B100AFD0F2 /* UIControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */; };
@@ -119,6 +122,9 @@
 		3E54CFE624295CF6005A2CD9 /* OTPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPButton.swift; sourceTree = "<group>"; };
 		3E55B16B2422A6C30027D626 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSerieModel.swift; sourceTree = "<group>"; };
+		3E57E944242D21610030CA52 /* SettingsCounterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCounterCell.swift; sourceTree = "<group>"; };
+		3E57E946242D26550030CA52 /* OTPDropDownPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPDropDownPickerView.swift; sourceTree = "<group>"; };
+		3E57E948242D27E70030CA52 /* UITextfieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextfieldExtension.swift; sourceTree = "<group>"; };
 		3E68F48523F060E500AFD0F2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtension.swift; sourceTree = "<group>"; };
 		3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIControlExtension.swift; sourceTree = "<group>"; };
@@ -192,6 +198,7 @@
 			children = (
 				3E73727D23EF2B7900E703A5 /* CanvasView.swift */,
 				3E54CFE624295CF6005A2CD9 /* OTPButton.swift */,
+				3E57E946242D26550030CA52 /* OTPDropDownPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -262,6 +269,15 @@
 			path = AssetCatalog;
 			sourceTree = "<group>";
 		};
+		3E57E943242D212C0030CA52 /* SettingsCells */ = {
+			isa = PBXGroup;
+			children = (
+				3E9A95AD241D4F160006CAE5 /* SettingsBasicCell.swift */,
+				3E57E944242D21610030CA52 /* SettingsCounterCell.swift */,
+			);
+			path = SettingsCells;
+			sourceTree = "<group>";
+		};
 		3E68F48423F060C700AFD0F2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,6 +296,7 @@
 				3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */,
 				3E523ECF23F1D941007D461B /* UIViewControllerExtension.swift */,
 				3E46AB1A242BCB5C00100736 /* UINavigationControllerExtension.swift */,
+				3E57E948242D27E70030CA52 /* UITextfieldExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -386,7 +403,7 @@
 		3E9A95A8241D4E7C0006CAE5 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				3E9A95AD241D4F160006CAE5 /* SettingsBasicCell.swift */,
+				3E57E943242D212C0030CA52 /* SettingsCells */,
 				3E9A95A9241D4E920006CAE5 /* SettingsView.swift */,
 				3E46AB18242BC8D500100736 /* SettingsViewModel.swift */,
 				3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */,
@@ -564,6 +581,7 @@
 				3E46AB1B242BCB5C00100736 /* UINavigationControllerExtension.swift in Sources */,
 				3E523ECE23F1D0F5007D461B /* CreateUserView.swift in Sources */,
 				3E68F48E23F0693600AFD0F2 /* LoginViewController.swift in Sources */,
+				3E57E947242D26550030CA52 /* OTPDropDownPickerView.swift in Sources */,
 				3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */,
 				3E46AB19242BC8D500100736 /* SettingsViewModel.swift in Sources */,
 				3E9A95B7241D74EC0006CAE5 /* NavBarButton.swift in Sources */,
@@ -572,6 +590,7 @@
 				3E4DA6922409BAB60095C054 /* StringExtension.swift in Sources */,
 				3E55B16C2422A6C30027D626 /* LocalStorage.swift in Sources */,
 				3E502E3223F81808003533F4 /* BaseViewController.swift in Sources */,
+				3E57E945242D21610030CA52 /* SettingsCounterCell.swift in Sources */,
 				3E54CFE724295CF6005A2CD9 /* OTPButton.swift in Sources */,
 				3E53B6AD23FEF88A000D6293 /* Coordinate.swift in Sources */,
 				3E523EDC23F31D47007D461B /* UserListViewController.swift in Sources */,
@@ -582,6 +601,7 @@
 				3E523ED423F1E308007D461B /* UserListTableViewCell.swift in Sources */,
 				3E523ED723F31BAC007D461B /* UserListViewModel.swift in Sources */,
 				3E54CFE424292CFD005A2CD9 /* AssetCatalog.swift in Sources */,
+				3E57E949242D27E70030CA52 /* UITextfieldExtension.swift in Sources */,
 				3E813DBF23EC96A00022D836 /* AppDelegate.swift in Sources */,
 				3E4DA68E2409B2840095C054 /* CreateUserViewModel.swift in Sources */,
 				3E5677ED240125A1003E8ED0 /* TimeSerieModel.swift in Sources */,

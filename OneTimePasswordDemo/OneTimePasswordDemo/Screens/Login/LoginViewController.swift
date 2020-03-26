@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: BaseViewController, NavigationBarProtocol {
+final class LoginViewController: BaseViewController, NavigationBarProtocol {
     
     // MARK: - Properties
     

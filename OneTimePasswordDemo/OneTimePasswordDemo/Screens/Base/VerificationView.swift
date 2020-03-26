@@ -15,7 +15,7 @@ enum Quarters: String {
     case fourth
 }
 
-class VerificationView: UIView {
+final class VerificationView: UIView {
     
     // MARK: - Properties
     

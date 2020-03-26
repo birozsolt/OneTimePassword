@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VerificationViewController: BaseViewController, NavigationBarProtocol {
+final class VerificationViewController: BaseViewController, NavigationBarProtocol {
     
     // MARK: - Properties
     
@@ -88,7 +88,7 @@ class VerificationViewController: BaseViewController, NavigationBarProtocol {
                     self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
                     self.verificationView.clearCanvas()
                     counter += 1
-                    if counter == 3 {
+                    if counter == (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1) - 1 {
                         self.rightBarButtonItem.setTitle(LocalizationKeys.save.rawValue.localized, for: .normal)
                     }
                 }

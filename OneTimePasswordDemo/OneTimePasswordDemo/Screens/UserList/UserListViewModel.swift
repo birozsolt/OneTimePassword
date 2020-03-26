@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserListViewModel: NSObject {
+final class UserListViewModel: NSObject {
     
     // MARK: - Properties
     
