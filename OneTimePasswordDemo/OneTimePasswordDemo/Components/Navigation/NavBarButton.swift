@@ -35,7 +35,7 @@ class NavBarButton: UIButton {
     init(withTitle title: String = "") {
         super.init(frame: CGRect.zero)
         setTitle(title, for: .normal)
-        tintColor = AssetCatalog.getColor(.buttonTitle)
+        setTitleColor(AssetCatalog.getColor(.buttonBg), for: .normal)
         titleLabel?.adjustsFontSizeToFitWidth = true
     }
     

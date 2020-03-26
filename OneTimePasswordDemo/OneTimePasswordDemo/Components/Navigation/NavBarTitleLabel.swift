@@ -27,7 +27,7 @@ class NavBarTitleLabel: UILabel {
     
     private func setupAppearance() {
         font = UIFont.boldSystemFont(ofSize: 30)
-        textColor = .darkGray
+        textColor = AssetCatalog.getColor(.buttonBg)
         textAlignment = .center
         clipsToBounds = true
         sizeToFit()

@@ -60,13 +60,13 @@ class BaseNavigationController: UINavigationController {
     // MARK: - Private methods
     
     private func setupAppearance() {
-        navigationBar.barStyle = .black
-        navigationBar.barTintColor = .lightGray
+        navigationBar.barStyle = .default
+        navigationBar.barTintColor = AssetCatalog.getColor(.textfieldBg)
         navigationBar.layer.borderWidth = 0.0
         navigationBar.layer.masksToBounds = false
-        navigationBar.layer.shadowColor = UIColor.darkGray.cgColor
-        navigationBar.layer.shadowOpacity = 0.8
-        navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        navigationBar.layer.shadowColor = AssetCatalog.getColor(.background).cgColor
+        navigationBar.layer.shadowOpacity = 0.6
+        navigationBar.layer.shadowOffset = CGSize(width: 0, height: 1.0)
         navigationBar.layer.shadowRadius = 1
     }
 }
