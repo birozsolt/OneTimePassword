@@ -12,6 +12,10 @@ final class AssetCatalog: NSObject {
     enum ImageCatalog: String {
         case back
         case settings
+        case eraser
+        case save
+        case test
+        case next
     }
     
     enum ColorCatalog: String {

@@ -72,6 +72,7 @@ final class CanvasView: UIView {
     
     func clearCanvas() {
         path.removeAllPoints()
+        coordinateList.removeAll()
         layer.sublayers?.removeAll()
     }
     

@@ -13,7 +13,7 @@ import UIKit
 @objc protocol NavigationBarProtocol {
     var navBarTitle: String? { get set }
     var leftBarButtonItem: NavBarButton? { get set }
-    @objc optional var rightBarButtonItem: NavBarButton { get set }
+    @objc optional var rightBarButtonItems: [NavBarButton] { get set }
 }
 
 // MARK: -
@@ -40,17 +40,24 @@ final class BaseNavigationController: UINavigationController {
         if let vcToPush = viewController as? NavigationBarProtocol {
             viewController.navigationItem.titleView = NavBarTitleLabel(withTitle: vcToPush.navBarTitle)
             viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: vcToPush.leftBarButtonItem ?? UIView())
-            viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: vcToPush.rightBarButtonItem ?? UIView())
+            var rightBarButtons = [UIBarButtonItem]()
+            if let rightButtonItems = vcToPush.rightBarButtonItems {
+                for button in rightButtonItems {
+                    rightBarButtons.append(UIBarButtonItem(customView: button))
+                    if button.navBarButtonType == .settings {
+                        button.addAction(for: .touchUpInside, closure: { _ in
+                            let settingsVC = SettingsViewController()
+                            self.pushViewController(settingsVC, animated: true)
+                        })
+                    }
+                }
+            }
+            
+            viewController.navigationItem.rightBarButtonItems = rightBarButtons
             vcToPush.leftBarButtonItem?.addAction(for: .touchUpInside, closure: { _ in
                 self.popViewController(animated: true)
                 self.setNavigationBarHidden(self.topViewController is LoginViewController ? true : false, animated: false)
             })
-            if vcToPush.rightBarButtonItem?.navBarButtonType == NavBarButtonType.settings {
-                vcToPush.rightBarButtonItem?.addAction(for: .touchUpInside, closure: { _ in
-                    let settingsVC = SettingsViewController()
-                    self.pushViewController(settingsVC, animated: true)
-                })
-            }
         }
          
         setNavigationBarHidden(viewController is LoginViewController ? true : false, animated: false)

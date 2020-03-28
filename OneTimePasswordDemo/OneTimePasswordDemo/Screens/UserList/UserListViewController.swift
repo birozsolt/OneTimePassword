@@ -14,7 +14,7 @@ final class UserListViewController: BaseViewController, NavigationBarProtocol {
     
     var navBarTitle: String?
     var leftBarButtonItem: NavBarButton?
-    var rightBarButtonItem: NavBarButton = NavBarButton()
+    var rightBarButtonItems: [NavBarButton] = []
     
     private lazy var userListView = UserListView()
     private lazy var viewModel = UserListViewModel()
@@ -48,7 +48,7 @@ final class UserListViewController: BaseViewController, NavigationBarProtocol {
     private func setNavigationAppearance() {
         navBarTitle = LocalizationKeys.userList.rawValue.localized
         leftBarButtonItem = NavBarButton(withType: .back)
-        rightBarButtonItem = NavBarButton(withType: .settings)
+        rightBarButtonItems.append(NavBarButton(withType: .settings))
     }
 }
 

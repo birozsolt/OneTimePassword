@@ -14,7 +14,7 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
     
     var navBarTitle: String?
     var leftBarButtonItem: NavBarButton?
-    var rightBarButtonItem: NavBarButton = NavBarButton()
+    var rightBarButtonItems: [NavBarButton] = []
     
     private lazy var verificationView = VerificationView()
     private var viewModel: VerificationViewModel
@@ -65,35 +65,22 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
     private func setNavigationAppearance() {
         navBarTitle = viewModel.userName
         leftBarButtonItem = NavBarButton(withType: .back)
-
-        let buttonTitle = viewModel.viewType == .enrollment ? LocalizationKeys.next.rawValue.localized : LocalizationKeys.test.rawValue.localized
-        rightBarButtonItem = NavBarButton(withTitle: buttonTitle)
+        rightBarButtonItems.append(NavBarButton(withType: viewModel.viewType == .enrollment ? .next : .test))
+        rightBarButtonItems.append(NavBarButton(withType: .eraser))
     }
     
     private func setupButtonClosures() {
         var counter = 0
-        rightBarButtonItem.addAction(for: .touchUpInside) { [weak self] (item) in
-            guard let self = self else { return }
-            if let item = item as? NavBarButton {
-                if item.currentTitle == LocalizationKeys.save.rawValue.localized {
-                    self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
-                    self.viewModel.saveUserData { (isSuccess) in
-                        if isSuccess {
-                            self.navigationController?.popToRootViewController(animated: true)
-                        }
-                    }
-                }
-                
-                if item.currentTitle == LocalizationKeys.next.rawValue.localized {
-                    self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+        for barButtonItem in rightBarButtonItems {
+            switch barButtonItem.navBarButtonType {
+            case .eraser:
+                barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
+                    guard let self = self else { return }
                     self.verificationView.clearCanvas()
-                    counter += 1
-                    if counter == (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1) - 1 {
-                        self.rightBarButtonItem.setTitle(LocalizationKeys.save.rawValue.localized, for: .normal)
-                    }
                 }
-                
-                if item.currentTitle == LocalizationKeys.test.rawValue.localized {
+            case .test:
+                barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
+                    guard let self = self else { return }
                     if !self.verificationView.getAllCoordinates().isEmpty() {
                         self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
                         
@@ -115,11 +102,46 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
                             }
                         }
                     } else {
+                        
                         self.showAlert(title: LocalizationKeys.verifyInvalidTitle.rawValue.localized,
                                        message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
                                         .replacingOccurrences(of: "@s", with: self.viewModel.userName))
                     }
                 }
+            case .next:
+                barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
+                    guard let self = self else { return }
+                    if !self.verificationView.getAllCoordinates().isEmpty() {
+                        self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+                        self.verificationView.clearCanvas()
+                        counter += 1
+                        if counter == (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1) - 1 {
+                            barButtonItem.setNavBar(toType: .save)
+                            barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
+                                guard let self = self else { return }
+                                if !self.verificationView.getAllCoordinates().isEmpty() {
+                                    self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+                                    self.viewModel.saveUserData { (isSuccess) in
+                                        if isSuccess {
+                                            self.navigationController?.popToRootViewController(animated: true)
+                                        }
+                                    }
+                                } else {
+                                    
+                                    self.showAlert(title: LocalizationKeys.verifyInvalidTitle.rawValue.localized,
+                                    message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
+                                     .replacingOccurrences(of: "@s", with: self.viewModel.userName))
+                                }
+                            }
+                        }
+                    } else {
+                        self.showAlert(title: LocalizationKeys.verifyInvalidTitle.rawValue.localized,
+                        message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
+                         .replacingOccurrences(of: "@s", with: self.viewModel.userName))
+                    }
+                }
+            default:
+                break
             }
         }
     }
