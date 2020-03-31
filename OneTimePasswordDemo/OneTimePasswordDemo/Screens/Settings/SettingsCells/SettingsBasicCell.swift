@@ -49,13 +49,13 @@ final class SettingsBasicCell: UITableViewCell {
         return onOffSwitch.isOn
     }
     
-    func setSwitch(toValue value: Bool) {
-        LocalStorage.shared.saveValue(value, forKey: .secureInput)
+    func setSwitch(toValue value: Bool, forKey key: LocalStorageKeys) {
+        LocalStorage.shared.saveValue(value, forKey: key)
     }
     
-    func configure(withText text: String, separatorVisible: Bool) {
+    func configure(withText text: String, separatorVisible: Bool = true, forKey key: LocalStorageKeys) {
         titleLabel.text = text
-        onOffSwitch.isOn = LocalStorage.shared.getValue(forKey: .secureInput) as? Bool ?? false
+        onOffSwitch.isOn = LocalStorage.shared.getValue(forKey: key) as? Bool ?? false
         separatorLine.isHidden = !separatorVisible
     }
     

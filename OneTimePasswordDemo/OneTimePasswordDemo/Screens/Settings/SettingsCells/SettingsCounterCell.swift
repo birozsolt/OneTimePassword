@@ -50,7 +50,7 @@ final class SettingsCounterCell: UITableViewCell {
     
     // MARK: - Public methods
     
-    func configure(withText text: String, separatorVisible: Bool) {
+    func configure(withText text: String, separatorVisible: Bool = true) {
         titleLabel.text = text
         separatorLine.isHidden = !separatorVisible
     }

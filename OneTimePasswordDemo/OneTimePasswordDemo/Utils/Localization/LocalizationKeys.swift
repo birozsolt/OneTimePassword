@@ -34,4 +34,5 @@ enum LocalizationKeys: String {
     case settings
     case secureInput
     case numberOfInput
+    case helperLines
 }

@@ -10,6 +10,7 @@ import UIKit
 
 enum LocalStorageKeys: String {
     case secureInput
+    case helperLines
     case numberOfInput
 }
 

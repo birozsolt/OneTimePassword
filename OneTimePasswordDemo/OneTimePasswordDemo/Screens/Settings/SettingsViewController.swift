@@ -66,16 +66,31 @@ extension SettingsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsBasicCell.identifier) as? SettingsBasicCell else {
                 return UITableViewCell()
             }
-            cell.configure(withText: LocalizationKeys.secureInput.rawValue.localized, separatorVisible: true)
+            cell.configure(withText: LocalizationKeys.secureInput.rawValue.localized, forKey: .secureInput)
             cell.setupOnOffSwitchAction { _ in
                 if cell.switchIsOn() {
-                    cell.setSwitch(toValue: true)
+                    cell.setSwitch(toValue: true, forKey: .secureInput)
                 } else {
-                    cell.setSwitch(toValue: false)
+                    cell.setSwitch(toValue: false, forKey: .secureInput)
                 }
             }
             return cell
-        } else if indexPath.row == 1 {
+        }
+        if indexPath.row == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsBasicCell.identifier) as? SettingsBasicCell else {
+                return UITableViewCell()
+            }
+            cell.configure(withText: LocalizationKeys.helperLines.rawValue.localized, forKey: .helperLines)
+            cell.setupOnOffSwitchAction { _ in
+                if cell.switchIsOn() {
+                    cell.setSwitch(toValue: true, forKey: .helperLines)
+                } else {
+                    cell.setSwitch(toValue: false, forKey: .helperLines)
+                }
+            }
+            return cell
+        }
+        if indexPath.row == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCounterCell.identifier) as? SettingsCounterCell else {
                 return UITableViewCell()
             }

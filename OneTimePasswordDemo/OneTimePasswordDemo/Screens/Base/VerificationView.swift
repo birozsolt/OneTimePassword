@@ -48,6 +48,20 @@ final class VerificationView: UIView {
         fourthQuarterView.clearCanvas()
     }
     
+    func drawHelpers(forQuarter quarter: Quarters, from coords: [Coordinate]) {
+        switch quarter {
+        case .first:
+            firstQuarterView.drawHelper(from: coords)
+        case .second:
+            secondQuarterView.drawHelper(from: coords)
+        case .third:
+            thirdQuarterView.drawHelper(from: coords)
+        case .fourth:
+            fourthQuarterView.drawHelper(from: coords)
+        }
+        
+    }
+    
     // MARK: - Private methods
     
     private func setupView() {

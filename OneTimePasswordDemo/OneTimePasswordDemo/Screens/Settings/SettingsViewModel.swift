@@ -15,6 +15,6 @@ final class SettingsViewModel: NSObject {
     }
     
     func numberOfRows() -> Int {
-        return 2
+        return 3
     }
 }

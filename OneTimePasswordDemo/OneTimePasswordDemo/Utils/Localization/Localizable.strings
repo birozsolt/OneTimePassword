@@ -33,3 +33,4 @@ verifyInvalidMessage = "Please draw in all square to test the @s user";
 settings = "Settings";
 secureInput = "Secure input";
 numberOfInput = "Number of samples";
+helperLines = "Helper lines";

@@ -14,9 +14,11 @@ final class CanvasView: UIView {
     
     private lazy var lineWidth: CGFloat = 5
     private lazy var path = UIBezierPath()
+    private lazy var helperPath = UIBezierPath()
     private lazy var startingPoint = CGPoint.zero
     private lazy var touchPoint = CGPoint.zero
     private var lineColor: UIColor
+    private var helperLineColor: UIColor
     
     private lazy var coordinateList: [Coordinate] = []
     
@@ -24,13 +26,17 @@ final class CanvasView: UIView {
     
     override init(frame: CGRect) {
         let isSecure = LocalStorage.shared.getValue(forKey: .secureInput) as? Bool ?? false
+        let shouldDraw = LocalStorage.shared.getValue(forKey: .helperLines) as? Bool ?? false
         lineColor = isSecure ? UIColor.clear : AssetCatalog.getColor(.text)
+        helperLineColor = isSecure ? UIColor.clear : shouldDraw ? lineColor.withAlphaComponent(0.3) : UIColor.clear
         super.init(frame: CGRect.zero)
     }
     
     required init?(coder: NSCoder) {
         let isSecure = LocalStorage.shared.getValue(forKey: .secureInput) as? Bool ?? false
+        let shouldDraw = LocalStorage.shared.getValue(forKey: .helperLines) as? Bool ?? false
         lineColor = isSecure ? UIColor.clear : AssetCatalog.getColor(.text)
+        helperLineColor = isSecure ? UIColor.clear : shouldDraw ? lineColor.withAlphaComponent(0.3) : UIColor.clear
         super.init(coder: coder)
     }
     
@@ -64,7 +70,7 @@ final class CanvasView: UIView {
             path.addLine(to: touchPoint)
             startingPoint = touchPoint
             
-            drawShapeLayer()
+            drawShapeLayer(withColor: lineColor, path: path)
         }
     }
     
@@ -73,20 +79,37 @@ final class CanvasView: UIView {
     func clearCanvas() {
         path.removeAllPoints()
         coordinateList.removeAll()
-        layer.sublayers?.removeAll()
+        if layer.sublayers?.count ?? 0 > 1 {
+            layer.sublayers?.removeSubrange(1..<(layer.sublayers?.count ?? 1))
+        }
+    }
+    
+    func clearHelperCanvas() {
+        helperPath.removeAllPoints()
+        layer.sublayers?.removeFirst()
     }
     
     func getCoordinateList() -> [Coordinate] {
         return coordinateList
     }
     
+    func drawHelper(from coords: [Coordinate]) {
+        if !coords.isEmpty {
+            helperPath.removeAllPoints()
+            helperPath.move(to: CGPoint(x: coords[0].x, y: coords[0].y))
+            for coord in coords {
+                helperPath.addLine(to: CGPoint(x: coord.x, y: coord.y))
+            }
+            drawShapeLayer(withColor: helperLineColor, path: helperPath)
+        }
+    }
     // MARK: - Private methods
     
-    private func drawShapeLayer() {
+    private func drawShapeLayer(withColor color: UIColor, path: UIBezierPath) {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
         shapeLayer.lineWidth = lineWidth
-        shapeLayer.strokeColor = lineColor.cgColor
+        shapeLayer.strokeColor = color.cgColor
         shapeLayer.fillColor = UIColor.clear.cgColor
         layer.addSublayer(shapeLayer)
         setNeedsDisplay()

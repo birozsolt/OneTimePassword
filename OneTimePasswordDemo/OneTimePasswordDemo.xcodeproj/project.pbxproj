@@ -33,6 +33,7 @@
 		3E54CFE424292CFD005A2CD9 /* AssetCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54CFE324292CFD005A2CD9 /* AssetCatalog.swift */; };
 		3E54CFE724295CF6005A2CD9 /* OTPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54CFE624295CF6005A2CD9 /* OTPButton.swift */; };
 		3E55B16C2422A6C30027D626 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E55B16B2422A6C30027D626 /* LocalStorage.swift */; };
+		3E55B9502433C0F5002D2BB1 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E55B94F2433C0F5002D2BB1 /* ArrayExtension.swift */; };
 		3E5677ED240125A1003E8ED0 /* TimeSerieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */; };
 		3E57E945242D21610030CA52 /* SettingsCounterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E944242D21610030CA52 /* SettingsCounterCell.swift */; };
 		3E57E947242D26550030CA52 /* OTPDropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E946242D26550030CA52 /* OTPDropDownPickerView.swift */; };
@@ -121,6 +122,7 @@
 		3E54CFE324292CFD005A2CD9 /* AssetCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCatalog.swift; sourceTree = "<group>"; };
 		3E54CFE624295CF6005A2CD9 /* OTPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPButton.swift; sourceTree = "<group>"; };
 		3E55B16B2422A6C30027D626 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
+		3E55B94F2433C0F5002D2BB1 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSerieModel.swift; sourceTree = "<group>"; };
 		3E57E944242D21610030CA52 /* SettingsCounterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCounterCell.swift; sourceTree = "<group>"; };
 		3E57E946242D26550030CA52 /* OTPDropDownPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPDropDownPickerView.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 		3E68F48723F0638000AFD0F2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3E55B94F2433C0F5002D2BB1 /* ArrayExtension.swift */,
 				3E4DA6912409BAB60095C054 /* StringExtension.swift */,
 				3E9A95B8241D76C30006CAE5 /* UIImageExtension.swift */,
 				3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */,
@@ -583,6 +586,7 @@
 				3E68F48E23F0693600AFD0F2 /* LoginViewController.swift in Sources */,
 				3E57E947242D26550030CA52 /* OTPDropDownPickerView.swift in Sources */,
 				3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */,
+				3E55B9502433C0F5002D2BB1 /* ArrayExtension.swift in Sources */,
 				3E46AB19242BC8D500100736 /* SettingsViewModel.swift in Sources */,
 				3E9A95B7241D74EC0006CAE5 /* NavBarButton.swift in Sources */,
 				3E9A95AE241D4F160006CAE5 /* SettingsBasicCell.swift in Sources */,

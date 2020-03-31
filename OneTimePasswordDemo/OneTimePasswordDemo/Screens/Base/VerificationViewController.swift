@@ -25,7 +25,15 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
         viewModel = VerificationViewModel(user: name, type: type)
         super.init(nibName: nil, bundle: nil)
         if type == .test {
-            viewModel.getUserData(completion: nil)
+            viewModel.getUserData { [ weak self ] (isSuccess) in
+                guard let self = self, let testedUser = self.viewModel.testedUser else { return }
+                if isSuccess {
+                    self.verificationView.drawHelpers(forQuarter: .first, from: testedUser.samples[0].getSerie(forQuarter: .first).getCoordinates())
+                    self.verificationView.drawHelpers(forQuarter: .second, from: testedUser.samples[0].getSerie(forQuarter: .second).getCoordinates())
+                    self.verificationView.drawHelpers(forQuarter: .third, from: testedUser.samples[0].getSerie(forQuarter: .third).getCoordinates())
+                    self.verificationView.drawHelpers(forQuarter: .fourth, from: testedUser.samples[0].getSerie(forQuarter: .fourth).getCoordinates())
+                }
+            }
         }
         setNavigationAppearance()
     }
@@ -46,6 +54,7 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
         let value = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         let value = UIInterfaceOrientation.portrait.rawValue
