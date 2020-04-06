@@ -22,6 +22,10 @@ extension Array where Element: FloatingPoint {
         return map { ($0 - min) / (max - min) }
     }
     
+    mutating func normalized(min: Element, max: Element) -> Array {
+        return map { ($0 - min) / (max - min) }
+    }
+    
     mutating func restored(min: Element, max: Element) -> Array {
         return map { ($0 * (max - min) + min) }
     }

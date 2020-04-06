@@ -28,10 +28,16 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
             viewModel.getUserData { [ weak self ] (isSuccess) in
                 guard let self = self, let testedUser = self.viewModel.testedUser else { return }
                 if isSuccess {
-                    self.verificationView.drawHelpers(forQuarter: .first, from: testedUser.samples[0].getSerie(forQuarter: .first).getCoordinates())
-                    self.verificationView.drawHelpers(forQuarter: .second, from: testedUser.samples[0].getSerie(forQuarter: .second).getCoordinates())
-                    self.verificationView.drawHelpers(forQuarter: .third, from: testedUser.samples[0].getSerie(forQuarter: .third).getCoordinates())
-                    self.verificationView.drawHelpers(forQuarter: .fourth, from: testedUser.samples[0].getSerie(forQuarter: .fourth).getCoordinates())
+                    for sample in testedUser.samples {
+                        self.verificationView.drawHelpers(forQuarter: .first,
+                                                          from: sample.getSerie(forQuarter: .first).getCoordinates())
+                        self.verificationView.drawHelpers(forQuarter: .second,
+                                                          from: sample.getSerie(forQuarter: .second).getCoordinates())
+                        self.verificationView.drawHelpers(forQuarter: .third,
+                                                          from: sample.getSerie(forQuarter: .third).getCoordinates())
+                        self.verificationView.drawHelpers(forQuarter: .fourth,
+                                                          from: sample.getSerie(forQuarter: .fourth).getCoordinates())
+                    }
                 }
             }
         }
@@ -90,9 +96,10 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
             case .test:
                 barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
                     guard let self = self else { return }
-                    if !self.verificationView.getAllCoordinates().isEmpty() {
-                        self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
-                        
+                    if self.viewModel.setCoordinates(coordsQ1: self.verificationView.getCoordinates(forQuarter: .first),
+                                                     coordsQ2: self.verificationView.getCoordinates(forQuarter: .second),
+                                                     coordsQ3: self.verificationView.getCoordinates(forQuarter: .third),
+                                                     coordsQ4: self.verificationView.getCoordinates(forQuarter: .fourth)) {
                         var validPassword: [Bool] = []
                         validPassword.append(self.viewModel.testUser(forQuarter: .first))
                         validPassword.append(self.viewModel.testUser(forQuarter: .second))
@@ -120,33 +127,36 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
             case .next:
                 barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
                     guard let self = self else { return }
-                    if !self.verificationView.getAllCoordinates().isEmpty() {
-                        self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+                    if self.viewModel.setCoordinates(coordsQ1: self.verificationView.getCoordinates(forQuarter: .first),
+                                                     coordsQ2: self.verificationView.getCoordinates(forQuarter: .second),
+                                                     coordsQ3: self.verificationView.getCoordinates(forQuarter: .third),
+                                                     coordsQ4: self.verificationView.getCoordinates(forQuarter: .fourth)) {        
                         self.verificationView.clearCanvas()
                         counter += 1
                         if counter == (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1) - 1 {
                             barButtonItem.setNavBar(toType: .save)
                             barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
                                 guard let self = self else { return }
-                                if !self.verificationView.getAllCoordinates().isEmpty() {
-                                    self.viewModel.setCoordinates(coordinates: self.verificationView.getAllCoordinates())
+                                if self.viewModel.setCoordinates(coordsQ1: self.verificationView.getCoordinates(forQuarter: .first),
+                                                                 coordsQ2: self.verificationView.getCoordinates(forQuarter: .second),
+                                                                 coordsQ3: self.verificationView.getCoordinates(forQuarter: .third),
+                                                                 coordsQ4: self.verificationView.getCoordinates(forQuarter: .fourth)) {
                                     self.viewModel.saveUserData { (isSuccess) in
                                         if isSuccess {
                                             self.navigationController?.popToRootViewController(animated: true)
                                         }
                                     }
                                 } else {
-                                    
                                     self.showAlert(title: LocalizationKeys.verifyInvalidTitle.rawValue.localized,
-                                    message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
-                                     .replacingOccurrences(of: "@s", with: self.viewModel.userName))
+                                                   message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
+                                                    .replacingOccurrences(of: "@s", with: self.viewModel.userName))
                                 }
                             }
                         }
                     } else {
                         self.showAlert(title: LocalizationKeys.verifyInvalidTitle.rawValue.localized,
-                        message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
-                         .replacingOccurrences(of: "@s", with: self.viewModel.userName))
+                                       message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
+                                        .replacingOccurrences(of: "@s", with: self.viewModel.userName))
                     }
                 }
             default:

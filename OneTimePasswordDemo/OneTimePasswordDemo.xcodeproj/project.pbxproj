@@ -38,6 +38,7 @@
 		3E57E945242D21610030CA52 /* SettingsCounterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E944242D21610030CA52 /* SettingsCounterCell.swift */; };
 		3E57E947242D26550030CA52 /* OTPDropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E946242D26550030CA52 /* OTPDropDownPickerView.swift */; };
 		3E57E949242D27E70030CA52 /* UITextfieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E948242D27E70030CA52 /* UITextfieldExtension.swift */; };
+		3E58900D243BC28A009CC17B /* NormalizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58900C243BC28A009CC17B /* NormalizationModel.swift */; };
 		3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48523F060E500AFD0F2 /* LoginView.swift */; };
 		3E68F48923F0639300AFD0F2 /* UIBarButtonItemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */; };
 		3E68F48B23F066B100AFD0F2 /* UIControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */; };
@@ -127,6 +128,7 @@
 		3E57E944242D21610030CA52 /* SettingsCounterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCounterCell.swift; sourceTree = "<group>"; };
 		3E57E946242D26550030CA52 /* OTPDropDownPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPDropDownPickerView.swift; sourceTree = "<group>"; };
 		3E57E948242D27E70030CA52 /* UITextfieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextfieldExtension.swift; sourceTree = "<group>"; };
+		3E58900C243BC28A009CC17B /* NormalizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalizationModel.swift; sourceTree = "<group>"; };
 		3E68F48523F060E500AFD0F2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtension.swift; sourceTree = "<group>"; };
 		3E68F48A23F066B100AFD0F2 /* UIControlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIControlExtension.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				3E4DA68B2406E30D0095C054 /* ExtendedCoordinate.swift */,
 				3E53B6AE23FEF9D4000D6293 /* CoordinateModel.swift */,
 				3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */,
+				3E58900C243BC28A009CC17B /* NormalizationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -594,6 +597,7 @@
 				3E4DA6922409BAB60095C054 /* StringExtension.swift in Sources */,
 				3E55B16C2422A6C30027D626 /* LocalStorage.swift in Sources */,
 				3E502E3223F81808003533F4 /* BaseViewController.swift in Sources */,
+				3E58900D243BC28A009CC17B /* NormalizationModel.swift in Sources */,
 				3E57E945242D21610030CA52 /* SettingsCounterCell.swift in Sources */,
 				3E54CFE724295CF6005A2CD9 /* OTPButton.swift in Sources */,
 				3E53B6AD23FEF88A000D6293 /* Coordinate.swift in Sources */,

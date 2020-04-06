@@ -13,17 +13,12 @@ class TimeSerieModel: Codable {
     // MARK: - Properties
     
     var exCoordinates: [ExtendedCoordinate] = []
-    var minX: CGFloat = 0
-    var maxX: CGFloat = 0
-    var minY: CGFloat = 0
-    var maxY: CGFloat = 0
-    var minForce: CGFloat = 0
-    var maxForce: CGFloat = 0
+    var normalizationModel: NormalizationModel!
+    
     // MARK: - Init
     
-    init(with coords: [Coordinate]) {
-        
-        generate(from: coords)
+    init(with coords: [Coordinate], normModel: NormalizationModel? = nil) {
+        generate(from: coords, with: normModel)
     }
     
     // MARK: - Public methods
@@ -36,9 +31,9 @@ class TimeSerieModel: Codable {
         var xArray = exCoordinates.map { $0.x }
         var yArray = exCoordinates.map { $0.y }
         var forceArray = exCoordinates.map { $0.force }
-        let restoredX = xArray.restored(min: minX, max: maxX)
-        let restoredY = yArray.restored(min: minY, max: maxY)
-        let restoredForce = forceArray.restored(min: minForce, max: maxForce)
+        let restoredX = xArray.restored(min: normalizationModel.minX, max: normalizationModel.maxX)
+        let restoredY = yArray.restored(min: normalizationModel.minY, max: normalizationModel.maxY)
+        let restoredForce = forceArray.restored(min: normalizationModel.minForce, max: normalizationModel.maxForce)
         return stride(from: 0, to: restoredX.count, by: 1).map({ Coordinate(x: restoredX[$0],
                                                                             y: restoredY[$0],
                                                                             force: restoredForce[$0])
@@ -48,7 +43,7 @@ class TimeSerieModel: Codable {
     // MARK: - Private methods
     
     // swiftlint:disable identifier_name
-    private func generate(from coords: [Coordinate]) {
+    private func generate(from coords: [Coordinate], with normModel: NormalizationModel?) {
         if coords.count > 1 {
             var x = [CGFloat]()
             var y = [CGFloat]()
@@ -63,15 +58,18 @@ class TimeSerieModel: Codable {
                 y.append(coord.y)
                 force.append(coord.force)
             }
-            minX = x.min() ?? 0
-            maxX = x.max() ?? 0
-            minY = y.min() ?? 0
-            maxY = y.max() ?? 0
-            minForce = force.min() ?? 0
-            maxForce = force.max() ?? 0
-            
-            let normalizedX = x.normalized()
-            let normalizedY = y.normalized()
+            normalizationModel = NormalizationModel(minX: x.min(), maxX: x.max(),
+                                                    minY: y.min(), maxY: y.max(),
+                                                    minForce: force.min(), maxForce: force.max())
+            var normalizedX = [CGFloat]()
+            var normalizedY = [CGFloat]()
+            if let normModel = normModel {
+                normalizedX = x.normalized(min: normModel.minX, max: normModel.maxX)
+                normalizedY = y.normalized(min: normModel.minY, max: normModel.maxY)
+            } else {
+                normalizedX = x.normalized()
+                normalizedY = y.normalized()
+            }
             
             xVelocity.append(0)
             xVelocity.append(contentsOf: stride(from: 1, to: coords.count, by: 1).map({ normalizedX[$0] - normalizedX[$0 - 1] }))

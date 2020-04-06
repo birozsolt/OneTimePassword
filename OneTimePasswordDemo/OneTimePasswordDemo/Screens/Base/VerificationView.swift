@@ -33,12 +33,17 @@ final class VerificationView: UIView {
     
     // MARK: - Public methods
     
-    func getAllCoordinates() -> CoordinateModel {
-        let coordinateModel = CoordinateModel(coordsQ1: getCoordinates(forQuarter: .first),
-                                              coordsQ2: getCoordinates(forQuarter: .second),
-                                              coordsQ3: getCoordinates(forQuarter: .third),
-                                              coordsQ4: getCoordinates(forQuarter: .fourth))
-        return coordinateModel
+    func getCoordinates(forQuarter quarter: Quarters) -> [Coordinate] {
+        switch quarter {
+        case .first:
+            return firstQuarterView.getCoordinateList()
+        case .second:
+            return secondQuarterView.getCoordinateList()
+        case .third:
+            return thirdQuarterView.getCoordinateList()
+        case .fourth:
+            return fourthQuarterView.getCoordinateList()
+        }
     }
     
     func clearCanvas() {
@@ -86,19 +91,6 @@ final class VerificationView: UIView {
             view.autoSetDimension(.width, toSize: quarterWidth)
             view.layer.borderColor = AssetCatalog.getColor(.buttonBg).cgColor
             view.layer.borderWidth = 1
-        }
-    }
-    
-    private func getCoordinates(forQuarter quarter: Quarters) -> [Coordinate] {
-        switch quarter {
-        case .first:
-            return firstQuarterView.getCoordinateList()
-        case .second:
-            return secondQuarterView.getCoordinateList()
-        case .third:
-            return thirdQuarterView.getCoordinateList()
-        case .fourth:
-            return fourthQuarterView.getCoordinateList()
         }
     }
 }

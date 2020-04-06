@@ -34,8 +34,26 @@ final class VerificationViewModel: NSObject {
     
     // MARK: - Public methods
     
-    func setCoordinates(coordinates: CoordinateModel) {
-        self.coordinates.append(coordinates)
+    func setCoordinates(coordsQ1: [Coordinate], coordsQ2: [Coordinate],
+                        coordsQ3: [Coordinate], coordsQ4: [Coordinate]) -> Bool {
+        if viewType == .test {
+            let coordinateModel = CoordinateModel(coordsQ1: coordsQ1, coordsQ2: coordsQ2, coordsQ3: coordsQ3, coordsQ4: coordsQ4,
+                                                  normModelQ1: testedUser?.samples[0].timeSerieQ1.normalizationModel,
+                                                  normModelQ2: testedUser?.samples[0].timeSerieQ2.normalizationModel,
+                                                  normModelQ3: testedUser?.samples[0].timeSerieQ3.normalizationModel,
+                                                  normModelQ4: testedUser?.samples[0].timeSerieQ4.normalizationModel)
+            if !coordinateModel.isEmpty() {
+                self.coordinates.append(coordinateModel)
+            }
+            return !coordinateModel.isEmpty()
+        } else {
+            let coordinateModel = CoordinateModel(coordsQ1: coordsQ1, coordsQ2: coordsQ2, coordsQ3: coordsQ3, coordsQ4: coordsQ4)
+            if !coordinateModel.isEmpty() {
+                self.coordinates.append(coordinateModel)
+            }
+            return !coordinateModel.isEmpty()
+        }
+        
     }
     
     func saveUserData(completion: @escaping (Bool) -> Void) {

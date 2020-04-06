@@ -19,6 +19,7 @@ final class CanvasView: UIView {
     private lazy var touchPoint = CGPoint.zero
     private var lineColor: UIColor
     private var helperLineColor: UIColor
+    private let helperLayerCounter: Int
     
     private lazy var coordinateList: [Coordinate] = []
     
@@ -29,6 +30,7 @@ final class CanvasView: UIView {
         let shouldDraw = LocalStorage.shared.getValue(forKey: .helperLines) as? Bool ?? false
         lineColor = isSecure ? UIColor.clear : AssetCatalog.getColor(.text)
         helperLineColor = isSecure ? UIColor.clear : shouldDraw ? lineColor.withAlphaComponent(0.3) : UIColor.clear
+        helperLayerCounter = (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1)
         super.init(frame: CGRect.zero)
     }
     
@@ -37,6 +39,7 @@ final class CanvasView: UIView {
         let shouldDraw = LocalStorage.shared.getValue(forKey: .helperLines) as? Bool ?? false
         lineColor = isSecure ? UIColor.clear : AssetCatalog.getColor(.text)
         helperLineColor = isSecure ? UIColor.clear : shouldDraw ? lineColor.withAlphaComponent(0.3) : UIColor.clear
+        helperLayerCounter = (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1)
         super.init(coder: coder)
     }
     
@@ -79,14 +82,14 @@ final class CanvasView: UIView {
     func clearCanvas() {
         path.removeAllPoints()
         coordinateList.removeAll()
-        if layer.sublayers?.count ?? 0 > 1 {
-            layer.sublayers?.removeSubrange(1..<(layer.sublayers?.count ?? 1))
+        if layer.sublayers?.count ?? 0 >= helperLayerCounter {
+            layer.sublayers?.removeSubrange(helperLayerCounter..<(layer.sublayers?.count ?? 1))
         }
     }
     
     func clearHelperCanvas() {
         helperPath.removeAllPoints()
-        layer.sublayers?.removeFirst()
+        layer.sublayers?.removeSubrange(0..<helperLayerCounter)
     }
     
     func getCoordinateList() -> [Coordinate] {
