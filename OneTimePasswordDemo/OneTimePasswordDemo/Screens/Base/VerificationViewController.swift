@@ -100,21 +100,24 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
                                                      coordsQ2: self.verificationView.getCoordinates(forQuarter: .second),
                                                      coordsQ3: self.verificationView.getCoordinates(forQuarter: .third),
                                                      coordsQ4: self.verificationView.getCoordinates(forQuarter: .fourth)) {
-                        var validPassword: [Bool] = []
-                        validPassword.append(self.viewModel.testUser(forQuarter: .first))
-                        validPassword.append(self.viewModel.testUser(forQuarter: .second))
-                        validPassword.append(self.viewModel.testUser(forQuarter: .third))
-                        validPassword.append(self.viewModel.testUser(forQuarter: .fourth))
+                        self.viewModel.verifyUser()
                         
-                        if validPassword.allSatisfy({ $0 == true }) {
+                        self.verificationView.changeBorderColor(forQuarter: .first, self.viewModel.resultModel.testResults[0])
+                        self.verificationView.changeBorderColor(forQuarter: .second, self.viewModel.resultModel.testResults[1])
+                        self.verificationView.changeBorderColor(forQuarter: .third, self.viewModel.resultModel.testResults[2])
+                        self.verificationView.changeBorderColor(forQuarter: .fourth, self.viewModel.resultModel.testResults[3])
+                        
+                        if self.viewModel.resultModel.isValid() {
                             self.showAlert(title: LocalizationKeys.verifySuccessTitle.rawValue.localized,
                                            message: LocalizationKeys.verifySuccessMessage.rawValue.localized) { _ in
                                             self.verificationView.clearCanvas()
+                                            self.viewModel.clearTestResults()
                             }
                         } else {
                             self.showAlert(title: LocalizationKeys.verifyFailedTitle.rawValue.localized,
                                            message: LocalizationKeys.verifyFailedMessage.rawValue.localized) { _ in
                                             self.verificationView.clearCanvas()
+                                            self.viewModel.clearTestResults()
                             }
                         }
                     } else {

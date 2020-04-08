@@ -21,6 +21,7 @@ final class VerificationViewModel: NSObject {
     let viewType: VerificationViewType
     private(set) var coordinates: [CoordinateModel] = []
     private(set) var testedUser: UserModel?
+    private(set) var resultModel = ResultModel()
     
     typealias AcceptedLimits = (min: CGFloat, max: CGFloat)
     
@@ -73,9 +74,47 @@ final class VerificationViewModel: NSObject {
         }
         completion?(false)
     }
-
+    
+    func verifyUser() {
+        var results = [Bool]()
+        results.append(testUser(forQuarter: .first))
+        results.append(testUser(forQuarter: .second))
+        results.append(testUser(forQuarter: .third))
+        results.append(testUser(forQuarter: .fourth))
+        resultModel = ResultModel(results)
+    }
+    
+    func clearTestResults() {
+        resultModel.reset()
+        coordinates.removeAll()
+    }
+    
+    // MARK: - Private methods
+    
+    private func testUser(forQuarter quarter: Quarters) -> Bool {
+        guard let testedUser = self.testedUser else { return false }
+        var distance = CGFloat.zero
+        let sampleCount = CGFloat(testedUser.samples.count)
+        let limits = calculateLimits(forQuarter: quarter)
+        for serie in testedUser.samples {
+            distance += dtwDistanceCalculator(serie1: serie.getSerie(forQuarter: quarter).exCoordinates,
+                                              serie2: coordinates[0].getSerie(forQuarter: quarter).exCoordinates)
+        }
+        let avarageDistance = distance / sampleCount
+        return (limits.min < avarageDistance && limits.max > avarageDistance) ? true : false
+    }
+    
+    private func eucledeanDistance(between exCoord1: ExtendedCoordinate, _ exCoord2: ExtendedCoordinate) -> CGFloat {
+        return sqrt(pow((exCoord1.x - exCoord2.x), 2) +
+            pow((exCoord1.y - exCoord2.y), 2) +
+            pow((exCoord1.xVelocity - exCoord2.xVelocity), 2) +
+            pow((exCoord1.yVelocity - exCoord2.yVelocity), 2) +
+            pow((exCoord1.xAcceleration - exCoord2.xAcceleration), 2) +
+            pow((exCoord1.yAcceleration - exCoord2.yAcceleration), 2))
+    }
+    
     // swiftlint:disable identifier_name
-    func dtwDistanceCalculator(serie1: [ExtendedCoordinate], serie2: [ExtendedCoordinate]) -> CGFloat {
+    private func dtwDistanceCalculator(serie1: [ExtendedCoordinate], serie2: [ExtendedCoordinate]) -> CGFloat {
         let n = serie1.count
         let m = serie2.count
         if n > 0 && m > 0 {
@@ -94,7 +133,7 @@ final class VerificationViewModel: NSObject {
     }
     // swiftlint:enable identifier_name
     
-    func calculateLimits(forQuarter quarter: Quarters) -> AcceptedLimits {
+    private func calculateLimits(forQuarter quarter: Quarters) -> AcceptedLimits {
         guard let testedUser = self.testedUser else { return (min: 0, max: 0) }
         var dtwDistance: [CGFloat] = []
         let countOfSamples = testedUser.samples.count
@@ -103,7 +142,7 @@ final class VerificationViewModel: NSObject {
                 if index < (testedUser.samples.firstIndex { $0.self == serie }) ?? 0 {
                     dtwDistance.append(
                         self.dtwDistanceCalculator(serie1: testedUser.samples[index].getSerie(forQuarter: quarter).exCoordinates,
-                                         serie2: serie.getSerie(forQuarter: quarter).exCoordinates))
+                                                   serie2: serie.getSerie(forQuarter: quarter).exCoordinates))
                 }
             }
         }
@@ -117,29 +156,5 @@ final class VerificationViewModel: NSObject {
         let variation = sum / count
         let standardDeviation = sqrt(variation)
         return (min: avarageDistance - standardDeviation, max: avarageDistance + standardDeviation)
-    }
-    
-    func testUser(forQuarter quarter: Quarters) -> Bool {
-        guard let testedUser = self.testedUser else { return false }
-        var distance = CGFloat.zero
-        let sampleCount = CGFloat(testedUser.samples.count)
-        let limits = calculateLimits(forQuarter: quarter)
-        for serie in testedUser.samples {
-            distance += dtwDistanceCalculator(serie1: serie.getSerie(forQuarter: quarter).exCoordinates,
-                                    serie2: coordinates[0].getSerie(forQuarter: quarter).exCoordinates)
-        }
-        
-        return (limits.min < (distance / sampleCount) && limits.max > (distance / sampleCount)) ? true : false
-    }
-    
-    // MARK: - Private methods
-    
-    private func eucledeanDistance(between exCoord1: ExtendedCoordinate, _ exCoord2: ExtendedCoordinate) -> CGFloat {
-        return sqrt(pow((exCoord1.x - exCoord2.x), 2) +
-            pow((exCoord1.y - exCoord2.y), 2) +
-            pow((exCoord1.xVelocity - exCoord2.xVelocity), 2) +
-            pow((exCoord1.yVelocity - exCoord2.yVelocity), 2) +
-            pow((exCoord1.xAcceleration - exCoord2.xAcceleration), 2) +
-            pow((exCoord1.yAcceleration - exCoord2.yAcceleration), 2))
     }
 }

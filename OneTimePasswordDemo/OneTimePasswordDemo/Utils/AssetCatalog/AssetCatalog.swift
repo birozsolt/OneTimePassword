@@ -24,6 +24,8 @@ final class AssetCatalog: NSObject {
         case buttonBg
         case text
         case textfieldBg
+        case goodVerification
+        case wrongVerification
     }
     
     private override init() {

@@ -51,6 +51,7 @@ final class VerificationView: UIView {
         secondQuarterView.clearCanvas()
         thirdQuarterView.clearCanvas()
         fourthQuarterView.clearCanvas()
+        resetBorderColor()
     }
     
     func drawHelpers(forQuarter quarter: Quarters, from coords: [Coordinate]) {
@@ -64,7 +65,20 @@ final class VerificationView: UIView {
         case .fourth:
             fourthQuarterView.drawHelper(from: coords)
         }
-        
+    }
+    
+    func changeBorderColor(forQuarter quarter: Quarters, _ isGood: Bool) {
+        let color = isGood ? AssetCatalog.getColor(.goodVerification) : AssetCatalog.getColor(.wrongVerification)
+        switch quarter {
+        case .first:
+            firstQuarterView.layer.borderColor = color.cgColor
+        case .second:
+            secondQuarterView.layer.borderColor = color.cgColor
+        case .third:
+            thirdQuarterView.layer.borderColor = color.cgColor
+        case .fourth:
+            fourthQuarterView.layer.borderColor = color.cgColor
+        }
     }
     
     // MARK: - Private methods
@@ -91,6 +105,12 @@ final class VerificationView: UIView {
             view.autoSetDimension(.width, toSize: quarterWidth)
             view.layer.borderColor = AssetCatalog.getColor(.buttonBg).cgColor
             view.layer.borderWidth = 1
+        }
+    }
+    
+    private func resetBorderColor() {
+        for view in subviews {
+            view.layer.borderColor = AssetCatalog.getColor(.buttonBg).cgColor
         }
     }
 }
