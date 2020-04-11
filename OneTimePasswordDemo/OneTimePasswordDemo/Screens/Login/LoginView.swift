@@ -6,7 +6,7 @@
 //  Copyright © 2020 Biro Zsolt. All rights reserved.
 //
 
-import PureLayout
+import UIKit
 
 final class LoginView: UIView {
     
@@ -37,15 +37,21 @@ final class LoginView: UIView {
     private func setupView() {
         addSubview(createUserButton)
         addSubview(verifyUserButton)
-        setupLayout()
+        setupLayoutConstraints()
     }
     
-    private func setupLayout() {
-        createUserButton.autoCenterInSuperviewMargins()
-        createUserButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
-        
-        verifyUserButton.autoPinEdge(.top, to: .bottom, of: createUserButton, withOffset: 30)
-        verifyUserButton.autoAlignAxis(toSuperviewMarginAxis: .vertical)
-        verifyUserButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
+    private func setupLayoutConstraints() {
+        subviews.forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                $0.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+                $0.widthAnchor.constraint(equalToConstant: UIConstants.buttonWidth),
+                $0.heightAnchor.constraint(equalToConstant: UIConstants.buttonHeight)
+            ])
+        }
+        NSLayoutConstraint.activate([
+            createUserButton.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            verifyUserButton.topAnchor.constraint(equalTo: createUserButton.bottomAnchor, constant: 30)
+        ])
     }
 }

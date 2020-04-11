@@ -46,17 +46,22 @@ final class UserListTableViewCell: UITableViewCell {
     // MARK: - Private methods
     
     private func setupView() {
-        addSubview(nameLabel)
-        addSubview(separatorLine)
-        setupLayout()
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(separatorLine)
+        setupLayoutConstraints()
     }
     
-    private func setupLayout() {
-        nameLabel.autoCenterInSuperview()
+    private func setupLayoutConstraints() {
+        contentView.subviews.forEach({ $0.translatesAutoresizingMaskIntoConstraints = false })
         
-        separatorLine.autoPinEdge(toSuperviewEdge: .bottom)
-        separatorLine.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
-        separatorLine.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
-        separatorLine.autoSetDimension(.height, toSize: 0.5)
+        NSLayoutConstraint.activate([
+            nameLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            nameLabel.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            
+            separatorLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.separatorPadding),
+            separatorLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIConstants.separatorPadding),
+            separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            separatorLine.heightAnchor.constraint(equalToConstant: UIConstants.separatorHeight)
+        ])
     }
 }

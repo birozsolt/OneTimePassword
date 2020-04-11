@@ -66,22 +66,25 @@ final class SettingsBasicCell: UITableViewCell {
     // MARK: - Private methods
     
     private func setupView() {
-        addSubview(titleLabel)
-        addSubview(onOffSwitch)
-        addSubview(separatorLine)
-        setupLayout()
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(onOffSwitch)
+        contentView.addSubview(separatorLine)
+        setupLayoutConstraints()
     }
     
-    private func setupLayout() {
-        titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 20)
-        titleLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
-        
-        onOffSwitch.autoPinEdge(toSuperviewEdge: .right, withInset: 20)
-        onOffSwitch.autoAlignAxis(toSuperviewAxis: .horizontal)
-        
-        separatorLine.autoPinEdge(toSuperviewEdge: .bottom)
-        separatorLine.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
-        separatorLine.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
-        separatorLine.autoSetDimension(.height, toSize: 0.5)
+    private func setupLayoutConstraints() {
+        contentView.subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.padding),
+            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            
+            onOffSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIConstants.padding),
+            onOffSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            
+            separatorLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.separatorPadding),
+            separatorLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIConstants.separatorPadding),
+            separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            separatorLine.heightAnchor.constraint(equalToConstant: UIConstants.separatorHeight)
+        ])
     }
 }

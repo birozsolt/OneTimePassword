@@ -6,7 +6,7 @@
 //  Copyright © 2020 Biro Zsolt. All rights reserved.
 //
 
-import PureLayout
+import UIKit
 
 final class SettingsView: UIView {
     
@@ -34,10 +34,16 @@ final class SettingsView: UIView {
     
     private func setupView() {
         addSubview(tableView)
-        setupLayout()
+        setupLayoutConstraints()
     }
     
-    private func setupLayout() {
-        tableView.autoPinEdgesToSuperviewSafeArea()
+    private func setupLayoutConstraints() {
+        subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
 }

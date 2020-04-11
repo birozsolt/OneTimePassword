@@ -6,7 +6,7 @@
 //  Copyright © 2020 Biro Zsolt. All rights reserved.
 //
 
-import PureLayout
+import UIKit
 
 final class CreateUserView: UIView {
     
@@ -60,19 +60,25 @@ final class CreateUserView: UIView {
         addSubview(userNameTextField)
         addSubview(userNameLabel)
         addSubview(continueButton)
-        setupLayout()
+        setupLayoutConstraints()
     }
     
-    private func setupLayout() {
-        userNameTextField.autoCenterInSuperviewMargins()
-        userNameTextField.autoSetDimensions(to: CGSize(width: 200, height: 50))
-        
-        userNameLabel.autoPinEdge(.bottom, to: .top, of: userNameTextField, withOffset: -10)
-        userNameLabel.autoPinEdge(.left, to: .left, of: userNameTextField)
-        
-        continueButton.autoPinEdge(.top, to: .bottom, of: userNameTextField, withOffset: 30)
-        continueButton.autoAlignAxis(toSuperviewMarginAxis: .vertical)
-        continueButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
+    private func setupLayoutConstraints() {
+        subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        NSLayoutConstraint.activate([
+            userNameTextField.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            userNameTextField.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            userNameTextField.widthAnchor.constraint(equalToConstant: UIConstants.buttonWidth),
+            userNameTextField.heightAnchor.constraint(equalToConstant: UIConstants.buttonHeight),
+            
+            userNameLabel.bottomAnchor.constraint(equalTo: userNameTextField.topAnchor, constant: -10),
+            userNameLabel.leadingAnchor.constraint(equalTo: userNameTextField.leadingAnchor),
+
+            continueButton.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: 30),
+            continueButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            continueButton.widthAnchor.constraint(equalToConstant: UIConstants.buttonWidth),
+            continueButton.heightAnchor.constraint(equalToConstant: UIConstants.buttonHeight)
+        ])
     }
 }
 

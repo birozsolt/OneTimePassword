@@ -6,7 +6,7 @@
 //  Copyright © 2020 Biro Zsolt. All rights reserved.
 //
 
-import PureLayout
+import UIKit
 
 enum Quarters: String {
     case first
@@ -88,29 +88,30 @@ final class VerificationView: UIView {
         addSubview(secondQuarterView)
         addSubview(thirdQuarterView)
         addSubview(fourthQuarterView)
-        setupLayout()
+        setupLayoutConstraints()
     }
     
-    private func setupLayout() {
-        let quarterWidth = self.safeAreaLayoutGuide.layoutFrame.width / 4
-        
-        firstQuarterView.autoPinEdge(toSuperviewSafeArea: .left) 
-        secondQuarterView.autoPinEdge(.left, to: .right, of: firstQuarterView)
-        thirdQuarterView.autoPinEdge(.left, to: .right, of: secondQuarterView)
-        fourthQuarterView.autoPinEdge(.left, to: .right, of: thirdQuarterView)
-        
-        for view in subviews {
-            view.autoPinEdge(toSuperviewSafeArea: .top)
-            view.autoPinEdge(toSuperviewSafeArea: .bottom)
-            view.autoSetDimension(.width, toSize: quarterWidth)
-            view.layer.borderColor = AssetCatalog.getColor(.buttonBg).cgColor
-            view.layer.borderWidth = 1
+    private func setupLayoutConstraints() {
+        subviews.forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.layer.borderColor = AssetCatalog.getColor(.buttonBg).cgColor
+            $0.layer.borderWidth = 1
+            NSLayoutConstraint.activate([
+                $0.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+                $0.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+                $0.widthAnchor.constraint(equalToConstant: safeAreaLayoutGuide.layoutFrame.width / 4)
+            ])
         }
+        
+        NSLayoutConstraint.activate([
+            firstQuarterView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            secondQuarterView.leadingAnchor.constraint(equalTo: firstQuarterView.trailingAnchor),
+            thirdQuarterView.leadingAnchor.constraint(equalTo: secondQuarterView.trailingAnchor),
+            fourthQuarterView.leadingAnchor.constraint(equalTo: thirdQuarterView.trailingAnchor)
+        ])
     }
     
     private func resetBorderColor() {
-        for view in subviews {
-            view.layer.borderColor = AssetCatalog.getColor(.buttonBg).cgColor
-        }
+        subviews.forEach { $0.layer.borderColor = AssetCatalog.getColor(.buttonBg).cgColor }
     }
 }

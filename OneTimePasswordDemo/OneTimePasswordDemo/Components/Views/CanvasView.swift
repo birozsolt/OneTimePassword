@@ -6,7 +6,7 @@
 //  Copyright © 2020 Biro Zsolt. All rights reserved.
 //
 
-import PureLayout
+import UIKit
 
 final class CanvasView: UIView {
     
