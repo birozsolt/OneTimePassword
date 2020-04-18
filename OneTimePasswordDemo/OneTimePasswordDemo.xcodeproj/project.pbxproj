@@ -51,10 +51,11 @@
 		3E813DBF23EC96A00022D836 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E813DBE23EC96A00022D836 /* AppDelegate.swift */; };
 		3E813DC123EC96A00022D836 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E813DC023EC96A00022D836 /* SceneDelegate.swift */; };
 		3E813DC323EC96A00022D836 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E813DC223EC96A00022D836 /* VerificationViewController.swift */; };
-		3E813DC823EC96A10022D836 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E813DC723EC96A10022D836 /* Assets.xcassets */; };
+		3E813DC823EC96A10022D836 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E813DC723EC96A10022D836 /* ImageAssets.xcassets */; };
 		3E813DCB23EC96A10022D836 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E813DC923EC96A10022D836 /* LaunchScreen.storyboard */; };
 		3E813DD623EC96A20022D836 /* OneTimePasswordDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E813DD523EC96A20022D836 /* OneTimePasswordDemoTests.swift */; };
 		3E813DE123EC96A20022D836 /* OneTimePasswordDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E813DE023EC96A20022D836 /* OneTimePasswordDemoUITests.swift */; };
+		3E95CA50244B038300ACAAD4 /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E95CA4F244B038300ACAAD4 /* ColorAssets.xcassets */; };
 		3E9A95AA241D4E920006CAE5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95A9241D4E920006CAE5 /* SettingsView.swift */; };
 		3E9A95AC241D4EA20006CAE5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */; };
 		3E9A95AE241D4F160006CAE5 /* SettingsBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9A95AD241D4F160006CAE5 /* SettingsBasicCell.swift */; };
@@ -141,7 +142,7 @@
 		3E813DBE23EC96A00022D836 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E813DC023EC96A00022D836 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3E813DC223EC96A00022D836 /* VerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
-		3E813DC723EC96A10022D836 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3E813DC723EC96A10022D836 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
 		3E813DCA23EC96A10022D836 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E813DCC23EC96A20022D836 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E813DD123EC96A20022D836 /* OneTimePasswordDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneTimePasswordDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +152,7 @@
 		3E813DE023EC96A20022D836 /* OneTimePasswordDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimePasswordDemoUITests.swift; sourceTree = "<group>"; };
 		3E813DE223EC96A20022D836 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E813DEF23EC9B150022D836 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
+		3E95CA4F244B038300ACAAD4 /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		3E9A95A9241D4E920006CAE5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3E9A95AD241D4F160006CAE5 /* SettingsBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBasicCell.swift; sourceTree = "<group>"; };
@@ -271,7 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				3E54CFE324292CFD005A2CD9 /* AssetCatalog.swift */,
-				3E813DC723EC96A10022D836 /* Assets.xcassets */,
+				3E813DC723EC96A10022D836 /* ImageAssets.xcassets */,
+				3E95CA4F244B038300ACAAD4 /* ColorAssets.xcassets */,
 			);
 			path = AssetCatalog;
 			sourceTree = "<group>";
@@ -535,10 +538,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E95CA50244B038300ACAAD4 /* ColorAssets.xcassets in Resources */,
 				3E68F49023F06C0B00AFD0F2 /* Main.storyboard in Resources */,
 				3E4DA6902409B72B0095C054 /* Localizable.strings in Resources */,
 				3E813DCB23EC96A10022D836 /* LaunchScreen.storyboard in Resources */,
-				3E813DC823EC96A10022D836 /* Assets.xcassets in Resources */,
+				3E813DC823EC96A10022D836 /* ImageAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
