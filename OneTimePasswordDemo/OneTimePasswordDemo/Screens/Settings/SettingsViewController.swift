@@ -67,7 +67,8 @@ extension SettingsViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.configure(withText: LocalizationKeys.secureInput.rawValue.localized, forKey: .secureInput)
-            cell.setupOnOffSwitchAction { _ in
+            cell.setupOnOffSwitchAction { [weak cell] _ in
+				guard let cell = cell else { return }
                 if cell.switchIsOn() {
                     cell.setSwitch(toValue: true, forKey: .secureInput)
                 } else {
@@ -81,7 +82,8 @@ extension SettingsViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.configure(withText: LocalizationKeys.helperLines.rawValue.localized, forKey: .helperLines)
-            cell.setupOnOffSwitchAction { _ in
+            cell.setupOnOffSwitchAction { [weak cell] _ in
+				guard let cell = cell else { return }
                 if cell.switchIsOn() {
                     cell.setSwitch(toValue: true, forKey: .helperLines)
                 } else {

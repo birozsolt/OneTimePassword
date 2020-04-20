@@ -10,10 +10,14 @@ import UIKit
 
 final class SettingsViewModel: NSObject {
     
+	// MARK: - Init
+	
     override init() {
         super.init()
     }
     
+	// MARK: - Public methods
+	
     func numberOfRows() -> Int {
         return 3
     }

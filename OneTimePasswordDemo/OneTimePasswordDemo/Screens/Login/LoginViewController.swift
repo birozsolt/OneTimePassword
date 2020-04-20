@@ -31,13 +31,15 @@ final class LoginViewController: BaseViewController, NavigationBarProtocol {
     // MARK: - Private methods
     
     private func setupButtonClosures() {
-        loginView.setupCreateUserButtonAction { _ in
+        loginView.setupCreateUserButtonAction { [weak self]_ in
+			guard let self = self else { return }
 //            SecureStorage.shared.deleteAllData()
             let createUserVC = CreateUserViewController()
             self.navigationController?.pushViewController(createUserVC, animated: true)
         }
         
-        loginView.setupVerifyUserButtonAction { _ in
+        loginView.setupVerifyUserButtonAction { [weak self] _ in
+			guard let self = self else { return }
             let userListVC = UserListViewController()
             self.navigationController?.pushViewController(userListVC, animated: true)
         }

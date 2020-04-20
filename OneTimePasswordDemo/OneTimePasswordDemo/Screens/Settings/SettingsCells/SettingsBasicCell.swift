@@ -75,10 +75,10 @@ final class SettingsBasicCell: UITableViewCell {
     private func setupLayoutConstraints() {
         contentView.subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.padding),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.edgeInset),
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
-            onOffSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIConstants.padding),
+            onOffSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIConstants.edgeInset),
             onOffSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
             separatorLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.separatorPadding),

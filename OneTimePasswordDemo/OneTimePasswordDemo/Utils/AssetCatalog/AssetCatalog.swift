@@ -28,8 +28,7 @@ final class AssetCatalog: NSObject {
         case wrongVerification
     }
     
-    private override init() {
-    }
+    private override init() { }
     
     static func getImage(_ name: ImageCatalog) -> UIImage {
         return UIImage(named: name.rawValue) ?? UIImage()

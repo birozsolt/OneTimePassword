@@ -28,7 +28,8 @@ final class OTPDropDownPickerView: UIPickerView {
         delegate = self
         dataSource = self
         setupToolBar()
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+			guard let self = self else { return }
             if !pickerData.isEmpty {
                 if !defaultValue.isEmpty, pickerData.contains(defaultValue) {
                     self.pickerTextField.text = defaultValue

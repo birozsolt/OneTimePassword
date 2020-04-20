@@ -71,16 +71,18 @@ final class CreateUserView: UIView {
             userNameTextField.widthAnchor.constraint(equalToConstant: UIConstants.buttonWidth),
             userNameTextField.heightAnchor.constraint(equalToConstant: UIConstants.buttonHeight),
             
-            userNameLabel.bottomAnchor.constraint(equalTo: userNameTextField.topAnchor, constant: -10),
+			userNameLabel.bottomAnchor.constraint(equalTo: userNameTextField.topAnchor, constant: -UIConstants.separatorPadding),
             userNameLabel.leadingAnchor.constraint(equalTo: userNameTextField.leadingAnchor),
 
-            continueButton.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: 30),
+			continueButton.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: UIConstants.verticalPadding),
             continueButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
             continueButton.widthAnchor.constraint(equalToConstant: UIConstants.buttonWidth),
             continueButton.heightAnchor.constraint(equalToConstant: UIConstants.buttonHeight)
         ])
     }
 }
+
+// MARK: - UITextFieldDelegate methods
 
 extension CreateUserView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

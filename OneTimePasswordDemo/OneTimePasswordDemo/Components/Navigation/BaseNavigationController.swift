@@ -45,7 +45,8 @@ final class BaseNavigationController: UINavigationController {
                 for button in rightButtonItems {
                     rightBarButtons.append(UIBarButtonItem(customView: button))
                     if button.navBarButtonType == .settings {
-                        button.addAction(for: .touchUpInside, closure: { _ in
+                        button.addAction(for: .touchUpInside, closure: { [weak self] _ in
+							guard let self = self else { return }
                             let settingsVC = SettingsViewController()
                             self.pushViewController(settingsVC, animated: true)
                         })
@@ -54,7 +55,8 @@ final class BaseNavigationController: UINavigationController {
             }
             
             viewController.navigationItem.rightBarButtonItems = rightBarButtons
-            vcToPush.leftBarButtonItem?.addAction(for: .touchUpInside, closure: { _ in
+            vcToPush.leftBarButtonItem?.addAction(for: .touchUpInside, closure: { [weak self] _ in
+				guard let self = self else { return }
                 self.popViewController(animated: true)
                 self.setNavigationBarHidden(self.topViewController is LoginViewController ? true : false, animated: false)
             })

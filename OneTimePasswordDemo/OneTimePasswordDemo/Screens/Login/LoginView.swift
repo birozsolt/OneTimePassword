@@ -51,7 +51,7 @@ final class LoginView: UIView {
         }
         NSLayoutConstraint.activate([
             createUserButton.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-            verifyUserButton.topAnchor.constraint(equalTo: createUserButton.bottomAnchor, constant: 30)
+			verifyUserButton.topAnchor.constraint(equalTo: createUserButton.bottomAnchor, constant: UIConstants.verticalPadding)
         ])
     }
 }

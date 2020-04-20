@@ -15,5 +15,6 @@ final class UIConstants {
     static let buttonWidth: CGFloat = 200
     static let buttonHeight: CGFloat = 50
     
-    static let padding: CGFloat = 20
+    static let edgeInset: CGFloat = 20
+	static let verticalPadding: CGFloat = 30
 }

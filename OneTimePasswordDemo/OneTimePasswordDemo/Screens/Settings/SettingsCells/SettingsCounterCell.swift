@@ -67,10 +67,10 @@ final class SettingsCounterCell: UITableViewCell {
     private func setupLayoutConstraints() {
         contentView.subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.padding),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.edgeInset),
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
-            counterTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIConstants.padding),
+            counterTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIConstants.edgeInset),
             counterTextField.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             counterTextField.heightAnchor.constraint(equalToConstant: UIConstants.buttonHeight),
             counterTextField.widthAnchor.constraint(equalToConstant: UIConstants.buttonWidth / 2),
