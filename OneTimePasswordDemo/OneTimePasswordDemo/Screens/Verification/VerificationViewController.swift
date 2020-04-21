@@ -8,13 +8,9 @@
 
 import UIKit
 
-final class VerificationViewController: BaseViewController, NavigationBarProtocol {
+final class VerificationViewController: BaseViewController {
     
     // MARK: - Properties
-    
-    var navBarTitle: String?
-    var leftBarButtonItem: NavBarButton?
-    var rightBarButtonItems: [NavBarButton] = []
     
     private lazy var verificationView = VerificationView()
     private var viewModel: VerificationViewModel
@@ -23,7 +19,7 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
     
     init(userName name: String, viewType type: VerificationViewType) {
         viewModel = VerificationViewModel(user: name, type: type)
-        super.init(nibName: nil, bundle: nil)
+		super.init()
         if type == .test {
             viewModel.getUserData { [ weak self ] (isSuccess) in
                 guard let self = self, let testedUser = self.viewModel.testedUser else { return }
@@ -41,7 +37,6 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
                 }
             }
         }
-        setNavigationAppearance()
     }
     
     required init?(coder: NSCoder) {
@@ -77,7 +72,7 @@ final class VerificationViewController: BaseViewController, NavigationBarProtoco
     
     // MARK: - Private methods
     
-    private func setNavigationAppearance() {
+	func setNavigationAppearance() {
         navBarTitle = viewModel.userName
         leftBarButtonItem = NavBarButton(withType: .back)
         rightBarButtonItems.append(NavBarButton(withType: viewModel.viewType == .enrollment ? .next : .test))

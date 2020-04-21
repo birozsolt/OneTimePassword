@@ -8,27 +8,12 @@
 
 import UIKit
 
-final class SettingsViewController: BaseViewController, NavigationBarProtocol {
+final class SettingsViewController: BaseViewController {
     
     // MARK: - Properties
     
-    var navBarTitle: String?
-    var leftBarButtonItem: NavBarButton?
-    
     private lazy var settingsView = SettingsView()
     private lazy var viewModel = SettingsViewModel()
-    
-    // MARK: - Init
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nil, bundle: nil)
-        setNavigationAppearance()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setNavigationAppearance()
-    }
     
     // MARK: - VC lifecycle
     
@@ -44,10 +29,10 @@ final class SettingsViewController: BaseViewController, NavigationBarProtocol {
     
     // MARK: - Private methods
     
-    private func setNavigationAppearance() {
-        navBarTitle = LocalizationKeys.settings.rawValue.localized
+	func setNavigationAppearance() {
+		navBarTitle = LocalizationKeys.settings.rawValue.localized
         leftBarButtonItem = NavBarButton(withType: .back)
-    }
+	}
 }
 
 // MARK: - UITableViewDataSource methods

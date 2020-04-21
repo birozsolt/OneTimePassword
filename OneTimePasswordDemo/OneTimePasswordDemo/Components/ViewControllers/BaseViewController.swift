@@ -8,8 +8,32 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+protocol BaseViewControllerProtocol {
+    func setNavigationAppearance()
+}
+
+typealias BaseViewController = BaseViewControllerClass & BaseViewControllerProtocol
+
+class BaseViewControllerClass: UIViewController, NavigationBarProtocol {
+	
+	var navBarTitle: String?
+	var leftBarButtonItem: NavBarButton?
+	var rightBarButtonItems: [NavBarButton] = []
     
+	// MARK: - Init
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+		guard let controller = self as? BaseViewController else { return }
+		controller.setNavigationAppearance()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+		guard let controller = self as? BaseViewController else { return }
+		controller.setNavigationAppearance()
+    }
+	
     // MARK: - VC lifecycle
     
     override func viewDidLoad() {

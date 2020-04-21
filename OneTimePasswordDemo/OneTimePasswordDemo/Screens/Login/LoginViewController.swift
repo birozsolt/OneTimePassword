@@ -8,12 +8,9 @@
 
 import UIKit
 
-final class LoginViewController: BaseViewController, NavigationBarProtocol {
+final class LoginViewController: BaseViewController {
     
     // MARK: - Properties
-    
-    var navBarTitle: String?
-    var leftBarButtonItem: NavBarButton?
     
     private lazy var loginView = LoginView()
     
@@ -28,6 +25,10 @@ final class LoginViewController: BaseViewController, NavigationBarProtocol {
         setupButtonClosures()
     }
     
+	func setNavigationAppearance() {
+		
+	}
+	
     // MARK: - Private methods
     
     private func setupButtonClosures() {

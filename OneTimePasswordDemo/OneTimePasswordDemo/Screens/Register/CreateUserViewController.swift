@@ -8,28 +8,12 @@
 
 import UIKit
 
-final class CreateUserViewController: BaseViewController, NavigationBarProtocol {
+final class CreateUserViewController: BaseViewController {
     
     // MARK: - Properties
-    
-    var navBarTitle: String?
-    var leftBarButtonItem: NavBarButton?
-    var rightBarButtonItems: [NavBarButton] = []
-    
+	
     private lazy var createUserView = CreateUserView()
     private lazy var viewModel = CreateUserViewModel()
-    
-    // MARK: - Init
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        setNavigationAppearance()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setNavigationAppearance()
-    }
     
     // MARK: - VC lifecycle
     
@@ -44,7 +28,7 @@ final class CreateUserViewController: BaseViewController, NavigationBarProtocol 
     
     // MARK: - Private methods
     
-    private func setNavigationAppearance() {
+	func setNavigationAppearance() {
         navBarTitle = LocalizationKeys.userList.rawValue.localized
         leftBarButtonItem = NavBarButton(withType: .back)
         rightBarButtonItems.append(NavBarButton(withType: .settings))
