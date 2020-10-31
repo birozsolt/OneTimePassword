@@ -6,7 +6,8 @@
 //  Copyright © 2020 Biro Zsolt. All rights reserved.
 //
 
-import Locksmith
+import SwiftKeychainWrapper
+import Foundation
 
 enum SecureStorageKeys: String {
     case userName
@@ -14,7 +15,7 @@ enum SecureStorageKeys: String {
     case oneTimePasswordAccount
 }
 
-final class SecureStorage: SecureStorable {
+final class SecureStorage {
     
     // MARK: - Properties
     
@@ -23,95 +24,82 @@ final class SecureStorage: SecureStorable {
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
     
+    private let keychainWrapper = KeychainWrapper.standard
+    
     typealias SecureStoreCallBack = (Bool) -> Void
     
     // MARK: - Init
     
-    private init() { }
+    private init() {
+    }
     
     // MARK: - Public methods
     
-    func setUser(withName name: String, completion: SecureStoreCallBack?) {
-        saveUserList(newName: name)
-        completion?(true)
-    }
-    
     func deleteAllData() {
-        try? Locksmith.deleteDataForUserAccount(userAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
+        keychainWrapper.removeAllKeys()
+    }
+    func getUser(forName name: String) -> String? {
+        return keychainWrapper.string(forKey: SecureStorageKeys.userName.rawValue)
     }
     
-    func getUser(forName name: String) -> String? {
-        guard let userData = Locksmith.loadDataForUserAccount(userAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue) else {
-            return nil
+    func saveUserList(addingName name: String, completion: SecureStoreCallBack?) {
+        guard let data = keychainWrapper.data(forKey: SecureStorageKeys.userList.rawValue) else {
+            do {
+                let jsonDataToSave = try encoder.encode([name])
+                keychainWrapper.set(jsonDataToSave, forKey: SecureStorageKeys.userList.rawValue) == true ? completion?(true) : completion?(false)
+            } catch {
+                print(error)
+                completion?(false)
+            }
+            return
         }
-        return userData[SecureStorageKeys.userName.rawValue] as? String
+        do {
+            var list = try decoder.decode([String].self, from: data)
+            if !list.contains(name) {
+                list.append(name)
+                let jsonDataToSave = try encoder.encode(list)
+                keychainWrapper.set(jsonDataToSave, forKey: SecureStorageKeys.userList.rawValue) == true ? completion?(true) : completion?(false)
+            }
+        } catch {
+            print(error)
+            completion?(false)
+        }
     }
     
     func getUserList() -> [String] {
-        guard let userData = Locksmith.loadDataForUserAccount(userAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue) else {
+        guard let userList = keychainWrapper.data(forKey: SecureStorageKeys.userList.rawValue) else {
             return []
         }
-        return (userData[SecureStorageKeys.userList.rawValue] as? [String]) ?? []
+        let list = try? decoder.decode([String].self, from: userList)
+        return (list == nil ? [] : list)!
     }
     
     func saveUserData(forUser user: UserModel, completion: SecureStoreCallBack?) {
-        guard var storedData = Locksmith.loadDataForUserAccount(userAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue) else {
-            do {
-                let jsonDataToSave = try encoder.encode(user)
-                try Locksmith.saveData(data: [user.name: jsonDataToSave],
-                                       forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
-            } catch {
+        do {
+            let jsonDataToSave = try encoder.encode(user)
+            if keychainWrapper.set(jsonDataToSave, forKey: user.name) == true {
+                saveUserList(addingName: user.name) { (isSuccess) in
+                    completion?(isSuccess)
+                }
+            } else {
                 completion?(false)
-                print(error)
             }
-            setUser(withName: user.name) { (isSuccess) in
-                completion?(isSuccess)
-            }
-            return
-        }
-        guard (storedData[user.name] as? Data) != nil else {
-            do {
-                let jsonDataToSave = try encoder.encode(user)
-                storedData.updateValue(jsonDataToSave, forKey: user.name)
-                try Locksmith.updateData(data: storedData, forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
-            } catch {
-                completion?(false)
-                print(error)
-            }
-            setUser(withName: user.name) { (isSuccess) in
-                completion?(isSuccess)
-            }
+        } catch {
             completion?(false)
-            return
+            print(error)
         }
     }
     
     func getUserData(forUser name: String) -> UserModel? {
-        guard let storedData = Locksmith.loadDataForUserAccount(userAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue) else { return nil }
-        guard let userData = storedData[name] as? Data else { return nil }
+        guard let userData = keychainWrapper.data(forKey: name) else {
+            return nil
+        }
         do {
             let model = try decoder.decode(UserModel.self, from: userData)
             return model
         } catch {
             print(error)
+            return nil
         }
-        return nil
-    }
-    
-    // MARK: - Private methods
-    
-    private func saveUserList(newName name: String) {
-        guard var userData = Locksmith.loadDataForUserAccount(userAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue) else {
-            try? Locksmith.saveData(data: [SecureStorageKeys.userList.rawValue: [name]],
-                                    forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
-            return }
-        guard var list = userData[SecureStorageKeys.userList.rawValue] as? [String] else {
-            userData[SecureStorageKeys.userList.rawValue] = [name]
-            try? Locksmith.updateData(data: userData, forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
-            return
-        }
-        list.append(name)
-        userData[SecureStorageKeys.userList.rawValue] = list
-        try? Locksmith.updateData(data: userData, forUserAccount: SecureStorageKeys.oneTimePasswordAccount.rawValue)
     }
 }

@@ -116,8 +116,6 @@
 		3E53B6AE23FEF9D4000D6293 /* CoordinateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateModel.swift; sourceTree = "<group>"; };
 		3E53F6E723F5A5B600378EF0 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
 		3E53F6E923F5AB2E00378EF0 /* OneTimePasswordDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneTimePasswordDemo.entitlements; sourceTree = "<group>"; };
-		3E53F6EA23F5F23D00378EF0 /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
-		3E53F6EC23F5F28500378EF0 /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
 		3E54CFE324292CFD005A2CD9 /* AssetCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCatalog.swift; sourceTree = "<group>"; };
 		3E54CFE624295CF6005A2CD9 /* OTPButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPButton.swift; sourceTree = "<group>"; };
 		3E55B16B2422A6C30027D626 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 		3E813DDC23EC96A20022D836 /* OneTimePasswordDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneTimePasswordDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E813DE023EC96A20022D836 /* OneTimePasswordDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTimePasswordDemoUITests.swift; sourceTree = "<group>"; };
 		3E813DE223EC96A20022D836 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3E813DEF23EC9B150022D836 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
 		3E95CA4F244B038300ACAAD4 /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		3E9A95A9241D4E920006CAE5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3E9A95AB241D4EA20006CAE5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -346,7 +343,6 @@
 		3E813DB223EC96A00022D836 = {
 			isa = PBXGroup;
 			children = (
-				3E53F6EC23F5F28500378EF0 /* Locksmith.framework */,
 				3E813DBD23EC96A00022D836 /* OneTimePasswordDemo */,
 				3E813DD423EC96A20022D836 /* OneTimePasswordDemoTests */,
 				3E813DDF23EC96A20022D836 /* OneTimePasswordDemoUITests */,
@@ -403,8 +399,6 @@
 		3E813DEE23EC9B150022D836 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3E53F6EA23F5F23D00378EF0 /* Locksmith.framework */,
-				3E813DEF23EC9B150022D836 /* PureLayout.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
