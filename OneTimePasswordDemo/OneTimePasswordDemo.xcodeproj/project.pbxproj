@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,14 +28,13 @@
 		3E53B6AD23FEF88A000D6293 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E53B6AC23FEF88A000D6293 /* Coordinate.swift */; };
 		3E53B6AF23FEF9D4000D6293 /* CoordinateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E53B6AE23FEF9D4000D6293 /* CoordinateModel.swift */; };
 		3E53F6E823F5A5B600378EF0 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E53F6E723F5A5B600378EF0 /* SecureStorage.swift */; };
-		3E53F6EB23F5F23D00378EF0 /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E53F6EA23F5F23D00378EF0 /* Locksmith.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		3E53F6ED23F5F28500378EF0 /* Locksmith.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E53F6EC23F5F28500378EF0 /* Locksmith.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E54CFE424292CFD005A2CD9 /* AssetCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54CFE324292CFD005A2CD9 /* AssetCatalog.swift */; };
 		3E54CFE724295CF6005A2CD9 /* OTPButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E54CFE624295CF6005A2CD9 /* OTPButton.swift */; };
 		3E55B16C2422A6C30027D626 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E55B16B2422A6C30027D626 /* LocalStorage.swift */; };
 		3E55B9502433C0F5002D2BB1 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E55B94F2433C0F5002D2BB1 /* ArrayExtension.swift */; };
 		3E5610F3243E480000FF6284 /* ResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5610F2243E480000FF6284 /* ResultModel.swift */; };
 		3E5677ED240125A1003E8ED0 /* TimeSerieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5677EC240125A1003E8ED0 /* TimeSerieModel.swift */; };
+		3E56B580254D471000C42CDD /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 3E56B57F254D471000C42CDD /* SwiftKeychainWrapper */; };
 		3E57E945242D21610030CA52 /* SettingsCounterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E944242D21610030CA52 /* SettingsCounterCell.swift */; };
 		3E57E947242D26550030CA52 /* OTPDropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E946242D26550030CA52 /* OTPDropDownPickerView.swift */; };
 		3E57E949242D27E70030CA52 /* UITextfieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E948242D27E70030CA52 /* UITextfieldExtension.swift */; };
@@ -88,7 +87,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3E53F6ED23F5F28500378EF0 /* Locksmith.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E53F6EB23F5F23D00378EF0 /* Locksmith.framework in Frameworks */,
+				3E56B580254D471000C42CDD /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +448,9 @@
 			dependencies = (
 			);
 			name = OneTimePasswordDemo;
+			packageProductDependencies = (
+				3E56B57F254D471000C42CDD /* SwiftKeychainWrapper */,
+			);
 			productName = OneTimePasswordDemo;
 			productReference = 3E813DBB23EC96A00022D836 /* OneTimePasswordDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -522,6 +523,9 @@
 				Base,
 			);
 			mainGroup = 3E813DB223EC96A00022D836;
+			packageReferences = (
+				3E56B57E254D471000C42CDD /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+			);
 			productRefGroup = 3E813DBC23EC96A00022D836 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -571,7 +575,6 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/PureLayout.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -579,7 +582,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -966,6 +970,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3E56B57E254D471000C42CDD /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3E56B57F254D471000C42CDD /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3E56B57E254D471000C42CDD /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3E813DB323EC96A00022D836 /* Project object */;
 }
