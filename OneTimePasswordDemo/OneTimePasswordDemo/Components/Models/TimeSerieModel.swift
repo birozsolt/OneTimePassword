@@ -45,13 +45,13 @@ class TimeSerieModel: Codable {
     // swiftlint:disable identifier_name
     private func generate(from coords: [Coordinate], with normModel: NormalizationModel?) {
         if coords.count > 1 {
-            var x = [CGFloat]()
-            var y = [CGFloat]()
-            var force = [CGFloat]()
-            var xVelocity = [CGFloat]()
-            var xAcceleration = [CGFloat]()
-            var yVelocity = [CGFloat]()
-            var yAcceleration = [CGFloat]()
+            var x = Array<CGFloat>()
+            var y = Array<CGFloat>()
+            var force = Array<CGFloat>()
+            var xVelocity = Array<CGFloat>()
+            var xAcceleration = Array<CGFloat>()
+            var yVelocity = Array<CGFloat>()
+            var yAcceleration = Array<CGFloat>()
             
             for coord in coords {
                 x.append(coord.x)
@@ -71,18 +71,27 @@ class TimeSerieModel: Codable {
                 normalizedY = y.normalized()
             }
             
+            let seqFromOne = stride(from: 1, to: coords.count, by: 1)
             xVelocity.append(0)
-            xVelocity.append(contentsOf: stride(from: 1, to: coords.count, by: 1).map({ normalizedX[$0] - normalizedX[$0 - 1] }))
-
             yVelocity.append(0)
-            yVelocity.append(contentsOf: stride(from: 1, to: coords.count, by: 1).map({ normalizedY[$0] - normalizedY[$0 - 1] }))
+            for index in seqFromOne {
+                let velX = normalizedX[index] - normalizedX[index - 1]
+                xVelocity.append(velX)
+                
+                let velY = normalizedY[index] - normalizedY[index - 1]
+                yVelocity.append(velY)
+            }
 
             let arr0: [CGFloat] = Array(repeating: 0, count: 2)
+            let seqFromTwo = stride(from: 2, to: coords.count, by: 1)
             xAcceleration.append(contentsOf: arr0)
-            xAcceleration.append(contentsOf: stride(from: 2, to: coords.count, by: 1).map({ xVelocity[$0] - xVelocity[$0 - 1] }))
-            
             yAcceleration.append(contentsOf: arr0)
-            yAcceleration.append(contentsOf: stride(from: 2, to: coords.count, by: 1).map({ yVelocity[$0] - yVelocity[$0 - 1] }))
+            for index in seqFromTwo {
+                let accX = xVelocity[index] - xVelocity[index - 1]
+                xAcceleration.append(accX)
+                let accY = yVelocity[index] - yVelocity[index - 1]
+                yAcceleration.append(accY)
+            }
             
             for index in 0..<coords.count {
                 exCoordinates.append(ExtendedCoordinate(x: normalizedX[index],

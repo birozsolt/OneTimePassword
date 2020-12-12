@@ -40,20 +40,20 @@ final class UserListViewController: BaseViewController {
 
 extension UserListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows()
+        viewModel.numberOfRows()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: UserListTableViewCell.identifier) as? UserListTableViewCell {
-            cell.configure(withText: viewModel.userName(forIndex: indexPath.row),
-                           separatorVisible: indexPath.row == viewModel.numberOfRows() - 1 ? false : true)
-            return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: UserListTableViewCell.identifier) as? UserListTableViewCell else {
+            return UITableViewCell()
         }
-        return UITableViewCell()
+        cell.configure(withText: viewModel.userName(forIndex: indexPath.row),
+                       separatorVisible: indexPath.row == (viewModel.numberOfRows() - 1) ? false : true)
+        return cell
     }
 }
 
@@ -61,7 +61,7 @@ extension UserListViewController: UITableViewDataSource {
 
 extension UserListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        60
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

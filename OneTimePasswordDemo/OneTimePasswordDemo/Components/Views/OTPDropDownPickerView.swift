@@ -56,13 +56,12 @@ final class OTPDropDownPickerView: UIPickerView {
         toolBar.isTranslucent = true
         toolBar.tintColor = AssetCatalog.getColor(.text)
         toolBar.backgroundColor = AssetCatalog.getColor(.textfieldBg)
-        toolBar.sizeToFit()
         // Adding Button ToolBar
-        let doneButton = UIBarButtonItem(title: LocalizationKeys.done.rawValue.localized, style: .plain, target: self, action: #selector(donePicker))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.setItems([spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
+        toolBar.sizeToFit()
         pickerTextField.inputAccessoryView = toolBar
     }
     

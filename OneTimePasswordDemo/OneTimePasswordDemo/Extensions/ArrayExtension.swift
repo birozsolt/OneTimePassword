@@ -6,7 +6,7 @@
 //  Copyright © 2020 Biro Zsolt. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Array where Element: FloatingPoint {
     
@@ -18,15 +18,15 @@ extension Array where Element: FloatingPoint {
         return self.max() ?? 0
     }
     
-    mutating func normalized() -> Array {
+    mutating func normalized() -> Self {
         return map { ($0 - min) / (max - min) }
     }
     
-    mutating func normalized(min: Element, max: Element) -> Array {
+    mutating func normalized(min: Element, max: Element) -> Self {
         return map { ($0 - min) / (max - min) }
     }
     
-    mutating func restored(min: Element, max: Element) -> Array {
+    mutating func restored(min: Element, max: Element) -> Self {
         return map { ($0 * (max - min) + min) }
     }
 }
