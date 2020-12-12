@@ -12,7 +12,6 @@ import Foundation
 enum SecureStorageKeys: String {
     case userName
     case userList
-    case oneTimePasswordAccount
 }
 
 final class SecureStorage {

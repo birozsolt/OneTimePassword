@@ -30,7 +30,7 @@ final class SettingsViewController: BaseViewController {
     // MARK: - Private methods
     
 	func setNavigationAppearance() {
-		navBarTitle = LocalizationKeys.settings.rawValue.localized
+		navBarTitle = LocalizationKeys.settings.localized
         leftBarButtonItem = NavBarButton(withType: .back)
 	}
 }
@@ -51,7 +51,7 @@ extension SettingsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsBasicCell.identifier) as? SettingsBasicCell else {
                 return UITableViewCell()
             }
-            cell.configure(withText: LocalizationKeys.secureInput.rawValue.localized, forKey: .secureInput)
+            cell.configure(withText: LocalizationKeys.secureInput.localized, forKey: .secureInput)
             cell.setupOnOffSwitchAction { [weak cell] _ in
 				guard let cell = cell else { return }
                 if cell.switchIsOn() {
@@ -66,7 +66,7 @@ extension SettingsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsBasicCell.identifier) as? SettingsBasicCell else {
                 return UITableViewCell()
             }
-            cell.configure(withText: LocalizationKeys.helperLines.rawValue.localized, forKey: .helperLines)
+            cell.configure(withText: LocalizationKeys.helperLines.localized, forKey: .helperLines)
             cell.setupOnOffSwitchAction { [weak cell] _ in
 				guard let cell = cell else { return }
                 if cell.switchIsOn() {
@@ -81,7 +81,7 @@ extension SettingsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCounterCell.identifier) as? SettingsCounterCell else {
                 return UITableViewCell()
             }
-            cell.configure(withText: LocalizationKeys.numberOfInput.rawValue.localized, separatorVisible: false)
+            cell.configure(withText: LocalizationKeys.numberOfInput.localized, separatorVisible: false)
             return cell
         }
         return UITableViewCell()

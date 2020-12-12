@@ -35,4 +35,10 @@ enum LocalizationKeys: String {
     case secureInput
     case numberOfInput
     case helperLines
+    case saveFailedTitle
+    case saveFailedMessage
+    
+    var localized: String {
+        return rawValue.localized
+    }
 }

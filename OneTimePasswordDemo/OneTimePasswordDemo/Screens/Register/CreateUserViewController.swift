@@ -29,7 +29,7 @@ final class CreateUserViewController: BaseViewController {
     // MARK: - Private methods
     
 	func setNavigationAppearance() {
-        navBarTitle = LocalizationKeys.registerUser.rawValue.localized
+        navBarTitle = LocalizationKeys.registerUser.localized
         leftBarButtonItem = NavBarButton(withType: .back)
         rightBarButtonItems.append(NavBarButton(withType: .settings))
     }
@@ -42,12 +42,12 @@ final class CreateUserViewController: BaseViewController {
                     let baseVC = VerificationViewController(userName: text, viewType: .enrollment)
                     self.navigationController?.pushViewController(baseVC, animated: true)
                 } else {
-                    self.showAlert(title: LocalizationKeys.error.rawValue.localized,
-                                   message: LocalizationKeys.userAlreadyExist.rawValue.localized)
+                    self.showAlert(title: LocalizationKeys.error.localized,
+                                   message: LocalizationKeys.userAlreadyExist.localized)
                 }
             } else {
-                self.showAlert(title: LocalizationKeys.warning.rawValue.localized,
-                               message: LocalizationKeys.emptyUserName.rawValue.localized)
+                self.showAlert(title: LocalizationKeys.warning.localized,
+                               message: LocalizationKeys.emptyUserName.localized)
             }
         }
     }

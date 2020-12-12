@@ -12,8 +12,8 @@ final class LoginView: UIView {
     
     // MARK: - Properties
     
-    private lazy var createUserButton = OTPButton(withTitle: LocalizationKeys.registerUser.rawValue.localized)
-    private lazy var verifyUserButton = OTPButton(withTitle: LocalizationKeys.verifyUser.rawValue.localized)
+    private lazy var createUserButton = OTPButton(withTitle: LocalizationKeys.registerUser.localized)
+    private lazy var verifyUserButton = OTPButton(withTitle: LocalizationKeys.verifyUser.localized)
     
     // MARK: - View lifecycle
     

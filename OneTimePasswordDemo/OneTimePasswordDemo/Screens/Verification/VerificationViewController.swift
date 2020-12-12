@@ -90,22 +90,22 @@ final class VerificationViewController: BaseViewController {
                         self.verificationView.changeBorderColor(for: self.viewModel.resultModel.testResults)
                         
                         if self.viewModel.resultModel.isValid() {
-                            self.showAlert(title: LocalizationKeys.verifySuccessTitle.rawValue.localized,
-                                           message: LocalizationKeys.verifySuccessMessage.rawValue.localized) { _ in
+                            self.showAlert(title: LocalizationKeys.verifySuccessTitle.localized,
+                                           message: LocalizationKeys.verifySuccessMessage.localized) { _ in
                                             self.verificationView.clearCanvas()
                                             self.viewModel.clearTestResults()
                             }
                         } else {
-                            self.showAlert(title: LocalizationKeys.verifyFailedTitle.rawValue.localized,
-                                           message: LocalizationKeys.verifyFailedMessage.rawValue.localized) { _ in
+                            self.showAlert(title: LocalizationKeys.verifyFailedTitle.localized,
+                                           message: LocalizationKeys.verifyFailedMessage.localized) { _ in
                                             self.verificationView.clearCanvas()
                                             self.viewModel.clearTestResults()
                             }
                         }
                     } else {
                         
-                        self.showAlert(title: LocalizationKeys.verifyInvalidTitle.rawValue.localized,
-                                       message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
+                        self.showAlert(title: LocalizationKeys.verifyInvalidTitle.localized,
+                                       message: LocalizationKeys.verifyInvalidMessage.localized
                                         .replacingOccurrences(of: "@s", with: self.viewModel.userName))
                     }
                 }
@@ -123,18 +123,22 @@ final class VerificationViewController: BaseViewController {
                                     self.viewModel.saveUserData { (isSuccess) in
                                         if isSuccess {
                                             self.navigationController?.popToRootViewController(animated: true)
+                                        } else {
+                                            self.showAlert(title: LocalizationKeys.saveFailedTitle.localized, message: "") { (action) in
+                                                self.navigationController?.popToRootViewController(animated: true)
+                                            }
                                         }
                                     }
                                 } else {
-                                    self.showAlert(title: LocalizationKeys.verifyInvalidTitle.rawValue.localized,
-                                                   message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
+                                    self.showAlert(title: LocalizationKeys.verifyInvalidTitle.localized,
+                                                   message: LocalizationKeys.verifyInvalidMessage.localized
                                                     .replacingOccurrences(of: "@s", with: self.viewModel.userName))
                                 }
                             }
                         }
                     } else {
-                        self.showAlert(title: LocalizationKeys.verifyInvalidTitle.rawValue.localized,
-                                       message: LocalizationKeys.verifyInvalidMessage.rawValue.localized
+                        self.showAlert(title: LocalizationKeys.verifyInvalidTitle.localized,
+                                       message: LocalizationKeys.verifyInvalidMessage.localized
                                         .replacingOccurrences(of: "@s", with: self.viewModel.userName))
                     }
                 }

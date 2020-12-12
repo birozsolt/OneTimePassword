@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
     /// Show an alert popup on the UIViewController
-    func showAlert(title: String, message: String, okButtonTitle: String? = LocalizationKeys.oke.rawValue.localized, cancelButtonTitle: String? = nil, okButtonHandler: ((UIAlertAction) -> Void)? = nil) {
+    func showAlert(title: String, message: String, okButtonTitle: String? = LocalizationKeys.oke.localized, cancelButtonTitle: String? = nil, okButtonHandler: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         if let okTitle = okButtonTitle {
             let okButton = UIAlertAction(title: okTitle, style: .default, handler: okButtonHandler)

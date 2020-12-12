@@ -14,7 +14,7 @@ final class CreateUserView: UIView {
     
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
-        label.text = LocalizationKeys.userName.rawValue.localized
+        label.text = LocalizationKeys.userName.localized
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = AssetCatalog.getColor(.text)
         label.backgroundColor = .clear
@@ -34,7 +34,7 @@ final class CreateUserView: UIView {
         return textField
     }()
     
-    private lazy var continueButton = OTPButton(withTitle: LocalizationKeys.continue.rawValue.localized)
+    private lazy var continueButton = OTPButton(withTitle: LocalizationKeys.continue.localized)
     
     // MARK: - View lifecycle
     
