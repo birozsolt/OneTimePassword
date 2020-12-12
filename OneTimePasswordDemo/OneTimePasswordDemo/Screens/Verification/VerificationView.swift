@@ -33,17 +33,11 @@ final class VerificationView: UIView {
     
     // MARK: - Public methods
     
-    func getCoordinates(forQuarter quarter: Quarters) -> [Coordinate] {
-        switch quarter {
-        case .first:
-            return firstQuarterView.getCoordinateList()
-        case .second:
-            return secondQuarterView.getCoordinateList()
-        case .third:
-            return thirdQuarterView.getCoordinateList()
-        case .fourth:
-            return fourthQuarterView.getCoordinateList()
-        }
+    func getCoordinates() -> CoordinateGroup {
+        return (q1: firstQuarterView.getCoordinateList(),
+                q2: secondQuarterView.getCoordinateList(),
+                q3: thirdQuarterView.getCoordinateList(),
+                q4: fourthQuarterView.getCoordinateList())
     }
     
     func clearCanvas() {
@@ -54,31 +48,22 @@ final class VerificationView: UIView {
         resetBorderColor()
     }
     
-    func drawHelpers(forQuarter quarter: Quarters, from coords: [Coordinate]) {
-        switch quarter {
-        case .first:
-            firstQuarterView.drawHelper(from: coords)
-        case .second:
-            secondQuarterView.drawHelper(from: coords)
-        case .third:
-            thirdQuarterView.drawHelper(from: coords)
-        case .fourth:
-            fourthQuarterView.drawHelper(from: coords)
-        }
+    func drawHelpers(for model: CoordinateModel) {
+        firstQuarterView.drawHelper(from: model.getSerie(forQuarter: .first).getCoordinates())
+        secondQuarterView.drawHelper(from: model.getSerie(forQuarter: .second).getCoordinates())
+        thirdQuarterView.drawHelper(from: model.getSerie(forQuarter: .third).getCoordinates())
+        fourthQuarterView.drawHelper(from: model.getSerie(forQuarter: .fourth).getCoordinates())
     }
     
-    func changeBorderColor(forQuarter quarter: Quarters, _ isGood: Bool) {
-        let color = isGood ? AssetCatalog.getColor(.goodVerification) : AssetCatalog.getColor(.wrongVerification)
-        switch quarter {
-        case .first:
-            firstQuarterView.layer.borderColor = color.cgColor
-        case .second:
-            secondQuarterView.layer.borderColor = color.cgColor
-        case .third:
-            thirdQuarterView.layer.borderColor = color.cgColor
-        case .fourth:
-            fourthQuarterView.layer.borderColor = color.cgColor
+    func changeBorderColor(for results: [Bool]) {
+        func getColor(_ isTrue: Bool) -> CGColor {
+            return isTrue ? AssetCatalog.getColor(.goodVerification).cgColor : AssetCatalog.getColor(.wrongVerification).cgColor
         }
+        
+        firstQuarterView.layer.borderColor = getColor(results[0])
+        secondQuarterView.layer.borderColor = getColor(results[1])
+        thirdQuarterView.layer.borderColor = getColor(results[2])
+        fourthQuarterView.layer.borderColor = getColor(results[3])
     }
     
     // MARK: - Private methods

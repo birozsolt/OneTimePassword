@@ -24,7 +24,6 @@ final class VerificationViewModel: NSObject {
     private(set) var resultModel = ResultModel()
     
     typealias AcceptedLimits = (min: CGFloat, max: CGFloat)
-    
     // MARK: - Init
     
     init(user: String, type: VerificationViewType) {
@@ -35,10 +34,9 @@ final class VerificationViewModel: NSObject {
     
     // MARK: - Public methods
     
-    func setCoordinates(coordsQ1: [Coordinate], coordsQ2: [Coordinate],
-                        coordsQ3: [Coordinate], coordsQ4: [Coordinate]) -> Bool {
+    func setCoordinates(coordGroup: CoordinateGroup) -> Bool {
         if viewType == .test {
-            let coordinateModel = CoordinateModel(coordsQ1: coordsQ1, coordsQ2: coordsQ2, coordsQ3: coordsQ3, coordsQ4: coordsQ4,
+            let coordinateModel = CoordinateModel(coordsQ1: coordGroup.q1, coordsQ2: coordGroup.q2, coordsQ3: coordGroup.q3, coordsQ4: coordGroup.q4,
                                                   normModelQ1: testedUser?.samples[0].timeSerieQ1.normalizationModel,
                                                   normModelQ2: testedUser?.samples[0].timeSerieQ2.normalizationModel,
                                                   normModelQ3: testedUser?.samples[0].timeSerieQ3.normalizationModel,
@@ -48,7 +46,7 @@ final class VerificationViewModel: NSObject {
             }
             return !coordinateModel.isEmpty()
         } else {
-            let coordinateModel = CoordinateModel(coordsQ1: coordsQ1, coordsQ2: coordsQ2, coordsQ3: coordsQ3, coordsQ4: coordsQ4)
+            let coordinateModel = CoordinateModel(coordsQ1: coordGroup.q1, coordsQ2: coordGroup.q2, coordsQ3: coordGroup.q3, coordsQ4: coordGroup.q4)
             if !coordinateModel.isEmpty() {
                 self.coordinates.append(coordinateModel)
             }

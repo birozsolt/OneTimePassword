@@ -25,14 +25,7 @@ final class VerificationViewController: BaseViewController {
                 guard let self = self, let testedUser = self.viewModel.testedUser else { return }
                 if isSuccess {
                     for sample in testedUser.samples {
-                        self.verificationView.drawHelpers(forQuarter: .first,
-                                                          from: sample.getSerie(forQuarter: .first).getCoordinates())
-                        self.verificationView.drawHelpers(forQuarter: .second,
-                                                          from: sample.getSerie(forQuarter: .second).getCoordinates())
-                        self.verificationView.drawHelpers(forQuarter: .third,
-                                                          from: sample.getSerie(forQuarter: .third).getCoordinates())
-                        self.verificationView.drawHelpers(forQuarter: .fourth,
-                                                          from: sample.getSerie(forQuarter: .fourth).getCoordinates())
+                        self.verificationView.drawHelpers(for: sample)
                     }
                 }
             }
@@ -91,16 +84,10 @@ final class VerificationViewController: BaseViewController {
             case .test:
                 barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
                     guard let self = self else { return }
-                    if self.viewModel.setCoordinates(coordsQ1: self.verificationView.getCoordinates(forQuarter: .first),
-                                                     coordsQ2: self.verificationView.getCoordinates(forQuarter: .second),
-                                                     coordsQ3: self.verificationView.getCoordinates(forQuarter: .third),
-                                                     coordsQ4: self.verificationView.getCoordinates(forQuarter: .fourth)) {
+                    if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
                         self.viewModel.verifyUser()
                         
-                        self.verificationView.changeBorderColor(forQuarter: .first, self.viewModel.resultModel.testResults[0])
-                        self.verificationView.changeBorderColor(forQuarter: .second, self.viewModel.resultModel.testResults[1])
-                        self.verificationView.changeBorderColor(forQuarter: .third, self.viewModel.resultModel.testResults[2])
-                        self.verificationView.changeBorderColor(forQuarter: .fourth, self.viewModel.resultModel.testResults[3])
+                        self.verificationView.changeBorderColor(for: self.viewModel.resultModel.testResults)
                         
                         if self.viewModel.resultModel.isValid() {
                             self.showAlert(title: LocalizationKeys.verifySuccessTitle.rawValue.localized,
@@ -125,20 +112,14 @@ final class VerificationViewController: BaseViewController {
             case .next:
                 barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
                     guard let self = self else { return }
-                    if self.viewModel.setCoordinates(coordsQ1: self.verificationView.getCoordinates(forQuarter: .first),
-                                                     coordsQ2: self.verificationView.getCoordinates(forQuarter: .second),
-                                                     coordsQ3: self.verificationView.getCoordinates(forQuarter: .third),
-                                                     coordsQ4: self.verificationView.getCoordinates(forQuarter: .fourth)) {        
+                    if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
                         self.verificationView.clearCanvas()
                         counter += 1
                         if counter == (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1) - 1 {
                             barButtonItem.setNavBar(toType: .save)
                             barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
                                 guard let self = self else { return }
-                                if self.viewModel.setCoordinates(coordsQ1: self.verificationView.getCoordinates(forQuarter: .first),
-                                                                 coordsQ2: self.verificationView.getCoordinates(forQuarter: .second),
-                                                                 coordsQ3: self.verificationView.getCoordinates(forQuarter: .third),
-                                                                 coordsQ4: self.verificationView.getCoordinates(forQuarter: .fourth)) {
+                                if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
                                     self.viewModel.saveUserData { (isSuccess) in
                                         if isSuccess {
                                             self.navigationController?.popToRootViewController(animated: true)
