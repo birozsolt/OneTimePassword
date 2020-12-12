@@ -30,7 +30,7 @@ final class CanvasView: UIView {
         let shouldDraw = LocalStorage.shared.getValue(forKey: .helperLines) as? Bool ?? false
         lineColor = isSecure ? UIColor.clear : AssetCatalog.getColor(.text)
         helperLineColor = isSecure ? UIColor.clear : shouldDraw ? lineColor.withAlphaComponent(0.3) : UIColor.clear
-        helperLayerCounter = (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1)
+        helperLayerCounter = shouldDraw ? (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1) : 0
         super.init(frame: CGRect.zero)
     }
     
@@ -39,7 +39,7 @@ final class CanvasView: UIView {
         let shouldDraw = LocalStorage.shared.getValue(forKey: .helperLines) as? Bool ?? false
         lineColor = isSecure ? UIColor.clear : AssetCatalog.getColor(.text)
         helperLineColor = isSecure ? UIColor.clear : shouldDraw ? lineColor.withAlphaComponent(0.3) : UIColor.clear
-        helperLayerCounter = (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1)
+        helperLayerCounter = shouldDraw ? (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1) : 0
         super.init(coder: coder)
     }
     
@@ -80,16 +80,21 @@ final class CanvasView: UIView {
     // MARK: - Public methods
     
     func clearCanvas() {
-        path.removeAllPoints()
+        guard let layerCount = layer.sublayers?.count, layerCount >= helperLayerCounter else {
+            return
+        }
         coordinateList.removeAll()
-        if layer.sublayers?.count ?? 0 >= helperLayerCounter {
-            layer.sublayers?.removeSubrange(helperLayerCounter..<(layer.sublayers?.count ?? 1))
+        DispatchQueue.main.async {
+            self.path.removeAllPoints()
+            self.layer.sublayers?.removeSubrange(self.helperLayerCounter..<layerCount)
         }
     }
     
     func clearHelperCanvas() {
-        helperPath.removeAllPoints()
-        layer.sublayers?.removeSubrange(0..<helperLayerCounter)
+        DispatchQueue.main.async {
+            self.helperPath.removeAllPoints()
+            self.layer.sublayers?.removeSubrange(0..<self.helperLayerCounter)
+        }
     }
     
     func getCoordinateList() -> [Coordinate] {
