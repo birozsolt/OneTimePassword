@@ -30,11 +30,11 @@ final class AssetCatalog: NSObject {
     
     private override init() { }
     
-    static func getImage(_ name: ImageCatalog) -> UIImage {
+    static func image(_ name: ImageCatalog) -> UIImage {
         return UIImage(named: name.rawValue) ?? UIImage()
     }
     
-    static func getColor(_ name: ColorCatalog) -> UIColor {
+    static func color(_ name: ColorCatalog) -> UIColor {
         return UIColor(named: name.rawValue) ?? UIColor.black
     }
 }

@@ -14,27 +14,31 @@ enum LocalStorageKeys: String {
     case numberOfInput
 }
 
-final class LocalStorage: NSObject {
+final class LocalStorage {
     
     // MARK: - Properties
     
-    static let shared = LocalStorage()
-    private let defaults: UserDefaults
+    private static let defaults = UserDefaults.standard
     
     // MARK: - Init
     
-    private override init() {
-        defaults = .standard
-        super.init()
-    }
+    private init() {}
     
     // MARK: - Public methods
     
-    func saveValue(_ value: Any, forKey key: LocalStorageKeys) {
+    static func saveValue(_ value: Any, forKey key: LocalStorageKeys) {
         defaults.setValue(value, forKey: key.rawValue)
     }
     
-    func getValue(forKey key: LocalStorageKeys) -> AnyObject {
-        return defaults.object(forKey: key.rawValue) as AnyObject
+    static func getBoolValue(forKey key: LocalStorageKeys) -> Bool {
+        return defaults.bool(forKey: key.rawValue)
+    }
+    
+    static func getStringValue(forKey key: LocalStorageKeys) -> String {
+        return defaults.string(forKey: key.rawValue) ?? ""
+    }
+    
+    static func getIntValue(forKey key: LocalStorageKeys) -> Int {
+        return defaults.integer(forKey: key.rawValue)
     }
 }

@@ -11,23 +11,23 @@ import UIKit
 extension UINavigationController {
     
     override open var shouldAutorotate: Bool {
-        if let visibleVC = visibleViewController {
-            return visibleVC.shouldAutorotate
+        guard let visibleVC = visibleViewController else {
+            return super.shouldAutorotate
         }
-        return super.shouldAutorotate
+        return visibleVC.shouldAutorotate
     }
     
     override open var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        if let visibleVC = visibleViewController {
-            return visibleVC.preferredInterfaceOrientationForPresentation
+        guard let visibleVC = visibleViewController else {
+            return super.preferredInterfaceOrientationForPresentation
         }
-        return super.preferredInterfaceOrientationForPresentation
+        return visibleVC.preferredInterfaceOrientationForPresentation
     }
     
     override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if let visibleVC = visibleViewController {
-            return visibleVC.supportedInterfaceOrientations
+        guard let visibleVC = visibleViewController else {
+            return super.supportedInterfaceOrientations
         }
-        return super.supportedInterfaceOrientations
+        return visibleVC.supportedInterfaceOrientations
     }
 }

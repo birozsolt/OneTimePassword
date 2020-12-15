@@ -26,7 +26,7 @@ final class SettingsView: UIView {
     // MARK: - View lifecycle
     
     override func layoutSubviews() {
-        backgroundColor = AssetCatalog.getColor(.background)
+        backgroundColor = AssetCatalog.color(.background)
         setupView()
     }
     

@@ -17,21 +17,21 @@ final class SettingsBasicCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.textColor = AssetCatalog.getColor(.text)
+        label.textColor = AssetCatalog.color(.text)
         label.font = UIFont.boldSystemFont(ofSize: 25)
         return label
     }()
     
     private lazy var onOffSwitch: UISwitch = {
         let cellSwitch = UISwitch()
-        cellSwitch.thumbTintColor = AssetCatalog.getColor(.buttonBg)
-        cellSwitch.onTintColor = AssetCatalog.getColor(.textfieldBg)
+        cellSwitch.thumbTintColor = AssetCatalog.color(.buttonBg)
+        cellSwitch.onTintColor = AssetCatalog.color(.textfieldBg)
         return cellSwitch
     }()
     
     private lazy var separatorLine: UIView = {
         let view = UIView()
-        view.backgroundColor = AssetCatalog.getColor(.buttonBg)
+        view.backgroundColor = AssetCatalog.color(.buttonBg)
         return view
     }()
     
@@ -45,17 +45,13 @@ final class SettingsBasicCell: UITableViewCell {
     
     // MARK: - Public methods
     
-    func switchIsOn() -> Bool {
+    func switchValue() -> Bool {
         return onOffSwitch.isOn
-    }
-    
-    func setSwitch(toValue value: Bool, forKey key: LocalStorageKeys) {
-        LocalStorage.shared.saveValue(value, forKey: key)
     }
     
     func configure(withText text: String, separatorVisible: Bool = true, forKey key: LocalStorageKeys) {
         titleLabel.text = text
-        onOffSwitch.isOn = LocalStorage.shared.getValue(forKey: key) as? Bool ?? false
+        onOffSwitch.isOn = LocalStorage.getBoolValue(forKey: key)
         separatorLine.isHidden = !separatorVisible
     }
     

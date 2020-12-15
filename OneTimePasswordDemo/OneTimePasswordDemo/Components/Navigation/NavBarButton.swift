@@ -41,20 +41,20 @@ final class NavBarButton: UIButton {
     func setNavBar(toType type: NavBarButtonType) {
         switch type {
         case .back:
-            setImage(AssetCatalog.getImage(.back).scaleWithin(height: 25), for: .normal)
+            setImage(AssetCatalog.image(.back).scaleWithin(height: 25), for: .normal)
         case .settings:
-            setImage(AssetCatalog.getImage(.settings).scaleWithin(height: 25), for: .normal)
+            setImage(AssetCatalog.image(.settings).scaleWithin(height: 25), for: .normal)
         case .eraser:
-            setImage(AssetCatalog.getImage(.eraser).scaleWithin(height: 25), for: .normal)
+            setImage(AssetCatalog.image(.eraser).scaleWithin(height: 25), for: .normal)
         case .save:
-            setImage(AssetCatalog.getImage(.save).scaleWithin(height: 25), for: .normal)
+            setImage(AssetCatalog.image(.save).scaleWithin(height: 25), for: .normal)
         case .test:
-            setImage(AssetCatalog.getImage(.test).scaleWithin(height: 25), for: .normal)
+            setImage(AssetCatalog.image(.test).scaleWithin(height: 25), for: .normal)
         case .next:
-            setImage(AssetCatalog.getImage(.next).scaleWithin(height: 25), for: .normal)
+            setImage(AssetCatalog.image(.next).scaleWithin(height: 25), for: .normal)
         case .text(let title):
             setTitle(title, for: .normal)
-            setTitleColor(AssetCatalog.getColor(.buttonBg), for: .normal)
+            setTitleColor(AssetCatalog.color(.buttonBg), for: .normal)
             titleLabel?.adjustsFontSizeToFitWidth = true
         }
         contentMode = .scaleAspectFit

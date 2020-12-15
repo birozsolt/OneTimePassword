@@ -18,13 +18,13 @@ final class UserListTableViewCell: UITableViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = AssetCatalog.getColor(.text)
+        label.textColor = AssetCatalog.color(.text)
         return label
     }()
     
     private lazy var separatorLine: UIView = {
         let view = UIView()
-        view.backgroundColor = AssetCatalog.getColor(.buttonBg)
+        view.backgroundColor = AssetCatalog.color(.buttonBg)
         return view
     }()
     

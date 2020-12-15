@@ -25,7 +25,7 @@ final class VerificationViewController: BaseViewController {
                 guard let self = self, let testedUser = self.viewModel.testedUser else { return }
                 if isSuccess {
                     for sample in testedUser.samples {
-                        self.verificationView.drawHelpers(for: sample)
+                        self.verificationView.drawHelpers(for: sample, sampleCount: testedUser.samples.count)
                     }
                 }
             }
@@ -86,9 +86,7 @@ final class VerificationViewController: BaseViewController {
                     guard let self = self else { return }
                     if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
                         self.viewModel.verifyUser()
-                        
                         self.verificationView.changeBorderColor(for: self.viewModel.resultModel.testResults)
-                        
                         if self.viewModel.resultModel.isValid() {
                             self.showAlert(title: LocalizationKeys.verifySuccessTitle.localized,
                                            message: LocalizationKeys.verifySuccessMessage.localized) { _ in
@@ -103,7 +101,6 @@ final class VerificationViewController: BaseViewController {
                             }
                         }
                     } else {
-                        
                         self.showAlert(title: LocalizationKeys.verifyInvalidTitle.localized,
                                        message: LocalizationKeys.verifyInvalidMessage.localized
                                         .replacingOccurrences(of: "@s", with: self.viewModel.userName))
@@ -115,7 +112,7 @@ final class VerificationViewController: BaseViewController {
                     if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
                         self.verificationView.clearCanvas()
                         counter += 1
-                        if counter == (Int(LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "1") ?? 1) - 1 {
+                        if counter == LocalStorage.getIntValue(forKey: .numberOfInput) - 1 {
                             barButtonItem.setNavBar(toType: .save)
                             barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
                                 guard let self = self else { return }

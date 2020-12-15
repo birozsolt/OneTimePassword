@@ -17,7 +17,11 @@ final class SettingsViewModel: NSObject {
     }
     
 	// MARK: - Public methods
-	
+    
+    func saveSwitchValue(_ value: Bool, forKey key: LocalStorageKeys) {
+        LocalStorage.saveValue(value, forKey: key)
+    }
+    
     func numberOfRows() -> Int {
         return 3
     }

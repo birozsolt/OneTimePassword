@@ -70,10 +70,10 @@ final class BaseNavigationController: UINavigationController {
     
     private func setupAppearance() {
         navigationBar.barStyle = .default
-        navigationBar.barTintColor = AssetCatalog.getColor(.textfieldBg)
+        navigationBar.barTintColor = AssetCatalog.color(.textfieldBg)
         navigationBar.layer.borderWidth = 0.0
         navigationBar.layer.masksToBounds = false
-        navigationBar.layer.shadowColor = AssetCatalog.getColor(.background).cgColor
+        navigationBar.layer.shadowColor = AssetCatalog.color(.background).cgColor
         navigationBar.layer.shadowOpacity = 0.6
         navigationBar.layer.shadowOffset = CGSize(width: 0, height: 1.0)
         navigationBar.layer.shadowRadius = 1

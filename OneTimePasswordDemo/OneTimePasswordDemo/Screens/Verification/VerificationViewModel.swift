@@ -35,42 +35,32 @@ final class VerificationViewModel: NSObject {
     // MARK: - Public methods
     
     func setCoordinates(coordGroup: CoordinateGroup) -> Bool {
-        if viewType == .test {
-            let coordinateModel = CoordinateModel(coordsQ1: coordGroup.q1, coordsQ2: coordGroup.q2, coordsQ3: coordGroup.q3, coordsQ4: coordGroup.q4,
-                                                  normModelQ1: testedUser?.samples[0].timeSerieQ1.normalizationModel,
-                                                  normModelQ2: testedUser?.samples[0].timeSerieQ2.normalizationModel,
-                                                  normModelQ3: testedUser?.samples[0].timeSerieQ3.normalizationModel,
-                                                  normModelQ4: testedUser?.samples[0].timeSerieQ4.normalizationModel)
-            if !coordinateModel.isEmpty() {
-                self.coordinates.append(coordinateModel)
-            }
-            return !coordinateModel.isEmpty()
-        } else {
-            let coordinateModel = CoordinateModel(coordsQ1: coordGroup.q1, coordsQ2: coordGroup.q2, coordsQ3: coordGroup.q3, coordsQ4: coordGroup.q4)
-            if !coordinateModel.isEmpty() {
-                self.coordinates.append(coordinateModel)
-            }
-            return !coordinateModel.isEmpty()
+        let coordinateModel = CoordinateModel(coordsQ1: coordGroup.q1, coordsQ2: coordGroup.q2, coordsQ3: coordGroup.q3, coordsQ4: coordGroup.q4,
+                                              normModelQ1: viewType == .test ? testedUser?.samples[0].timeSerieQ1.normalizationModel : nil,
+                                              normModelQ2: viewType == .test ? testedUser?.samples[0].timeSerieQ2.normalizationModel : nil,
+                                              normModelQ3: viewType == .test ? testedUser?.samples[0].timeSerieQ3.normalizationModel : nil,
+                                              normModelQ4: viewType == .test ? testedUser?.samples[0].timeSerieQ4.normalizationModel : nil)
+        guard coordinateModel.isEmpty() else {
+            coordinates.append(coordinateModel)
+            return true
         }
-        
+        return false
     }
     
     func saveUserData(completion: @escaping (Bool) -> Void) {
         let user = UserModel(name: userName, samples: coordinates)
-        SecureStorage.shared.saveUserData(forUser: user) { (isSuccess) in
-            if isSuccess {
-                completion(true)
-            }
-            completion(false)
+        SecureStorage.saveUserData(forUser: user) { (isSuccess) in
+            completion(isSuccess)
         }
     }
     
     func getUserData(completion: ((Bool) -> Void)?) {
-        if let userData = SecureStorage.shared.getUserData(forUser: userName) {
-            testedUser = userData
-            completion?(true)
+        guard let userData = SecureStorage.getUserData(forUser: userName) else {
+            completion?(false)
+            return
         }
-        completion?(false)
+        testedUser = userData
+        completion?(true)
     }
     
     func verifyUser() {

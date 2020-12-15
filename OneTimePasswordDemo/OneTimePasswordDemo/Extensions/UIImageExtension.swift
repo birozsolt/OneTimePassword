@@ -13,20 +13,17 @@ extension UIImage {
     public func scaleWithin(height: CGFloat) -> UIImage? {
         let scale = height / size.height
         let newSize = CGSize(width: size.width * scale, height: height)
-        let resized = resizedImage(newSize: newSize)
-        return resized
+        return resizedImage(newSize: newSize)
     }
     
     /// Returns an image that fills in newSize
     private func resizedImage(newSize: CGSize) -> UIImage? {
         guard size != newSize else { return self }
-        let hasAlpha = false
-        let scale: CGFloat = 0.0
-        UIGraphicsBeginImageContextWithOptions(newSize, !hasAlpha, scale)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let newImage: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+        let renderFormat = UIGraphicsImageRendererFormat.default()
+        let renderer = UIGraphicsImageRenderer(size: newSize, format: renderFormat)
+        let newImage = renderer.image { (context) in
+            self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        }
         return newImage
     }
 }

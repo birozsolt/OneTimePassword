@@ -9,6 +9,7 @@
 import UIKit
 
 typealias CoordinateGroup = (q1: [Coordinate], q2: [Coordinate], q3: [Coordinate], q4: [Coordinate])
+
 // swiftlint:disable identifier_name
 class Coordinate: Codable {
     

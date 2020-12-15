@@ -27,7 +27,7 @@ final class VerificationView: UIView {
     // MARK: - View lifecycle
     
     override func layoutSubviews() {
-        backgroundColor = AssetCatalog.getColor(.background)
+        backgroundColor = AssetCatalog.color(.background)
         setupView()
     }
     
@@ -48,16 +48,16 @@ final class VerificationView: UIView {
         resetBorderColor()
     }
     
-    func drawHelpers(for model: CoordinateModel) {
-        firstQuarterView.drawHelper(from: model.getSerie(forQuarter: .first).getCoordinates())
-        secondQuarterView.drawHelper(from: model.getSerie(forQuarter: .second).getCoordinates())
-        thirdQuarterView.drawHelper(from: model.getSerie(forQuarter: .third).getCoordinates())
-        fourthQuarterView.drawHelper(from: model.getSerie(forQuarter: .fourth).getCoordinates())
+    func drawHelpers(for model: CoordinateModel, sampleCount: Int) {
+        firstQuarterView.drawHelper(from: model.getSerie(forQuarter: .first).getCoordinates(), helperCount: sampleCount)
+        secondQuarterView.drawHelper(from: model.getSerie(forQuarter: .second).getCoordinates(), helperCount: sampleCount)
+        thirdQuarterView.drawHelper(from: model.getSerie(forQuarter: .third).getCoordinates(), helperCount: sampleCount)
+        fourthQuarterView.drawHelper(from: model.getSerie(forQuarter: .fourth).getCoordinates(), helperCount: sampleCount)
     }
     
     func changeBorderColor(for results: [Bool]) {
         func getColor(_ isTrue: Bool) -> CGColor {
-            return isTrue ? AssetCatalog.getColor(.goodVerification).cgColor : AssetCatalog.getColor(.wrongVerification).cgColor
+            return isTrue ? AssetCatalog.color(.goodVerification).cgColor : AssetCatalog.color(.wrongVerification).cgColor
         }
         
         firstQuarterView.layer.borderColor = getColor(results[0])
@@ -79,7 +79,7 @@ final class VerificationView: UIView {
     private func setupLayoutConstraints() {
         subviews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.layer.borderColor = AssetCatalog.getColor(.buttonBg).cgColor
+            $0.layer.borderColor = AssetCatalog.color(.buttonBg).cgColor
             $0.layer.borderWidth = 1
             NSLayoutConstraint.activate([
                 $0.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -97,6 +97,6 @@ final class VerificationView: UIView {
     }
     
     private func resetBorderColor() {
-        subviews.forEach { $0.layer.borderColor = AssetCatalog.getColor(.buttonBg).cgColor }
+        subviews.forEach { $0.layer.borderColor = AssetCatalog.color(.buttonBg).cgColor }
     }
 }

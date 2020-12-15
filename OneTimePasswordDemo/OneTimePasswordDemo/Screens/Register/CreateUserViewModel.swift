@@ -18,7 +18,7 @@ final class CreateUserViewModel: NSObject {
     
     override init() {
         super.init()
-        userList = SecureStorage.shared.getUserList()
+        userList = SecureStorage.getUserList()
     }
     
     // MARK: - Public methods

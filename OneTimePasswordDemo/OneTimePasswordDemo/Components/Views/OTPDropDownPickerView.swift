@@ -23,7 +23,7 @@ final class OTPDropDownPickerView: UIPickerView {
         pickerTextField = dropdownField
         // Super init
         super.init(frame: .zero)
-        backgroundColor = AssetCatalog.getColor(.textfieldBg)
+        backgroundColor = AssetCatalog.color(.textfieldBg)
         // Set delegates
         delegate = self
         dataSource = self
@@ -54,8 +54,8 @@ final class OTPDropDownPickerView: UIPickerView {
         // ToolBar
         let toolBar = UIToolbar()
         toolBar.isTranslucent = true
-        toolBar.tintColor = AssetCatalog.getColor(.text)
-        toolBar.backgroundColor = AssetCatalog.getColor(.textfieldBg)
+        toolBar.tintColor = AssetCatalog.color(.text)
+        toolBar.backgroundColor = AssetCatalog.color(.textfieldBg)
         // Adding Button ToolBar
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -66,7 +66,7 @@ final class OTPDropDownPickerView: UIPickerView {
     }
     
     @objc private func donePicker (sender: UIBarButtonItem) {
-        LocalStorage.shared.saveValue(pickerData[selectedRow(inComponent: 0)], forKey: .numberOfInput)
+        LocalStorage.saveValue(pickerData[selectedRow(inComponent: 0)], forKey: .numberOfInput)
         pickerTextField.resignFirstResponder()
     }
 }
@@ -76,11 +76,11 @@ final class OTPDropDownPickerView: UIPickerView {
 extension OTPDropDownPickerView: UIPickerViewDataSource {
     // Sets number of columns in picker view
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        1
     }
     // Sets the number of rows in the picker view
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
+        pickerData.count
     }
 }
 
@@ -89,7 +89,7 @@ extension OTPDropDownPickerView: UIPickerViewDataSource {
 extension OTPDropDownPickerView: UIPickerViewDelegate {
     // This function sets the text of the picker view to the content of the "pickerData" array
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+        pickerData[row]
     }
     // When user selects an option, this function will set the text of the text field to reflect the selected option.
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

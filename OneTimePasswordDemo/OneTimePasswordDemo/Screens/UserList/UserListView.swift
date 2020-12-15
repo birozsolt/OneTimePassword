@@ -25,7 +25,7 @@ final class UserListView: UIView {
     // MARK: - View lifecycle
     
     override func layoutSubviews() {
-        backgroundColor = AssetCatalog.getColor(.background)
+        backgroundColor = AssetCatalog.color(.background)
         setupView()
     }
     

@@ -17,26 +17,27 @@ final class SettingsCounterCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.textColor = AssetCatalog.getColor(.text)
+        label.textColor = AssetCatalog.color(.text)
         label.font = UIFont.boldSystemFont(ofSize: 25)
         return label
     }()
     
     private lazy var counterTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = AssetCatalog.getColor(.background)
+        textField.backgroundColor = AssetCatalog.color(.background)
         textField.font = UIFont.systemFont(ofSize: 25)
         textField.textAlignment = .right
-        textField.textColor = AssetCatalog.getColor(.text)
-        textField.tintColor = AssetCatalog.getColor(.buttonBg)
-        textField.loadDropdownData(from: ["2", "3", "4", "5", "6"],
-                                   defaultValue: LocalStorage.shared.getValue(forKey: .numberOfInput) as? String ?? "")
+        textField.textColor = AssetCatalog.color(.text)
+        textField.tintColor = AssetCatalog.color(.buttonBg)
+        var counterArray = [1, 2, 3, 4, 5]
+        textField.loadDropdownData(from: counterArray.map { String($0) },
+                                   defaultValue: LocalStorage.getStringValue(forKey: .numberOfInput))
         return textField
     }()
     
     private lazy var separatorLine: UIView = {
         let view = UIView()
-        view.backgroundColor = AssetCatalog.getColor(.buttonBg)
+        view.backgroundColor = AssetCatalog.color(.buttonBg)
         return view
     }()
     

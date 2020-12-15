@@ -24,9 +24,9 @@ final class OTPButton: UIButton {
     // MARK: - Private methods
     
     private func setupAppearance(title: String) {
-        backgroundColor = AssetCatalog.getColor(.buttonBg)
+        backgroundColor = AssetCatalog.color(.buttonBg)
         setTitle(title, for: .normal)
-        setTitleColor(AssetCatalog.getColor(.buttonTitle), for: .normal)
+        setTitleColor(AssetCatalog.color(.buttonTitle), for: .normal)
         titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         layer.cornerRadius = 20
     }

@@ -39,11 +39,11 @@ final class SettingsViewController: BaseViewController {
 
 extension SettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows()
+        viewModel.numberOfRows()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -54,11 +54,7 @@ extension SettingsViewController: UITableViewDataSource {
             cell.configure(withText: LocalizationKeys.secureInput.localized, forKey: .secureInput)
             cell.setupOnOffSwitchAction { [weak cell] _ in
 				guard let cell = cell else { return }
-                if cell.switchIsOn() {
-                    cell.setSwitch(toValue: true, forKey: .secureInput)
-                } else {
-                    cell.setSwitch(toValue: false, forKey: .secureInput)
-                }
+                self.viewModel.saveSwitchValue(cell.switchValue(), forKey: .secureInput)
             }
             return cell
         }
@@ -69,11 +65,7 @@ extension SettingsViewController: UITableViewDataSource {
             cell.configure(withText: LocalizationKeys.helperLines.localized, forKey: .helperLines)
             cell.setupOnOffSwitchAction { [weak cell] _ in
 				guard let cell = cell else { return }
-                if cell.switchIsOn() {
-                    cell.setSwitch(toValue: true, forKey: .helperLines)
-                } else {
-                    cell.setSwitch(toValue: false, forKey: .helperLines)
-                }
+                self.viewModel.saveSwitchValue(cell.switchValue(), forKey: .helperLines)
             }
             return cell
         }
@@ -92,10 +84,6 @@ extension SettingsViewController: UITableViewDataSource {
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        60
     }
 }

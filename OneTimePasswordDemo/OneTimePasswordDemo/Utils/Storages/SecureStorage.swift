@@ -9,7 +9,7 @@
 import SwiftKeychainWrapper
 import Foundation
 
-enum SecureStorageKeys: String {
+private enum SecureStorageKeys: String {
     case userName
     case userList
 }
@@ -18,87 +18,80 @@ final class SecureStorage {
     
     // MARK: - Properties
     
-    static let shared = SecureStorage()
+    private static let decoder = JSONDecoder()
+    private static let encoder = JSONEncoder()
     
-    private let decoder = JSONDecoder()
-    private let encoder = JSONEncoder()
-    
-    private let keychainWrapper = KeychainWrapper.standard
+    private static let keychainWrapper = KeychainWrapper.standard
     
     typealias SecureStoreCallBack = (Bool) -> Void
     
     // MARK: - Init
     
-    private init() {
-    }
+    private init() {}
     
     // MARK: - Public methods
     
-    func deleteAllData() {
+    static func deleteAllData() {
         keychainWrapper.removeAllKeys()
     }
-    func getUser(forName name: String) -> String? {
+    
+    static func getUser(forName name: String) -> String? {
         return keychainWrapper.string(forKey: SecureStorageKeys.userName.rawValue)
     }
     
-    func saveUserList(addingName name: String, completion: SecureStoreCallBack?) {
-        guard let data = keychainWrapper.data(forKey: SecureStorageKeys.userList.rawValue) else {
-            do {
-                let jsonDataToSave = try encoder.encode([name])
-                keychainWrapper.set(jsonDataToSave, forKey: SecureStorageKeys.userList.rawValue) == true ? completion?(true) : completion?(false)
-            } catch {
-                print(error)
-                completion?(false)
-            }
-            return
-        }
-        do {
-            var list = try decoder.decode([String].self, from: data)
-            if !list.contains(name) {
-                list.append(name)
-                let jsonDataToSave = try encoder.encode(list)
-                keychainWrapper.set(jsonDataToSave, forKey: SecureStorageKeys.userList.rawValue) == true ? completion?(true) : completion?(false)
-            }
-        } catch {
-            print(error)
-            completion?(false)
-        }
-    }
-    
-    func getUserList() -> [String] {
-        guard let userList = keychainWrapper.data(forKey: SecureStorageKeys.userList.rawValue) else {
+    static func getUserList() -> [String] {
+        guard let userList = keychainWrapper.data(forKey: SecureStorageKeys.userList.rawValue),
+              let list = try? decoder.decode([String].self, from: userList) else {
             return []
         }
-        let list = try? decoder.decode([String].self, from: userList)
-        return (list == nil ? [] : list)!
+        return list
     }
     
-    func saveUserData(forUser user: UserModel, completion: SecureStoreCallBack?) {
+    static func saveUserData(forUser user: UserModel, completion: SecureStoreCallBack?) {
         do {
             let jsonDataToSave = try encoder.encode(user)
-            if keychainWrapper.set(jsonDataToSave, forKey: user.name) == true {
-                saveUserList(addingName: user.name) { (isSuccess) in
-                    completion?(isSuccess)
-                }
-            } else {
+            guard keychainWrapper.set(jsonDataToSave, forKey: user.name) == true else {
                 completion?(false)
+                return
+            }
+            saveUserList(addingName: user.name) { (isSuccess) in
+                completion?(isSuccess)
             }
         } catch {
             completion?(false)
-            print(error)
         }
     }
     
-    func getUserData(forUser name: String) -> UserModel? {
+    static func getUserData(forUser name: String) -> UserModel? {
         guard let userData = keychainWrapper.data(forKey: name) else {
             return nil
         }
-        do {
-            let model = try decoder.decode(UserModel.self, from: userData)
-            return model
-        } catch {
-            print(error)
-            return nil
+        let model = try? decoder.decode(UserModel.self, from: userData)
+        return model
+    }
+    
+    // MARK: - Private methods
+
+    private static func saveUserList(addingName name: String, completion: SecureStoreCallBack?) {
+        guard let data = keychainWrapper.data(forKey: SecureStorageKeys.userList.rawValue) else {
+            guard let jsonDataToSave = try? encoder.encode([name]),
+                  keychainWrapper.set(jsonDataToSave, forKey: SecureStorageKeys.userList.rawValue) == true else {
+                completion?(false)
+                return
+            }
+            completion?(true)
+            return
         }
+        guard var list = try? decoder.decode([String].self, from: data), !list.contains(name) else {
+            completion?(false)
+            return
+        }
+        list.append(name)
+        guard let jsonDataToSave = try? encoder.encode(list),
+              keychainWrapper.set(jsonDataToSave, forKey: SecureStorageKeys.userList.rawValue) == true else {
+            completion?(false)
+            return
+        }
+        completion?(true)
     }
 }

@@ -16,21 +16,21 @@ final class CreateUserView: UIView {
         let label = UILabel()
         label.text = LocalizationKeys.userName.localized
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = AssetCatalog.getColor(.text)
+        label.textColor = AssetCatalog.color(.text)
         label.backgroundColor = .clear
         return label
     }()
     
     private lazy var userNameTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = AssetCatalog.getColor(.textfieldBg)
+        textField.backgroundColor = AssetCatalog.color(.textfieldBg)
         textField.clearButtonMode = .whileEditing
         textField.isUserInteractionEnabled = true
         textField.clearsOnBeginEditing = true
         textField.autocorrectionType = .no
         textField.font = UIFont.systemFont(ofSize: 20)
-        textField.textColor = AssetCatalog.getColor(.text)
-        textField.tintColor = AssetCatalog.getColor(.buttonBg)
+        textField.textColor = AssetCatalog.color(.text)
+        textField.tintColor = AssetCatalog.color(.buttonBg)
         return textField
     }()
     
@@ -39,7 +39,7 @@ final class CreateUserView: UIView {
     // MARK: - View lifecycle
     
     override func layoutSubviews() {
-        backgroundColor = AssetCatalog.getColor(.background)
+        backgroundColor = AssetCatalog.color(.background)
         setupView()
         userNameTextField.delegate = self
     }
