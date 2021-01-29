@@ -45,13 +45,13 @@ class TimeSerieModel: Codable {
     // swiftlint:disable identifier_name
     private func generate(from coords: [Coordinate], with normModel: NormalizationModel?) {
         if coords.count > 1 {
-            var x = Array<CGFloat>()
-            var y = Array<CGFloat>()
-            var force = Array<CGFloat>()
-            var xVelocity = Array<CGFloat>()
-            var xAcceleration = Array<CGFloat>()
-            var yVelocity = Array<CGFloat>()
-            var yAcceleration = Array<CGFloat>()
+            var x = [CGFloat]()
+            var y = [CGFloat]()
+            var force = [CGFloat]()
+            var xVelocity = [CGFloat]()
+            var xAcceleration = [CGFloat]()
+            var yVelocity = [CGFloat]()
+            var yAcceleration = [CGFloat]()
             
             for coord in coords {
                 x.append(coord.x)

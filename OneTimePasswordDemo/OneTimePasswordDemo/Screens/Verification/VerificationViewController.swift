@@ -121,7 +121,7 @@ final class VerificationViewController: BaseViewController {
                                         if isSuccess {
                                             self.navigationController?.popToRootViewController(animated: true)
                                         } else {
-                                            self.showAlert(title: LocalizationKeys.saveFailedTitle.localized, message: "") { (action) in
+                                            self.showAlert(title: LocalizationKeys.saveFailedTitle.localized, message: "") { _ in
                                                 self.navigationController?.popToRootViewController(animated: true)
                                             }
                                         }

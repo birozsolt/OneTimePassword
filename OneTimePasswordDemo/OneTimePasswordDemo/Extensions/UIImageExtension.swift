@@ -21,7 +21,7 @@ extension UIImage {
         guard size != newSize else { return self }
         let renderFormat = UIGraphicsImageRendererFormat.default()
         let renderer = UIGraphicsImageRenderer(size: newSize, format: renderFormat)
-        let newImage = renderer.image { (context) in
+        let newImage = renderer.image { _ in
             self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         }
         return newImage
