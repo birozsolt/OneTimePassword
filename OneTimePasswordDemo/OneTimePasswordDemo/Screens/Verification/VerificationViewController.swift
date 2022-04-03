@@ -13,7 +13,7 @@ final class VerificationViewController: BaseViewController {
     // MARK: - Properties
     
     private lazy var verificationView = VerificationView()
-    private var viewModel: VerificationViewModel
+    private let viewModel: VerificationViewModel
     
     // MARK: - Init
     

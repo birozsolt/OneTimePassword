@@ -34,13 +34,18 @@ final class SettingsBasicCell: UITableViewCell {
         view.backgroundColor = AssetCatalog.color(.buttonBg)
         return view
     }()
-    
-    // MARK: - View lifecycle
-    
-    override func layoutSubviews() {
+
+    // MARK: - Init
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
         selectionStyle = .none
         setupView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Public methods
@@ -70,17 +75,16 @@ final class SettingsBasicCell: UITableViewCell {
     
     private func setupLayoutConstraints() {
         contentView.subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.edgeInset),
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            
-            onOffSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIConstants.edgeInset),
-            onOffSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            
-            separatorLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.separatorPadding),
-            separatorLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIConstants.separatorPadding),
-            separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            separatorLine.heightAnchor.constraint(equalToConstant: UIConstants.separatorHeight)
-        ])
+        
+        titleLabel.leadingAnchor(equalTo: contentView.leadingAnchor, constant: UIConstants.edgeInset)
+            .centerVertical(equalTo: contentView.centerYAnchor)
+
+        onOffSwitch.trailingAnchor(equalTo: contentView.trailingAnchor, constant: -UIConstants.edgeInset)
+            .centerVertical(equalTo: contentView.centerYAnchor)
+
+        separatorLine.leadingAnchor(equalTo: contentView.leadingAnchor, constant: UIConstants.separatorPadding)
+            .trailingAnchor(equalTo: contentView.trailingAnchor, constant: -UIConstants.separatorPadding)
+            .bottomAnchor(equalTo: contentView.bottomAnchor)
+            .heightAnchor(constant: UIConstants.separatorHeight)
     }
 }

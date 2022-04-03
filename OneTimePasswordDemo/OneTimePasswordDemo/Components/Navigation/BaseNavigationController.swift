@@ -69,8 +69,13 @@ final class BaseNavigationController: UINavigationController {
     // MARK: - Private methods
     
     private func setupAppearance() {
-        navigationBar.barStyle = .default
-        navigationBar.barTintColor = AssetCatalog.color(.textfieldBg)
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = AssetCatalog.color(.textfieldBg)
+
+        navigationBar.standardAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
+
         navigationBar.layer.borderWidth = 0.0
         navigationBar.layer.masksToBounds = false
         navigationBar.layer.shadowColor = AssetCatalog.color(.background).cgColor

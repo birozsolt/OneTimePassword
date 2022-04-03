@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CreateUserViewModel: NSObject {
+final class CreateUserViewModel {
     
     // MARK: - Properties
     
@@ -16,14 +16,13 @@ final class CreateUserViewModel: NSObject {
     
     // MARK: - Init
     
-    override init() {
-        super.init()
+    init() {
         userList = SecureStorage.getUserList()
     }
     
     // MARK: - Public methods
     
     func verifyUser(withName name: String) -> Bool {
-        return !userList.contains(name)
+        !userList.contains(name)
     }
 }

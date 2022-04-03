@@ -23,14 +23,14 @@ final class VerificationView: UIView {
     private lazy var secondQuarterView = CanvasView()
     private lazy var thirdQuarterView = CanvasView()
     private lazy var fourthQuarterView = CanvasView()
-    
+
     // MARK: - View lifecycle
-    
+
     override func layoutSubviews() {
         backgroundColor = AssetCatalog.color(.background)
         setupView()
     }
-    
+
     // MARK: - Public methods
     
     func getCoordinates() -> CoordinateGroup {
@@ -81,19 +81,14 @@ final class VerificationView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.layer.borderColor = AssetCatalog.color(.buttonBg).cgColor
             $0.layer.borderWidth = 1
-            NSLayoutConstraint.activate([
-                $0.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-                $0.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-                $0.widthAnchor.constraint(equalToConstant: safeAreaLayoutGuide.layoutFrame.width / 4)
-            ])
+            $0.topAnchor(equalTo: safeAreaLayoutGuide.topAnchor)
+            $0.bottomAnchor(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            $0.widthAnchor(constant: safeAreaLayoutGuide.layoutFrame.width / 4)
         }
-        
-        NSLayoutConstraint.activate([
-            firstQuarterView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            secondQuarterView.leadingAnchor.constraint(equalTo: firstQuarterView.trailingAnchor),
-            thirdQuarterView.leadingAnchor.constraint(equalTo: secondQuarterView.trailingAnchor),
-            fourthQuarterView.leadingAnchor.constraint(equalTo: thirdQuarterView.trailingAnchor)
-        ])
+        firstQuarterView.leadingAnchor(equalTo: safeAreaLayoutGuide.leadingAnchor)
+        secondQuarterView.leadingAnchor(equalTo: firstQuarterView.trailingAnchor)
+        thirdQuarterView.leadingAnchor(equalTo: secondQuarterView.trailingAnchor)
+        fourthQuarterView.leadingAnchor(equalTo: thirdQuarterView.trailingAnchor)
     }
     
     private func resetBorderColor() {

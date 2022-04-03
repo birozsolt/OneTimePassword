@@ -27,7 +27,7 @@ final class OTPButton: UIButton {
         backgroundColor = AssetCatalog.color(.buttonBg)
         setTitle(title, for: .normal)
         setTitleColor(AssetCatalog.color(.buttonTitle), for: .normal)
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        titleLabel?.font = .boldSystemFont(ofSize: 20)
         layer.cornerRadius = 20
     }
 }

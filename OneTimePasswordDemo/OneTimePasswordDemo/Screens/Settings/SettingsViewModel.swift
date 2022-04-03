@@ -8,13 +8,7 @@
 
 import UIKit
 
-final class SettingsViewModel: NSObject {
-    
-	// MARK: - Init
-	
-    override init() {
-        super.init()
-    }
+final class SettingsViewModel {
     
 	// MARK: - Public methods
     
@@ -23,6 +17,6 @@ final class SettingsViewModel: NSObject {
     }
     
     func numberOfRows() -> Int {
-        return 3
+        3
     }
 }

@@ -39,6 +39,7 @@
 		3E57E947242D26550030CA52 /* OTPDropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E946242D26550030CA52 /* OTPDropDownPickerView.swift */; };
 		3E57E949242D27E70030CA52 /* UITextfieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E57E948242D27E70030CA52 /* UITextfieldExtension.swift */; };
 		3E58900D243BC28A009CC17B /* NormalizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E58900C243BC28A009CC17B /* NormalizationModel.swift */; };
+		3E5E089027F99C8200A12E18 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E088F27F99C8200A12E18 /* UIViewExtension.swift */; };
 		3E5EC0B22441BED000C0E28B /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5EC0B12441BED000C0E28B /* UIConstants.swift */; };
 		3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48523F060E500AFD0F2 /* LoginView.swift */; };
 		3E68F48923F0639300AFD0F2 /* UIBarButtonItemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */; };
@@ -126,6 +127,7 @@
 		3E57E946242D26550030CA52 /* OTPDropDownPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPDropDownPickerView.swift; sourceTree = "<group>"; };
 		3E57E948242D27E70030CA52 /* UITextfieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextfieldExtension.swift; sourceTree = "<group>"; };
 		3E58900C243BC28A009CC17B /* NormalizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalizationModel.swift; sourceTree = "<group>"; };
+		3E5E088F27F99C8200A12E18 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		3E5EC0B12441BED000C0E28B /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		3E68F48523F060E500AFD0F2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		3E68F48823F0639300AFD0F2 /* UIBarButtonItemExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonItemExtension.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				3E523ECF23F1D941007D461B /* UIViewControllerExtension.swift */,
 				3E46AB1A242BCB5C00100736 /* UINavigationControllerExtension.swift */,
 				3E57E948242D27E70030CA52 /* UITextfieldExtension.swift */,
+				3E5E088F27F99C8200A12E18 /* UIViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				3E523ECE23F1D0F5007D461B /* CreateUserView.swift in Sources */,
 				3E68F48E23F0693600AFD0F2 /* LoginViewController.swift in Sources */,
 				3E57E947242D26550030CA52 /* OTPDropDownPickerView.swift in Sources */,
+				3E5E089027F99C8200A12E18 /* UIViewExtension.swift in Sources */,
 				3E68F48623F060E500AFD0F2 /* LoginView.swift in Sources */,
 				3E55B9502433C0F5002D2BB1 /* ArrayExtension.swift in Sources */,
 				3E46AB19242BC8D500100736 /* SettingsViewModel.swift in Sources */,
@@ -728,7 +732,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -785,7 +789,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

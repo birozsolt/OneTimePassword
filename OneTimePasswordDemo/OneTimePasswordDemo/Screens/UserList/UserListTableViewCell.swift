@@ -17,7 +17,7 @@ final class UserListTableViewCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 20)
         label.textColor = AssetCatalog.color(.text)
         return label
     }()
@@ -28,12 +28,17 @@ final class UserListTableViewCell: UITableViewCell {
         return view
     }()
     
-    // MARK: - View lifecycle
-    
-    override func layoutSubviews() {
+    // MARK: - Init
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
         selectionStyle = .none
         setupView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Public methods
@@ -53,15 +58,13 @@ final class UserListTableViewCell: UITableViewCell {
     
     private func setupLayoutConstraints() {
         contentView.subviews.forEach({ $0.translatesAutoresizingMaskIntoConstraints = false })
-        
-        NSLayoutConstraint.activate([
-            nameLabel.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            nameLabel.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-            
-            separatorLine.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: UIConstants.separatorPadding),
-            separatorLine.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -UIConstants.separatorPadding),
-            separatorLine.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            separatorLine.heightAnchor.constraint(equalToConstant: UIConstants.separatorHeight)
-        ])
+
+        nameLabel.centerHorizontal(equalTo: safeAreaLayoutGuide.centerXAnchor)
+            .centerVertical(equalTo: safeAreaLayoutGuide.centerYAnchor)
+
+        separatorLine.leadingAnchor(equalTo: contentView.leadingAnchor, constant: UIConstants.separatorPadding)
+            .trailingAnchor(equalTo: contentView.trailingAnchor, constant: -UIConstants.separatorPadding)
+            .bottomAnchor(equalTo: contentView.bottomAnchor)
+            .heightAnchor(constant: UIConstants.separatorHeight)
     }
 }

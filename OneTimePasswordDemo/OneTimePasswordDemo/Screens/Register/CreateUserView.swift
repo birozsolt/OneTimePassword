@@ -15,7 +15,7 @@ final class CreateUserView: UIView {
     private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.text = LocalizationKeys.userName.localized
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 20)
         label.textColor = AssetCatalog.color(.text)
         label.backgroundColor = .clear
         return label
@@ -25,10 +25,9 @@ final class CreateUserView: UIView {
         let textField = UITextField()
         textField.backgroundColor = AssetCatalog.color(.textfieldBg)
         textField.clearButtonMode = .whileEditing
-        textField.isUserInteractionEnabled = true
         textField.clearsOnBeginEditing = true
         textField.autocorrectionType = .no
-        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.font = .systemFont(ofSize: 20)
         textField.textColor = AssetCatalog.color(.text)
         textField.tintColor = AssetCatalog.color(.buttonBg)
         return textField
@@ -36,14 +35,19 @@ final class CreateUserView: UIView {
     
     private lazy var continueButton = OTPButton(withTitle: LocalizationKeys.continue.localized)
     
-    // MARK: - View lifecycle
-    
-    override func layoutSubviews() {
+    // MARK: - Init
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         backgroundColor = AssetCatalog.color(.background)
         setupView()
         userNameTextField.delegate = self
     }
-    
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Public methods
     
     func setupContinueButtonAction(closure: @escaping UIControl.UIControlTargetClosure) {
@@ -51,7 +55,7 @@ final class CreateUserView: UIView {
     }
     
     func getTextfieldText() -> String? {
-        return userNameTextField.text
+        userNameTextField.text
     }
     
     // MARK: - Private methods
@@ -65,20 +69,19 @@ final class CreateUserView: UIView {
     
     private func setupLayoutConstraints() {
         subviews.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        NSLayoutConstraint.activate([
-            userNameTextField.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            userNameTextField.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-            userNameTextField.widthAnchor.constraint(equalToConstant: UIConstants.buttonWidth),
-            userNameTextField.heightAnchor.constraint(equalToConstant: UIConstants.buttonHeight),
-            
-			userNameLabel.bottomAnchor.constraint(equalTo: userNameTextField.topAnchor, constant: -UIConstants.separatorPadding),
-            userNameLabel.leadingAnchor.constraint(equalTo: userNameTextField.leadingAnchor),
 
-			continueButton.topAnchor.constraint(equalTo: userNameTextField.bottomAnchor, constant: UIConstants.verticalPadding),
-            continueButton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-            continueButton.widthAnchor.constraint(equalToConstant: UIConstants.buttonWidth),
-            continueButton.heightAnchor.constraint(equalToConstant: UIConstants.buttonHeight)
-        ])
+        userNameTextField.centerVertical(equalTo: safeAreaLayoutGuide.centerYAnchor)
+            .centerHorizontal(equalTo: safeAreaLayoutGuide.centerXAnchor)
+            .widthAnchor(constant: UIConstants.buttonWidth)
+            .heightAnchor(constant: UIConstants.buttonHeight)
+
+        userNameLabel.bottomAnchor(equalTo: userNameTextField.topAnchor, constant: -UIConstants.separatorPadding)
+            .leadingAnchor(equalTo: userNameTextField.leadingAnchor)
+
+        continueButton.topAnchor(equalTo: userNameTextField.bottomAnchor, constant: UIConstants.verticalPadding)
+            .centerHorizontal(equalTo: safeAreaLayoutGuide.centerXAnchor)
+            .widthAnchor(constant: UIConstants.buttonWidth)
+            .heightAnchor(constant: UIConstants.buttonHeight)
     }
 }
 

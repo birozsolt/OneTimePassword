@@ -12,12 +12,12 @@ final class CanvasView: UIView {
     
     // MARK: - Properties
     
-    private lazy var lineWidth: CGFloat = 5
+    private static let lineWidth: CGFloat = 5
     private lazy var path = UIBezierPath()
     private lazy var helperPath = UIBezierPath()
     private lazy var startingPoint = CGPoint.zero
-    private var lineColor: UIColor
-    private var helperLineColor: UIColor
+    private let lineColor: UIColor
+    private let helperLineColor: UIColor
     private var helperLayerCounter: Int
     private let shouldDraw: Bool
     
@@ -28,8 +28,8 @@ final class CanvasView: UIView {
     override init(frame: CGRect) {
         let isSecure = LocalStorage.getBoolValue(forKey: .secureInput)
         shouldDraw = LocalStorage.getBoolValue(forKey: .helperLines)
-        lineColor = isSecure ? UIColor.clear : AssetCatalog.color(.text)
-        helperLineColor = isSecure ? UIColor.clear : shouldDraw ? lineColor.withAlphaComponent(0.3) : UIColor.clear
+        lineColor = isSecure ? .clear : AssetCatalog.color(.text)
+        helperLineColor = isSecure ? .clear : shouldDraw ? lineColor.withAlphaComponent(0.3) : .clear
         helperLayerCounter = shouldDraw ? LocalStorage.getIntValue(forKey: .numberOfInput) : 0
         super.init(frame: CGRect.zero)
     }
@@ -37,8 +37,8 @@ final class CanvasView: UIView {
     required init?(coder: NSCoder) {
         let isSecure = LocalStorage.getBoolValue(forKey: .secureInput)
         shouldDraw = LocalStorage.getBoolValue(forKey: .helperLines)
-        lineColor = isSecure ? UIColor.clear : AssetCatalog.color(.text)
-        helperLineColor = isSecure ? UIColor.clear : shouldDraw ? lineColor.withAlphaComponent(0.3) : UIColor.clear
+        lineColor = isSecure ? .clear : AssetCatalog.color(.text)
+        helperLineColor = isSecure ? .clear : shouldDraw ? lineColor.withAlphaComponent(0.3) : .clear
         helperLayerCounter = shouldDraw ? LocalStorage.getIntValue(forKey: .numberOfInput) : 0
         super.init(coder: coder)
     }
@@ -118,7 +118,7 @@ final class CanvasView: UIView {
     private func drawShapeLayer(withColor color: UIColor, path: UIBezierPath) {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
-        shapeLayer.lineWidth = lineWidth
+        shapeLayer.lineWidth = Self.lineWidth
         shapeLayer.strokeColor = color.cgColor
         shapeLayer.fillColor = UIColor.clear.cgColor
         layer.addSublayer(shapeLayer)

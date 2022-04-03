@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class UserListViewModel: NSObject {
+final class UserListViewModel {
     
     // MARK: - Properties
     
@@ -16,18 +16,17 @@ final class UserListViewModel: NSObject {
     
     // MARK: - Init
     
-    override init() {
-        super.init()
+    init() {
         userList = SecureStorage.getUserList()
     }
     
     // MARK: - Public methods
     
     func numberOfRows() -> Int {
-        return userList.count
+        userList.count
     }
     
     func userName(forIndex index: Int) -> String {
-        return userList[index]
+        userList[index]
     }
 }

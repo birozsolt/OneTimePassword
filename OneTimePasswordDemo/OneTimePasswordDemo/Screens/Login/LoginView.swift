@@ -15,13 +15,18 @@ final class LoginView: UIView {
     private lazy var createUserButton = OTPButton(withTitle: LocalizationKeys.registerUser.localized)
     private lazy var verifyUserButton = OTPButton(withTitle: LocalizationKeys.verifyUser.localized)
     
-    // MARK: - View lifecycle
-    
-    override func layoutSubviews() {
+    // MARK: - Init
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         backgroundColor = AssetCatalog.color(.background)
         setupView()
     }
-    
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Public methods
     
     func setupCreateUserButtonAction(closure: @escaping UIControl.UIControlTargetClosure) {
@@ -43,15 +48,11 @@ final class LoginView: UIView {
     private func setupLayoutConstraints() {
         subviews.forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                $0.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-                $0.widthAnchor.constraint(equalToConstant: UIConstants.buttonWidth),
-                $0.heightAnchor.constraint(equalToConstant: UIConstants.buttonHeight)
-            ])
+            $0.centerHorizontal(equalTo: safeAreaLayoutGuide.centerXAnchor)
+            $0.widthAnchor(constant: UIConstants.buttonWidth)
+            $0.heightAnchor(constant: UIConstants.buttonHeight)
         }
-        NSLayoutConstraint.activate([
-            createUserButton.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-			verifyUserButton.topAnchor.constraint(equalTo: createUserButton.bottomAnchor, constant: UIConstants.verticalPadding)
-        ])
+        createUserButton.centerVertical(equalTo: safeAreaLayoutGuide.centerYAnchor)
+        verifyUserButton.topAnchor(equalTo: createUserButton.bottomAnchor, constant: UIConstants.verticalPadding)
     }
 }

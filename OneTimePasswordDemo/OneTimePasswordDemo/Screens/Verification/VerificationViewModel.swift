@@ -13,7 +13,7 @@ enum VerificationViewType {
     case test
 }
 
-final class VerificationViewModel: NSObject {
+final class VerificationViewModel {
     
     // MARK: - Properties
     
@@ -24,12 +24,12 @@ final class VerificationViewModel: NSObject {
     private(set) var resultModel = ResultModel()
     
     typealias AcceptedLimits = (min: CGFloat, max: CGFloat)
+
     // MARK: - Init
     
     init(user: String, type: VerificationViewType) {
         self.userName = user
         self.viewType = type
-        super.init()
     }
     
     // MARK: - Public methods
