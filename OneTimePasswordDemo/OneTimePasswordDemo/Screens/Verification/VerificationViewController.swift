@@ -14,7 +14,8 @@ final class VerificationViewController: BaseViewController {
     
     private lazy var verificationView = VerificationView()
     private let viewModel: VerificationViewModel
-    
+    private var counter = 0
+
     // MARK: - Init
     
     init(userName name: String, viewType type: VerificationViewType) {
@@ -68,12 +69,13 @@ final class VerificationViewController: BaseViewController {
 	func setNavigationAppearance() {
         navBarTitle = viewModel.userName
         leftBarButtonItem = NavBarButton(withType: .back)
-        rightBarButtonItems.append(NavBarButton(withType: viewModel.viewType == .enrollment ? .next : .test))
-        rightBarButtonItems.append(NavBarButton(withType: .eraser))
+        rightBarButtonItems?.append(NavBarButton(withType: viewModel.viewType == .enrollment ? .next : .test))
+        rightBarButtonItems?.append(NavBarButton(withType: .eraser))
     }
     
     private func setupButtonClosures() {
-        var counter = 0
+        guard let rightBarButtonItems else { return }
+
         for barButtonItem in rightBarButtonItems {
             switch barButtonItem.navBarButtonType {
             case .eraser:
@@ -82,66 +84,79 @@ final class VerificationViewController: BaseViewController {
                     self.verificationView.clearCanvas()
                 }
             case .test:
-                barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
-                    guard let self = self else { return }
-                    if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
-                        self.viewModel.verifyUser()
-                        self.verificationView.changeBorderColor(for: self.viewModel.resultModel.testResults)
-                        if self.viewModel.resultModel.isValid() {
-                            self.showAlert(title: LocalizationKeys.verifySuccessTitle.localized,
-                                           message: LocalizationKeys.verifySuccessMessage.localized) { _ in
-                                            self.verificationView.clearCanvas()
-                                            self.viewModel.clearTestResults()
-                            }
-                        } else {
-                            self.showAlert(title: LocalizationKeys.verifyFailedTitle.localized,
-                                           message: LocalizationKeys.verifyFailedMessage.localized) { _ in
-                                            self.verificationView.clearCanvas()
-                                            self.viewModel.clearTestResults()
-                            }
-                        }
-                    } else {
-                        self.showAlert(title: LocalizationKeys.verifyInvalidTitle.localized,
-                                       message: LocalizationKeys.verifyInvalidMessage.localized
-                                        .replacingOccurrences(of: "@s", with: self.viewModel.userName))
-                    }
-                }
+                barButtonItem.addAction(testButtonAction(barButtonItem: barButtonItem), for: .touchUpInside)
             case .next:
-                barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
-                    guard let self = self else { return }
-                    if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
-                        self.verificationView.clearCanvas()
-                        counter += 1
-                        if counter == LocalStorage.getIntValue(forKey: .numberOfInput) - 1 {
-                            barButtonItem.setNavBar(toType: .save)
-                            barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
-                                guard let self = self else { return }
-                                if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
-                                    self.viewModel.saveUserData { (isSuccess) in
-                                        if isSuccess {
-                                            self.navigationController?.popToRootViewController(animated: true)
-                                        } else {
-                                            self.showAlert(title: LocalizationKeys.saveFailedTitle.localized, message: "") { _ in
-                                                self.navigationController?.popToRootViewController(animated: true)
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    self.showAlert(title: LocalizationKeys.verifyInvalidTitle.localized,
-                                                   message: LocalizationKeys.verifyInvalidMessage.localized
-                                                    .replacingOccurrences(of: "@s", with: self.viewModel.userName))
-                                }
-                            }
-                        }
-                    } else {
-                        self.showAlert(title: LocalizationKeys.verifyInvalidTitle.localized,
-                                       message: LocalizationKeys.verifyInvalidMessage.localized
-                                        .replacingOccurrences(of: "@s", with: self.viewModel.userName))
-                    }
-                }
+                barButtonItem.addAction(nextButtonAction(barButtonItem: barButtonItem), for: .touchUpInside)
             default:
                 break
             }
         }
+    }
+
+    private func nextButtonAction(barButtonItem: NavBarButton) -> UIAction {
+        let action = UIAction { [weak self] _ in
+            guard let self = self else { return }
+            if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
+                self.verificationView.clearCanvas()
+                self.counter += 1
+                if self.counter == LocalStorage.getIntValue(forKey: .numberOfInput) - 1 {
+                    barButtonItem.setNavBar(toType: .save)
+                    barButtonItem.addAction(for: .touchUpInside) { [weak self] _ in
+                        guard let self = self else { return }
+                        if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
+                            self.viewModel.saveUserData { (isSuccess) in
+                                if isSuccess {
+                                    self.navigationController?.popToRootViewController(animated: true)
+                                } else {
+                                    self.showAlert(title: LocalizationKeys.saveFailedTitle.localized, message: "") { _ in
+                                        self.navigationController?.popToRootViewController(animated: true)
+                                    }
+                                }
+                            }
+                        } else {
+                            self.showAlert(title: LocalizationKeys.verifyInvalidTitle.localized,
+                                           message: LocalizationKeys.verifyInvalidMessage.localized
+                                .replacingOccurrences(of: "@s", with: self.viewModel.userName))
+                        }
+                    }
+                }
+            } else {
+                self.showAlert(title: LocalizationKeys.verifyInvalidTitle.localized,
+                               message: LocalizationKeys.verifyInvalidMessage.localized
+                    .replacingOccurrences(of: "@s", with: self.viewModel.userName))
+            }
+        }
+
+        return action
+    }
+
+    private func testButtonAction(barButtonItem: NavBarButton) -> UIAction {
+        let action = UIAction { [weak self] _ in
+            guard let self = self else { return }
+
+            if self.viewModel.setCoordinates(coordGroup: self.verificationView.getCoordinates()) {
+                self.viewModel.verifyUser()
+                self.verificationView.changeBorderColor(for: self.viewModel.resultModel.testResults)
+                if self.viewModel.resultModel.isValid() {
+                    self.showAlert(title: LocalizationKeys.verifySuccessTitle.localized,
+                                   message: LocalizationKeys.verifySuccessMessage.localized) { _ in
+                                    self.verificationView.clearCanvas()
+                                    self.viewModel.clearTestResults()
+                    }
+                } else {
+                    self.showAlert(title: LocalizationKeys.verifyFailedTitle.localized,
+                                   message: LocalizationKeys.verifyFailedMessage.localized) { _ in
+                                    self.verificationView.clearCanvas()
+                                    self.viewModel.clearTestResults()
+                    }
+                }
+            } else {
+                self.showAlert(title: LocalizationKeys.verifyInvalidTitle.localized,
+                               message: LocalizationKeys.verifyInvalidMessage.localized
+                                .replacingOccurrences(of: "@s", with: self.viewModel.userName))
+            }
+        }
+
+        return action
     }
 }

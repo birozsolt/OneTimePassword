@@ -25,7 +25,7 @@ final class LoginViewController: BaseViewController {
         setupButtonClosures()
     }
     
-	func setNavigationAppearance() { }
+    nonisolated func setNavigationAppearance() { }
 	
     // MARK: - Private methods
     

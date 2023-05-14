@@ -19,19 +19,17 @@ extension UIControl {
             self.closure = closure
         }
     }
-    
-    private struct AssociatedKeys {
-        static var targetClosure = "targetClosure"
-    }
+
+    static var targetClosureKey = "targetClosure"
     
     private var targetClosure: UIControlTargetClosure? {
         get {
-            guard let closureWrapper = objc_getAssociatedObject(self, &AssociatedKeys.targetClosure) as? UIControlClosureWrapper else { return nil }
+            guard let closureWrapper = objc_getAssociatedObject(self, &Self.targetClosureKey) as? UIControlClosureWrapper else { return nil }
             return closureWrapper.closure
         }
         set(newValue) {
             guard let newValue = newValue else { return }
-            objc_setAssociatedObject(self, &AssociatedKeys.targetClosure,
+            objc_setAssociatedObject(self, &Self.targetClosureKey,
                                      UIControlClosureWrapper(newValue),
                                      objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }

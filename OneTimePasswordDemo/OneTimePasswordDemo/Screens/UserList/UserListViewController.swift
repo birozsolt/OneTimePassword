@@ -32,7 +32,7 @@ final class UserListViewController: BaseViewController {
 	func setNavigationAppearance() {
         navBarTitle = LocalizationKeys.userList.localized
         leftBarButtonItem = NavBarButton(withType: .back)
-        rightBarButtonItems.append(NavBarButton(withType: .settings))
+        rightBarButtonItems?.append(NavBarButton(withType: .settings))
     }
 }
 

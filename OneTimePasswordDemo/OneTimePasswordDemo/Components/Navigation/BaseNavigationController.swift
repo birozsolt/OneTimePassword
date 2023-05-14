@@ -13,7 +13,7 @@ import UIKit
 @objc protocol NavigationBarProtocol {
     var navBarTitle: String? { get set }
     var leftBarButtonItem: NavBarButton? { get set }
-    @objc optional var rightBarButtonItems: [NavBarButton] { get set }
+    var rightBarButtonItems: [NavBarButton]? { get set }
 }
 
 // MARK: -

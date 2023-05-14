@@ -31,7 +31,7 @@ final class CreateUserViewController: BaseViewController {
 	func setNavigationAppearance() {
         navBarTitle = LocalizationKeys.registerUser.localized
         leftBarButtonItem = NavBarButton(withType: .back)
-        rightBarButtonItems.append(NavBarButton(withType: .settings))
+        rightBarButtonItems?.append(NavBarButton(withType: .settings))
     }
     
     private func setupButtonClosures() {

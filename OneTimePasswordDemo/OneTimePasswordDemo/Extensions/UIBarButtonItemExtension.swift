@@ -19,20 +19,18 @@ extension UIBarButtonItem {
             self.closure = closure
         }
     }
-    
-    private struct AssociatedKeys {
-        static var targetClosure = "targetClosure"
-    }
+
+    static var targetClosureKey = "targetClosure"
     
     private var targetClosure: UIBarButtonItemTargetClosure? {
         get {
-            guard let closureWrapper = objc_getAssociatedObject(self, &AssociatedKeys.targetClosure) as? UIBarButtonItemClosureWrapper else {
+            guard let closureWrapper = objc_getAssociatedObject(self, &Self.targetClosureKey) as? UIBarButtonItemClosureWrapper else {
                 return nil }
             return closureWrapper.closure
         }
         set(newValue) {
             guard let newValue = newValue else { return }
-            objc_setAssociatedObject(self, &AssociatedKeys.targetClosure,
+            objc_setAssociatedObject(self, &Self.targetClosureKey,
                                      UIBarButtonItemClosureWrapper(newValue),
                                      objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }

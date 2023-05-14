@@ -18,7 +18,7 @@ class BaseViewControllerClass: UIViewController, NavigationBarProtocol {
 	
 	var navBarTitle: String?
 	var leftBarButtonItem: NavBarButton?
-	var rightBarButtonItems: [NavBarButton] = []
+	var rightBarButtonItems: [NavBarButton]?
     
 	// MARK: - Init
     
